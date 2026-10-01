@@ -52,6 +52,20 @@ const currentPath = Astro.url.pathname;
   <style define:vars={{ accent: SITE_CONFIG.accentColor }}>
     :root { --accent: var(--accent); }
   </style>
+
+  <!-- Prevent Age Gate Flash for Verified Visitors -->
+  <script is:inline>
+    try {
+      if (localStorage.getItem('age_confirmed') === '1') {
+        document.documentElement.classList.add('age-confirmed');
+      }
+    } catch (e) {}
+  </script>
+  <style is:inline>
+    html.age-confirmed #age-gate {
+      display: none !important;
+    }
+  </style>
 </head>
 <body>
 
@@ -218,10 +232,12 @@ const currentPath = Astro.url.pathname;
     if (gate) {
       if (localStorage.getItem('age_confirmed') === '1') {
         gate.classList.add('hidden');
+        document.documentElement.classList.add('age-confirmed');
       } else {
         document.body.style.overflow = 'hidden';
         document.getElementById('btn-confirm-age')?.addEventListener('click', () => {
           localStorage.setItem('age_confirmed', '1');
+          document.documentElement.classList.add('age-confirmed');
           gate.classList.add('hidden');
           document.body.style.overflow = '';
         });

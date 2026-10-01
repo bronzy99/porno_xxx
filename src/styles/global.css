@@ -62,7 +62,10 @@ ul   { list-style: none; }
   padding: 24px;
 }
 
-#age-gate.hidden { display: none; }
+#age-gate.hidden,
+html.age-confirmed #age-gate {
+  display: none !important;
+}
 
 .age-gate-box {
   background: var(--surface);
