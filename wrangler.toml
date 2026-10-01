@@ -1,0 +1,15 @@
+name = "px-video-platform"
+compatibility_date = "2024-09-29"
+pages_build_output_dir = "./dist"
+
+# ── KV Namespace ──────────────────────────────────────────
+# 1. Run: wrangler kv namespace create VIEWS_KV
+# 2. Run: wrangler kv namespace create VIEWS_KV --preview
+# 3. Paste the returned IDs below
+# 4. In Cloudflare Pages dashboard → Settings → Functions → KV bindings
+#    Add binding: Variable name = VIEWS_KV, KV namespace = the one you created
+# ─────────────────────────────────────────────────────────
+[[kv_namespaces]]
+binding = "VIEWS_KV"
+id = "f6c2e267546b43a592b11b507544a951"
+preview_id = "ab5e117ffdf747e19db51f874e6947a3"

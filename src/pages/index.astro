@@ -1,0 +1,242 @@
+---
+// src/pages/index.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import VideoCard  from '../components/VideoCard.astro';
+import { videos, CATEGORIES, SITE_CONFIG } from '../data/videos';
+
+// Sort by date (newest first) for initial render
+const sorted = [...videos].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+---
+
+<BaseLayout
+  title={`${SITE_CONFIG.name} – ${SITE_CONFIG.tagline}`}
+  description={`Watch free premium adult videos on ${SITE_CONFIG.name}. Browse amateur, couples, solo, and compilation content.`}
+  canonical={`${SITE_CONFIG.siteUrl}/`}
+>
+
+  <div class="container">
+
+    <!-- ── Sort + Heading ── -->
+    <div class="sort-bar">
+      <h1 id="grid-heading" style="font-size:1.1rem;font-weight:700">Latest Videos</h1>
+      <div class="sort-options" role="group" aria-label="Sort videos">
+        <button class="sort-btn active" data-sort="date"  aria-pressed="true">Latest</button>
+        <button class="sort-btn"        data-sort="views" aria-pressed="false">Most Viewed</button>
+        <button class="sort-btn"        data-sort="alpha" aria-pressed="false">A–Z</button>
+      </div>
+    </div>
+
+    <!-- ── Video Grid (pre-rendered for SEO) ── -->
+    <div class="video-grid" id="video-grid" role="list" aria-label="Video list">
+      {sorted.map(video => <VideoCard video={video} />)}
+    </div>
+
+    <!-- ── Empty State (hidden by default) ── -->
+    <div class="empty-state" id="empty-state" style="display:none" aria-live="polite">
+      <div class="empty-icon">🎬</div>
+      <h3>No videos found</h3>
+      <p>Try a different category.</p>
+    </div>
+
+    <!-- ── Load More ── -->
+    <div class="load-more-wrap" id="load-more-wrap">
+      <button class="btn btn-ghost" id="load-more-btn">Load More Videos</button>
+    </div>
+
+  </div>
+</BaseLayout>
+
+<script define:vars={{ PER_PAGE: SITE_CONFIG.videosPerPage }}>
+  // ════════════════════════════════════════════════════════
+  //  HOMEPAGE CLIENT LOGIC
+  //  All cards are pre-rendered in the HTML (good for SEO).
+  //  JS handles: category filter, sort, load-more, view counts.
+  // ════════════════════════════════════════════════════════
+
+  const grid      = document.getElementById('video-grid');
+  const emptyState = document.getElementById('empty-state');
+  const loadWrap  = document.getElementById('load-more-wrap');
+  const loadBtn   = document.getElementById('load-more-btn');
+  const heading   = document.getElementById('grid-heading');
+
+  let allCards     = [];
+  let visibleCards = [];
+  let shownCount   = 0;
+  let currentCat   = 'All';
+  let currentSort  = 'date';
+
+  /** Get all video-card elements in DOM order */
+  function getCards() {
+    return Array.from(grid?.querySelectorAll('.video-card') ?? []);
+  }
+
+  /** Parse a "12K", "1.2M" string to a number for sorting */
+  function parseViews(str) {
+    const n = parseFloat(str || '0');
+    const u = (str || '').toUpperCase();
+    if (u.includes('M')) return n * 1_000_000;
+    if (u.includes('K')) return n * 1_000;
+    return n;
+  }
+
+  /** Sort cards in-place and re-append to grid */
+  function sortCards(cards, sort) {
+    const order = [...cards];
+    if (sort === 'date') {
+      order.sort((a, b) => new Date(b.dataset.date).getTime() - new Date(a.dataset.date).getTime());
+    } else if (sort === 'views') {
+      // Sort automatically by view count descending
+      order.sort((a, b) => {
+        const av = parseInt(a.dataset.views || a.querySelector('.card-view-count')?.dataset.rawViews || '0');
+        const bv = parseInt(b.dataset.views || b.querySelector('.card-view-count')?.dataset.rawViews || '0');
+        return bv - av;
+      });
+    } else if (sort === 'alpha') {
+      order.sort((a, b) => (a.dataset.title || '').localeCompare(b.dataset.title || ''));
+    }
+    order.forEach(c => grid?.appendChild(c));
+    return order;
+  }
+
+  /** Apply current category filter and sort, then paginate */
+  function applyFilters() {
+    allCards = getCards();
+
+    // Filter by category or dynamic tab (Popular, Trending, Latest)
+    if (currentCat === 'All') {
+      visibleCards = allCards;
+    } else if (currentCat === 'Popular') {
+      // Automatic popular posts based on view count descending
+      visibleCards = allCards;
+      currentSort = 'views';
+      document.querySelectorAll('.sort-btn').forEach(b => {
+        const isViews = b.dataset.sort === 'views';
+        b.classList.toggle('active', isViews);
+        b.setAttribute('aria-pressed', String(isViews));
+      });
+    } else if (currentCat === 'Trending') {
+      visibleCards = allCards;
+      currentSort = 'views';
+      document.querySelectorAll('.sort-btn').forEach(b => {
+        const isViews = b.dataset.sort === 'views';
+        b.classList.toggle('active', isViews);
+        b.setAttribute('aria-pressed', String(isViews));
+      });
+    } else if (currentCat === 'Latest') {
+      visibleCards = allCards;
+      currentSort = 'date';
+      document.querySelectorAll('.sort-btn').forEach(b => {
+        const isDate = b.dataset.sort === 'date';
+        b.classList.toggle('active', isDate);
+        b.setAttribute('aria-pressed', String(isDate));
+      });
+    } else {
+      visibleCards = allCards.filter(c => (c.dataset.category || '').toLowerCase() === currentCat.toLowerCase());
+    }
+
+    // Hide all first
+    allCards.forEach(c => c.classList.add('hidden'));
+
+    // Sort visible set
+    visibleCards = sortCards(visibleCards, currentSort);
+
+    // Show empty state if needed
+    if (emptyState) emptyState.style.display = visibleCards.length === 0 ? 'block' : 'none';
+
+    // Reset pagination
+    shownCount = 0;
+    showMore();
+  }
+
+  /** Reveal next batch of cards */
+  function showMore() {
+    const next = visibleCards.slice(shownCount, shownCount + PER_PAGE);
+    next.forEach(c => c.classList.remove('hidden'));
+    shownCount += next.length;
+
+    if (loadWrap) {
+      loadWrap.style.display = shownCount < visibleCards.length ? 'block' : 'none';
+    }
+  }
+
+  // ── Sort buttons ─────────────────────────────────────────
+  document.querySelectorAll('.sort-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.sort-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+      currentSort = btn.dataset.sort || 'date';
+      applyFilters();
+    });
+  });
+
+  // ── Load More ────────────────────────────────────────────
+  loadBtn?.addEventListener('click', showMore);
+
+  // ── Load view counts for all cards & auto-sort popular ─────
+  async function loadViewCounts() {
+    const countEls = document.querySelectorAll('.card-view-count[data-slug]');
+    if (!countEls.length) return;
+
+    const slugs = Array.from(countEls).map(el => el.getAttribute('data-slug')).filter(Boolean);
+
+    try {
+      const res = await fetch(`/api/views?slugs=${encodeURIComponent(slugs.join(','))}`);
+      if (res.ok) {
+        const data = await res.json();
+        const viewsMap = data.views || {};
+
+        countEls.forEach((el) => {
+          const slug = el.getAttribute('data-slug');
+          if (slug && viewsMap[slug] !== undefined) {
+            const views = viewsMap[slug];
+            el.textContent = formatViews(views);
+            el.dataset.rawViews = String(views);
+            const card = el.closest('.video-card');
+            if (card) card.dataset.views = String(views);
+          }
+        });
+
+        // Automatically re-sort popular posts with real live view counts
+        if (currentSort === 'views' || currentCat === 'Popular' || currentCat === 'Trending') {
+          applyFilters();
+        }
+        return;
+      }
+    } catch {
+      // Fallback to individual fetches
+    }
+
+    const fetches = Array.from(countEls).map(async (el) => {
+      const slug = el.getAttribute('data-slug');
+      if (!slug) return;
+      try {
+        const res = await fetch(`/api/views?slug=${encodeURIComponent(slug)}`);
+        if (!res.ok) return;
+        const { views } = await res.json();
+        el.textContent = formatViews(views);
+        el.dataset.rawViews = String(views);
+        const card = el.closest('.video-card');
+        if (card) card.dataset.views = String(views);
+      } catch {}
+    });
+    await Promise.all(fetches);
+
+    if (currentSort === 'views' || currentCat === 'Popular' || currentCat === 'Trending') {
+      applyFilters();
+    }
+  }
+
+  function formatViews(n) {
+    if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'M';
+    if (n >= 1_000)     return Math.floor(n / 1_000) + 'K';
+    return String(n);
+  }
+
+  // ── Init ─────────────────────────────────────────────────
+  applyFilters();
+  loadViewCounts();
+</script>

@@ -1,0 +1,163 @@
+---
+// src/pages/categories.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import VideoCard  from '../components/VideoCard.astro';
+import { videos, CATEGORIES, SITE_CONFIG, slugify, getVideosForCategory } from '../data/videos';
+
+const CATEGORY_ICONS: Record<string, string> = {
+  Latest:      '🆕',
+  Popular:     '🔥',
+  Trending:    '📈',
+  Amateur:     '🎥',
+  Couples:     '💑',
+  Solo:        '⭐',
+  Compilation: '🎞️',
+  Squirting:   '💦',
+  Teen:        '🌸',
+};
+
+const sorted = [...videos].sort(
+  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+);
+---
+
+<BaseLayout
+  title={`Categories – ${SITE_CONFIG.name}`}
+  description={`Browse all adult video categories on ${SITE_CONFIG.name}. Explore high-definition amateur, teen, couples, and trending sex scenes.`}
+  canonical={`${SITE_CONFIG.siteUrl}/categories/`}
+>
+
+  <div class="container">
+
+    <div class="sort-bar" style="padding-top:28px">
+      <h1 style="font-size:1.4rem;font-weight:800">Browse Categories</h1>
+    </div>
+
+    <!-- ── Category Cards (Direct links for SEO) ── -->
+    <div class="categories-grid" role="list">
+      <a href="/category/popular/" class="category-card" role="listitem">
+        <div class="cat-icon">🔥</div>
+        <h3>Popular</h3>
+        <p>{videos.length} videos</p>
+      </a>
+      {CATEGORIES.filter(c => c !== 'Popular').map(cat => {
+        const catVids = getVideosForCategory(cat);
+        const count = catVids.length;
+        const icon = CATEGORY_ICONS[cat] ?? '🎬';
+        return (
+          <a href={`/category/${slugify(cat)}/`} class="category-card" role="listitem">
+            <div class="cat-icon">{icon}</div>
+            <h3>{cat}</h3>
+            <p>{count} video{count !== 1 ? 's' : ''}</p>
+          </a>
+        );
+      })}
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── Sort + Grid ── -->
+    <div class="sort-bar">
+      <h2 id="cat-grid-heading" style="font-size:1.1rem;font-weight:700">All Videos</h2>
+      <div class="sort-options" role="group" aria-label="Sort videos">
+        <button class="sort-btn active" data-sort="date"  aria-pressed="true">Latest</button>
+        <button class="sort-btn"        data-sort="views" aria-pressed="false">Most Viewed</button>
+        <button class="sort-btn"        data-sort="alpha" aria-pressed="false">A–Z</button>
+      </div>
+    </div>
+
+    <div class="video-grid" id="video-grid" role="list">
+      {sorted.map(video => <VideoCard video={video} />)}
+    </div>
+
+    <div class="empty-state" id="empty-state" style="display:none" aria-live="polite">
+      <div class="empty-icon">🎬</div>
+      <h3>No videos in this category</h3>
+      <p>Check back later or browse another category.</p>
+    </div>
+
+    <div class="load-more-wrap" id="load-more-wrap">
+      <button class="btn btn-ghost" id="load-more-btn">Load More Videos</button>
+    </div>
+
+  </div>
+</BaseLayout>
+
+<script define:vars={{ PER_PAGE: SITE_CONFIG.videosPerPage }}>
+  const grid       = document.getElementById('video-grid');
+  const emptyState = document.getElementById('empty-state');
+  const loadWrap   = document.getElementById('load-more-wrap');
+  const loadBtn    = document.getElementById('load-more-btn');
+  const heading    = document.getElementById('cat-grid-heading');
+
+  let allCards     = [];
+  let visibleCards = [];
+  let shownCount   = 0;
+  let currentCat   = 'All';
+  let currentSort  = 'date';
+
+  function getCards() {
+    return Array.from(grid?.querySelectorAll('.video-card') ?? []);
+  }
+
+  function sortCards(cards, sort) {
+    const order = [...cards];
+    if (sort === 'date') {
+      order.sort((a, b) => new Date(b.dataset.date).getTime() - new Date(a.dataset.date).getTime());
+    } else if (sort === 'alpha') {
+      order.sort((a, b) => (a.dataset.title || '').localeCompare(b.dataset.title || ''));
+    }
+    order.forEach(c => grid?.appendChild(c));
+    return order;
+  }
+
+  function applyFilter() {
+    allCards = getCards();
+    if (currentCat === 'All') {
+      visibleCards = allCards;
+    } else {
+      visibleCards = allCards.filter(c => c.dataset.category === currentCat);
+    }
+
+    allCards.forEach(c => c.classList.add('hidden'));
+    visibleCards = sortCards(visibleCards, currentSort);
+
+    if (emptyState) emptyState.style.display = visibleCards.length === 0 ? 'block' : 'none';
+
+    shownCount = 0;
+    showMore();
+  }
+
+  function showMore() {
+    visibleCards.slice(shownCount, shownCount + PER_PAGE).forEach(c => c.classList.remove('hidden'));
+    shownCount = Math.min(shownCount + PER_PAGE, visibleCards.length);
+    if (loadWrap) loadWrap.style.display = shownCount < visibleCards.length ? 'block' : 'none';
+  }
+
+  // Sort buttons
+  document.querySelectorAll('.sort-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.sort-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+      currentSort = btn.dataset.sort || 'date';
+      applyFilter();
+    });
+  });
+
+  loadBtn?.addEventListener('click', showMore);
+
+  // Check URL for pre-selected category
+  const urlCat = new URLSearchParams(window.location.search).get('cat');
+  if (urlCat) {
+    currentCat = urlCat;
+    if (heading) heading.textContent = urlCat;
+    const matchCard = document.querySelector(`.category-card[data-filter="${CSS.escape(urlCat)}"]`);
+    matchCard?.setAttribute('aria-pressed', 'true');
+  }
+
+  applyFilter();
+</script>

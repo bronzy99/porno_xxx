@@ -1,0 +1,229 @@
+---
+// src/pages/category/[category]/[...page].astro
+// URLs: /category/amateur/ (page 1), /category/amateur/2/ (page 2), etc.
+import BaseLayout  from '../../../layouts/BaseLayout.astro';
+import VideoCard   from '../../../components/VideoCard.astro';
+import Pagination  from '../../../components/Pagination.astro';
+import {
+  getAllCategories,
+  getVideosForCategory,
+  slugify,
+  SITE_CONFIG,
+  type Video,
+} from '../../../data/videos';
+
+export async function getStaticPaths({ paginate }: { paginate: any }) {
+  const categories = getAllCategories();
+  const paths: any[] = [];
+  const pageSize = SITE_CONFIG.videosPerPage;
+
+  for (const cat of categories) {
+    const catVideos = getVideosForCategory(cat);
+    const catSlug = slugify(cat);
+
+    if (catVideos.length === 0) {
+      // Generate page 1 with empty state so category route always exists
+      const emptyPage = {
+        data: [],
+        start: 0,
+        end: 0,
+        total: 0,
+        currentPage: 1,
+        size: pageSize,
+        lastPage: 1,
+        url: {
+          current: `/category/${catSlug}/`,
+          prev: undefined,
+          next: undefined,
+          first: `/category/${catSlug}/`,
+          last: `/category/${catSlug}/`,
+        },
+      };
+
+      paths.push({
+        params: { category: catSlug, page: undefined },
+        props: { page: emptyPage, categoryName: cat, categorySlug: catSlug },
+      });
+
+      if (catSlug.includes('-')) {
+        const underscoreSlug = catSlug.replace(/-/g, '_');
+        paths.push({
+          params: { category: underscoreSlug, page: undefined },
+          props: {
+            page: { ...emptyPage, url: { ...emptyPage.url, current: `/category/${underscoreSlug}/` } },
+            categoryName: cat,
+            categorySlug: catSlug,
+          },
+        });
+      }
+    } else {
+      // Primary route (hyphenated / standard slug)
+      const paginatedPrimary = paginate(catVideos, {
+        params: { category: catSlug },
+        pageSize,
+        props: { categoryName: cat, categorySlug: catSlug },
+      });
+      paths.push(...paginatedPrimary);
+
+      // If slug has hyphens, also generate underscore variant (e.g. big_cock)
+      if (catSlug.includes('-')) {
+        const underscoreSlug = catSlug.replace(/-/g, '_');
+        const paginatedAlt = paginate(catVideos, {
+          params: { category: underscoreSlug },
+          pageSize,
+          props: { categoryName: cat, categorySlug: catSlug },
+        });
+        paths.push(...paginatedAlt);
+      }
+    }
+  }
+
+  return paths;
+}
+
+const { page, categoryName, categorySlug } = Astro.props;
+const current = page.currentPage;
+const isFirstPage = current === 1;
+
+// Optimized SEO Title and Description
+const pageTitle = isFirstPage
+  ? `${categoryName} Porn Videos – Free HD ${categoryName} Sex Movies | ${SITE_CONFIG.name}`
+  : `${categoryName} Porn Videos – Page ${current} | ${SITE_CONFIG.name}`;
+
+const pageDesc = isFirstPage
+  ? `Watch the best free ${categoryName} porn videos in HD on ${SITE_CONFIG.name}. Stream hot ${categoryName} sex movies, clips and popular scenes updated daily.`
+  : `Browse page ${current} of ${categoryName} adult videos and HD sex movies on ${SITE_CONFIG.name}.`;
+
+const canonicalUrl = isFirstPage
+  ? `${SITE_CONFIG.siteUrl}/category/${categorySlug}/`
+  : `${SITE_CONFIG.siteUrl}/category/${categorySlug}/${current}/`;
+
+const firstThumb = page.data?.[0]?.thumbnail;
+
+// JSON-LD Breadcrumb Schema for search engine rich snippets
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
+    {
+      '@type': 'ListItem',
+      'position': 1,
+      'name': 'Home',
+      'item': SITE_CONFIG.siteUrl,
+    },
+    {
+      '@type': 'ListItem',
+      'position': 2,
+      'name': 'Categories',
+      'item': `${SITE_CONFIG.siteUrl}/categories/`,
+    },
+    {
+      '@type': 'ListItem',
+      'position': 3,
+      'name': categoryName,
+      'item': `${SITE_CONFIG.siteUrl}/category/${categorySlug}/`,
+    },
+  ],
+};
+
+// JSON-LD CollectionPage Schema
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  'name': pageTitle,
+  'description': pageDesc,
+  'url': canonicalUrl,
+  'isPartOf': {
+    '@type': 'WebSite',
+    'name': SITE_CONFIG.name,
+    'url': SITE_CONFIG.siteUrl,
+  },
+  'numberOfItems': page.total,
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  ogTitle={pageTitle}
+  ogImage={firstThumb}
+  canonical={canonicalUrl}
+>
+  <!-- SEO Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
+
+  <div class="container">
+
+    <!-- ── Breadcrumb Navigation ── -->
+    <nav class="breadcrumbs" aria-label="Breadcrumb navigation">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <a href="/categories/">Categories</a>
+      <span class="sep">/</span>
+      <span class="active">{categoryName} {current > 1 && `(Page ${current})`}</span>
+    </nav>
+
+    <!-- ── Category SEO Header ── -->
+    <header class="tax-header">
+      <div class="tax-title-wrap">
+        <h1 class="tax-title">{categoryName} Videos</h1>
+        <span class="tax-count-badge">{page.total} Video{page.total !== 1 ? 's' : ''}</span>
+      </div>
+      <p class="tax-desc">
+        Explore the best collection of <strong>{categoryName}</strong> porn videos in crisp high-definition.
+        Stream trending full-length scenes, fresh clips, and top-rated content daily on {SITE_CONFIG.name}.
+      </p>
+    </header>
+
+    <!-- ── Video Grid ── -->
+    {page.data.length > 0 ? (
+      <>
+        <div class="video-grid" id="video-grid" role="list" aria-label={`${categoryName} video list`}>
+          {page.data.map((video: Video) => (
+            <VideoCard video={video} />
+          ))}
+        </div>
+
+        <!-- ── Pagination Controls ── -->
+        <Pagination page={page} baseUrl={`/category/${categorySlug}`} />
+      </>
+    ) : (
+      <div class="empty-state">
+        <div class="empty-icon">🎬</div>
+        <h3>No videos in this category yet</h3>
+        <p>Check back soon or explore other <a href="/categories/" style="color:var(--accent)">popular categories</a>.</p>
+      </div>
+    )}
+
+  </div>
+</BaseLayout>
+
+<script>
+  // ── Load live view counts for cards ──
+  async function loadViewCounts() {
+    const countEls = document.querySelectorAll('.card-view-count[data-slug]');
+    const fetches = Array.from(countEls).map(async (el) => {
+      const slug = el.getAttribute('data-slug');
+      if (!slug) return;
+      try {
+        const res = await fetch(`/api/views?slug=${encodeURIComponent(slug)}`);
+        if (!res.ok) return;
+        const { views } = await res.json();
+        el.textContent = formatViews(views);
+        el.setAttribute('data-raw-views', String(views));
+      } catch {
+        el.textContent = '—';
+      }
+    });
+    await Promise.all(fetches);
+  }
+
+  function formatViews(n: number) {
+    if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'M';
+    if (n >= 1_000)     return Math.floor(n / 1_000) + 'K';
+    return String(n);
+  }
+
+  loadViewCounts();
+</script>

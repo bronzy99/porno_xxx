@@ -1,0 +1,209 @@
+---
+// src/components/VideoCard.astro
+import type { Video } from '../data/videos';
+import { slugify, formatDate, getQualityTag } from '../data/videos';
+
+interface Props {
+  video: Video;
+}
+
+const { video } = Astro.props;
+const slug       = slugify(video.title);
+const previewUrl = video.preview?.trim() || '';
+const hasPreview = Boolean(previewUrl);
+const isGif      = Boolean(previewUrl.toLowerCase().endsWith('.gif'));
+const quality    = getQualityTag(video.tags);
+const initialViews = video.views || 0;
+const formattedViews = initialViews >= 1_000_000
+  ? (initialViews / 1_000_000).toFixed(1) + 'M'
+  : initialViews >= 1_000
+    ? Math.floor(initialViews / 1_000) + 'K'
+    : (initialViews > 0 ? String(initialViews) : '—');
+---
+
+<article
+  class="video-card"
+  data-category={video.category}
+  data-date={video.date}
+  data-title={video.title.toLowerCase()}
+  data-tags={video.tags.join(',')}
+  data-views={initialViews}
+>
+  <a href={`/videos/${slug}/`} class="card-link">
+    <div class="card-thumb" data-has-preview={hasPreview ? 'true' : 'false'}>
+      {quality && (
+        <span class="quality-badge" aria-label={`Quality: ${quality}`}>
+          {quality}
+        </span>
+      )}
+      <img
+        class="thumb-img"
+        src={video.thumbnail}
+        alt={video.title}
+        loading="lazy"
+        width="640"
+        height="360"
+        referrerpolicy="no-referrer"
+        onerror="this.src='https://picsum.photos/640/360?grayscale'"
+      />
+      {hasPreview && (
+        <div class="preview-wrap">
+          {!isGif && (
+            <video
+              class="preview-video"
+              muted
+              loop
+              playsinline
+              preload="none"
+              referrerpolicy="no-referrer"
+            >
+              <source src={previewUrl} type="video/mp4" />
+              <source src={previewUrl} />
+            </video>
+          )}
+          <img
+            class="preview-img"
+            data-src={previewUrl}
+            alt={`Preview of ${video.title}`}
+            referrerpolicy="no-referrer"
+            loading="lazy"
+            width="640"
+            height="360"
+            style={!isGif ? "display: none;" : ""}
+            src={isGif ? previewUrl : undefined}
+          />
+        </div>
+      )}
+      <div class="card-play-overlay" aria-hidden="true">
+        <div class="card-play-circle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </div>
+      </div>
+      <span class="duration-badge" aria-label={`Duration: ${video.duration}`}>
+        {video.duration}
+      </span>
+    </div>
+
+    <div class="card-body">
+      <h3 class="card-title">{video.title}</h3>
+      <div class="card-meta">
+        <div class="card-meta-left">
+          <span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            <span class="card-view-count" data-slug={slug} data-raw-views={initialViews}>{formattedViews}</span>
+          </span>
+          <span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            {formatDate(video.date)}
+          </span>
+        </div>
+        <span class="category-tag">{video.category}</span>
+      </div>
+    </div>
+  </a>
+</article>
+
+<script>
+  function setupHoverPreviews() {
+    const cards = document.querySelectorAll<HTMLElement>('.video-card');
+
+    cards.forEach((card) => {
+      if (card.dataset.previewInit === 'true') return;
+      card.dataset.previewInit = 'true';
+
+      const thumb = card.querySelector<HTMLElement>('.card-thumb');
+      if (thumb?.dataset.hasPreview !== 'true') return;
+
+      const video = card.querySelector<HTMLVideoElement>('.preview-video');
+      const img   = card.querySelector<HTMLImageElement>('.preview-img');
+      if (!video && !img) return;
+
+      let timer: number | null = null;
+
+      // Fallback: If video element encounters an error, display img
+      if (video) {
+        video.addEventListener('error', () => {
+          video.style.display = 'none';
+          if (img) {
+            img.style.display = 'block';
+            if (img.dataset.src && !img.src) {
+              img.src = img.dataset.src;
+            }
+          }
+        });
+      }
+
+      card.addEventListener('mouseenter', () => {
+        if (timer) window.clearTimeout(timer);
+
+        timer = window.setTimeout(() => {
+          if (video && video.style.display !== 'none') {
+            video.muted = true;
+            if (video.currentTime > 0 && video.ended) {
+              video.currentTime = 0;
+            }
+            const promise = video.play();
+            if (promise !== undefined) {
+              promise
+                .then(() => {
+                  card.classList.add('has-active-preview');
+                  video.classList.add('is-playing');
+                })
+                .catch(() => {
+                  // Fallback to img if video playback prevented
+                  if (img) {
+                    img.style.display = 'block';
+                    if (img.dataset.src && !img.src) {
+                      img.src = img.dataset.src;
+                    }
+                    card.classList.add('has-active-preview');
+                    img.classList.add('is-visible');
+                  }
+                });
+            }
+          } else if (img) {
+            if (img.dataset.src && !img.src) {
+              img.src = img.dataset.src;
+            }
+            card.classList.add('has-active-preview');
+            img.classList.add('is-visible');
+          }
+        }, 50);
+      });
+
+      card.addEventListener('mouseleave', () => {
+        if (timer) {
+          window.clearTimeout(timer);
+          timer = null;
+        }
+
+        card.classList.remove('has-active-preview');
+
+        if (video) {
+          video.pause();
+          video.currentTime = 0;
+          video.classList.remove('is-playing');
+        }
+
+        if (img) {
+          img.classList.remove('is-visible');
+        }
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupHoverPreviews);
+  } else {
+    setupHoverPreviews();
+  }
+  document.addEventListener('astro:page-load', setupHoverPreviews);
+</script>

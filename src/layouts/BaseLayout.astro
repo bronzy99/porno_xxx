@@ -1,0 +1,250 @@
+---
+// src/layouts/BaseLayout.astro
+import { SITE_CONFIG, CATEGORIES, slugify } from '../data/videos';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogTitle?: string;
+  ogImage?: string;
+  canonical?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = `${SITE_CONFIG.name} – ${SITE_CONFIG.tagline}`,
+  ogTitle = title,
+  ogImage,
+  canonical,
+  noindex = false,
+} = Astro.props;
+
+const currentPath = Astro.url.pathname;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  {noindex && <meta name="robots" content="noindex">}
+  {canonical && <link rel="canonical" href={canonical}>}
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content={ogTitle}>
+  <meta property="og:description" content={description}>
+  <meta property="og:type"        content="website">
+  <meta property="og:site_name"   content={SITE_CONFIG.name}>
+  {ogImage && <meta property="og:image" content={ogImage}>}
+  {canonical && <meta property="og:url" content={canonical}>}
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content={ogTitle}>
+  <meta name="twitter:description" content={description}>
+
+  <!-- Accent color override (applied before CSS loads) -->
+  <style define:vars={{ accent: SITE_CONFIG.accentColor }}>
+    :root { --accent: var(--accent); }
+  </style>
+</head>
+<body>
+
+  <!-- ── Age Gate ── -->
+  <div id="age-gate" role="dialog" aria-modal="true" aria-labelledby="age-gate-title">
+    <div class="age-gate-box">
+      <div class="age-gate-icon">🔞</div>
+      <h2 id="age-gate-title">Adults Only</h2>
+      <p>
+        This website contains sexually explicit material intended for adults only.<br>
+        By entering, you confirm that you are <strong>18 years of age or older</strong>
+        and that viewing adult content is legal in your jurisdiction.
+      </p>
+      <div class="age-buttons">
+        <button id="btn-confirm-age" class="btn btn-primary btn-lg">I am 18+ – Enter</button>
+        <button id="btn-deny-age"   class="btn btn-ghost btn-lg">I am under 18 – Leave</button>
+      </div>
+      <p class="notice">
+        By entering you agree to our
+        <a href="/about/#terms" style="color:var(--accent)">Terms</a> and
+        <a href="/about/#privacy" style="color:var(--accent)">Privacy Policy</a>.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── Header ── -->
+  <header id="site-header" role="banner">
+    <div class="header-inner">
+
+      <a href="/" class="site-logo" aria-label={`${SITE_CONFIG.name} – Home`}>
+        Porno <span>XXX</span>
+      </a>
+
+      <nav class="header-nav" aria-label="Main navigation">
+        <a href="/" aria-current={currentPath === '/' ? 'page' : undefined}>Home</a>
+
+        <!-- Categories Dropdown Menu -->
+        <div class="nav-dropdown">
+          <a
+            href="/categories/"
+            class="nav-dropdown-trigger"
+            aria-current={currentPath.startsWith('/categories') || currentPath.startsWith('/category') ? 'page' : undefined}
+          >
+            Categories
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </a>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="/categories/" class="nav-dropdown-item" role="menuitem" style="font-weight:700;color:var(--accent)">
+              Browse All Categories &rarr;
+            </a>
+            <div class="nav-dropdown-divider"></div>
+            {CATEGORIES.map((cat) => (
+              <a href={`/category/${slugify(cat)}/`} class="nav-dropdown-item" role="menuitem">
+                {cat}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <a href="/search/" aria-current={currentPath.startsWith('/search') ? 'page' : undefined}>Browse</a>
+        <a href="/about/"  aria-current={currentPath.startsWith('/about') ? 'page' : undefined}>About</a>
+      </nav>
+
+      <form class="header-search" action="/search/" method="get" role="search">
+        <div class="search-wrap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="search" name="q" placeholder="Search videos, categories, tags…" autocomplete="off" aria-label="Search">
+        </div>
+        <button type="submit" class="btn btn-primary btn-sm">Search</button>
+      </form>
+
+      <button class="btn-icon menu-toggle" id="menu-toggle"
+              aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span id="menu-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6"  x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- ── Global Category Menu Strip (Links to real category pages) ── -->
+  <div class="category-strip" role="navigation" aria-label="Category navigation menu">
+    <div class="category-strip-inner">
+      <a href="/" class={`cat-btn ${currentPath === '/' ? 'active' : ''}`} aria-current={currentPath === '/' ? 'page' : undefined}>
+        All
+      </a>
+      {CATEGORIES.map((cat) => {
+        const catSlug = slugify(cat);
+        const isActive = currentPath === `/category/${catSlug}/` || currentPath === `/category/${catSlug.replace(/-/g, '_')}/`;
+        return (
+          <a
+            href={`/category/${catSlug}/`}
+            class={`cat-btn ${isActive ? 'active' : ''}`}
+            aria-current={isActive ? 'page' : undefined}
+          >
+            {cat}
+          </a>
+        );
+      })}
+    </div>
+  </div>
+
+  <!-- ── Mobile Nav ── -->
+  <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation">
+    <a href="/"            aria-current={currentPath === '/' ? 'page' : undefined}>Home</a>
+    <a href="/categories/" aria-current={currentPath === '/categories/' ? 'page' : undefined}>All Categories</a>
+    <div class="mobile-categories" style="display:flex;flex-wrap:wrap;gap:6px;padding:4px 16px 10px;">
+      {CATEGORIES.map((cat) => (
+        <a
+          href={`/category/${slugify(cat)}/`}
+          style="font-size:0.8rem;padding:5px 12px;background:var(--surface-2);border-radius:var(--radius-pill);color:var(--text);text-decoration:none;"
+        >
+          {cat}
+        </a>
+      ))}
+    </div>
+    <a href="/search/"     aria-current={currentPath.startsWith('/search') ? 'page' : undefined}>Browse</a>
+    <a href="/about/"      aria-current={currentPath.startsWith('/about') ? 'page' : undefined}>About</a>
+    <form class="mobile-search" action="/search/" method="get" role="search">
+      <input type="search" name="q" placeholder="Search…" autocomplete="off" aria-label="Search">
+      <button type="submit" class="btn btn-primary btn-sm">Go</button>
+    </form>
+  </nav>
+
+  <!-- ── Page Content ── -->
+  <main id="main-content">
+    <slot />
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer id="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-logo">Porno <span>XXX</span></div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/about/">About</a>
+        <a href="/about/#contact">Contact</a>
+        <a href="/about/#terms">Terms of Service</a>
+        <a href="/about/#privacy">Privacy Policy</a>
+        {import.meta.env.DEV && (
+          <a href="/admin/" style="color:var(--text-light);font-size:0.75rem" title="Local Development Only">⚙️ Admin</a>
+        )}
+      </nav>
+      <div class="age-notice">🔞 Adults Only (18+)</div>
+      <p class="footer-copy">
+        &copy; {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved.<br>
+        All videos are hosted by authorized third-party providers. We do not host or own any video content.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ── Global Client Scripts ── -->
+  <script>
+    // ── Age Gate ──────────────────────────────────────────
+    const gate = document.getElementById('age-gate');
+    if (gate) {
+      if (localStorage.getItem('age_confirmed') === '1') {
+        gate.classList.add('hidden');
+      } else {
+        document.body.style.overflow = 'hidden';
+        document.getElementById('btn-confirm-age')?.addEventListener('click', () => {
+          localStorage.setItem('age_confirmed', '1');
+          gate.classList.add('hidden');
+          document.body.style.overflow = '';
+        });
+        document.getElementById('btn-deny-age')?.addEventListener('click', () => {
+          window.location.href = 'https://www.google.com';
+        });
+      }
+    }
+
+    // ── Mobile menu ───────────────────────────────────────
+    const toggle  = document.getElementById('menu-toggle');
+    const drawer  = document.getElementById('mobile-nav');
+    const menuIcon = document.getElementById('menu-icon');
+
+    const ICON_MENU  = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`;
+    const ICON_CLOSE = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
+
+    toggle?.addEventListener('click', () => {
+      const open = drawer?.classList.toggle('open');
+      if (menuIcon) menuIcon.innerHTML = open ? ICON_CLOSE : ICON_MENU;
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+  </script>
+
+</body>
+</html>

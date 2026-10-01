@@ -1,0 +1,95 @@
+---
+// src/pages/about.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_CONFIG } from '../data/videos';
+---
+
+<BaseLayout
+  title={`About – ${SITE_CONFIG.name}`}
+  description={`About ${SITE_CONFIG.name} – Terms of Service, Privacy Policy, and contact information.`}
+  noindex={true}
+>
+  <div class="container">
+    <div class="about-wrap">
+
+      <h1>About {SITE_CONFIG.name}</h1>
+
+      <p>
+        <strong>{SITE_CONFIG.name}</strong> is a curated adult video directory. We do not host,
+        upload, produce, or own any video content on this website. All videos are linked or
+        embedded from authorized third-party providers who are solely responsible for the content
+        they host.
+      </p>
+
+      <p>
+        This platform is intended for adults aged 18 and over. By using this site, you confirm
+        that you are of legal age in your jurisdiction to view adult content.
+      </p>
+
+      <div class="divider"></div>
+
+      <h2 id="terms">Terms of Service</h2>
+      <p>
+        By accessing this website, you agree that you are at least 18 years of age (or the age
+        of majority in your jurisdiction, whichever is greater), and that it is legal for you
+        to view sexually explicit material in your location.
+      </p>
+      <p>
+        This website does not host any video files. All content is streamed from authorized
+        third-party providers. We are not responsible for the content, availability, or
+        accuracy of external sources.
+      </p>
+      <p>
+        We reserve the right to modify these terms at any time. Continued use of the website
+        constitutes acceptance of the updated terms.
+      </p>
+
+      <div class="divider"></div>
+
+      <h2 id="privacy">Privacy Policy</h2>
+      <p>
+        We do not collect personally identifiable information. We use <code>localStorage</code>
+        solely to store your age-confirmation preference so you do not see the age gate on
+        every visit. We use <code>sessionStorage</code> to deduplicate view counts within a
+        browsing session. No personal data is transmitted to our servers.
+      </p>
+      <p>
+        This site uses Cloudflare's infrastructure. Cloudflare may process request metadata
+        (such as IP addresses) as part of their security and networking services. Please review
+        <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener" style="color:var(--accent)">Cloudflare's Privacy Policy</a>
+        for details.
+      </p>
+      <p>
+        Third-party video providers embedded on this site may set their own cookies and
+        collect data according to their own privacy policies.
+      </p>
+
+      <div class="divider"></div>
+
+      <h2 id="dmca">DMCA / Content Removal</h2>
+      <p>
+        We respect intellectual property rights. If you believe that content linked or embedded
+        on this site infringes your copyright, please contact us with:
+      </p>
+      <ul>
+        <li>Your name and contact information</li>
+        <li>A description of the copyrighted work</li>
+        <li>The specific URL on this site where the content appears</li>
+        <li>A statement that you have a good-faith belief that the use is unauthorized</li>
+      </ul>
+      <p>We will process valid DMCA notices promptly.</p>
+
+      <div class="divider"></div>
+
+      <h2 id="contact">Contact</h2>
+      <p>
+        For DMCA notices, content removal requests, or general enquiries, please email:
+        <a href="mailto:contact@YOUR-DOMAIN.com" style="color:var(--accent)">contact@YOUR-DOMAIN.com</a>
+      </p>
+      <p style="color:var(--text-light);font-size:.85rem">
+        Replace the address above with your actual contact email before publishing.
+      </p>
+
+    </div>
+  </div>
+</BaseLayout>

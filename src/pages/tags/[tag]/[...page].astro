@@ -1,0 +1,192 @@
+---
+// src/pages/tags/[tag]/[...page].astro
+// URLs: /tags/threesome/ (page 1), /tags/threesome/2/ (page 2), etc.
+import BaseLayout  from '../../../layouts/BaseLayout.astro';
+import VideoCard   from '../../../components/VideoCard.astro';
+import Pagination  from '../../../components/Pagination.astro';
+import {
+  getAllTags,
+  getVideosForTag,
+  slugify,
+  SITE_CONFIG,
+  type Video,
+} from '../../../data/videos';
+
+export async function getStaticPaths({ paginate }: { paginate: any }) {
+  const tags = getAllTags();
+  const paths: any[] = [];
+
+  for (const tag of tags) {
+    const tagVideos = getVideosForTag(tag);
+    const tagSlug = slugify(tag);
+    const pageSize = SITE_CONFIG.videosPerPage;
+
+    // Primary route (hyphenated / standard slug)
+    const paginatedPrimary = paginate(tagVideos, {
+      params: { tag: tagSlug },
+      pageSize,
+      props: { tagName: tag, tagSlug: tagSlug },
+    });
+    paths.push(...paginatedPrimary);
+
+    // If slug has hyphens, also generate underscore variant (e.g. big_cock)
+    if (tagSlug.includes('-')) {
+      const underscoreSlug = tagSlug.replace(/-/g, '_');
+      const paginatedAlt = paginate(tagVideos, {
+        params: { tag: underscoreSlug },
+        pageSize,
+        props: { tagName: tag, tagSlug: tagSlug },
+      });
+      paths.push(...paginatedAlt);
+    }
+  }
+
+  return paths;
+}
+
+const { page, tagName, tagSlug } = Astro.props;
+const current = page.currentPage;
+const isFirstPage = current === 1;
+
+// Optimized SEO Title and Description
+const pageTitle = isFirstPage
+  ? `${tagName} Porn Videos & Clips – Watch Free HD Movies | ${SITE_CONFIG.name}`
+  : `${tagName} Porn Videos – Page ${current} | ${SITE_CONFIG.name}`;
+
+const pageDesc = isFirstPage
+  ? `Watch the best free ${tagName} porn videos and sex clips in high definition on ${SITE_CONFIG.name}. Stream hot ${tagName} movies, updated daily.`
+  : `Browse page ${current} of ${tagName} adult videos and HD clips on ${SITE_CONFIG.name}.`;
+
+const canonicalUrl = isFirstPage
+  ? `${SITE_CONFIG.siteUrl}/tags/${tagSlug}/`
+  : `${SITE_CONFIG.siteUrl}/tags/${tagSlug}/${current}/`;
+
+const firstThumb = page.data?.[0]?.thumbnail;
+
+// JSON-LD Breadcrumb Schema
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
+    {
+      '@type': 'ListItem',
+      'position': 1,
+      'name': 'Home',
+      'item': SITE_CONFIG.siteUrl,
+    },
+    {
+      '@type': 'ListItem',
+      'position': 2,
+      'name': 'Browse',
+      'item': `${SITE_CONFIG.siteUrl}/search/`,
+    },
+    {
+      '@type': 'ListItem',
+      'position': 3,
+      'name': `#${tagName}`,
+      'item': `${SITE_CONFIG.siteUrl}/tags/${tagSlug}/`,
+    },
+  ],
+};
+
+// JSON-LD CollectionPage Schema
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  'name': pageTitle,
+  'description': pageDesc,
+  'url': canonicalUrl,
+  'isPartOf': {
+    '@type': 'WebSite',
+    'name': SITE_CONFIG.name,
+    'url': SITE_CONFIG.siteUrl,
+  },
+  'numberOfItems': page.total,
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  ogTitle={pageTitle}
+  ogImage={firstThumb}
+  canonical={canonicalUrl}
+>
+  <!-- SEO Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
+
+  <div class="container">
+
+    <!-- ── Breadcrumb Navigation ── -->
+    <nav class="breadcrumbs" aria-label="Breadcrumb navigation">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <a href="/search/">Browse</a>
+      <span class="sep">/</span>
+      <span class="active">#{tagName} {current > 1 && `(Page ${current})`}</span>
+    </nav>
+
+    <!-- ── Tag SEO Header ── -->
+    <header class="tax-header">
+      <div class="tax-title-wrap">
+        <h1 class="tax-title">#{tagName} Videos</h1>
+        <span class="tax-count-badge">{page.total} Video{page.total !== 1 ? 's' : ''}</span>
+      </div>
+      <p class="tax-desc">
+        Watch free <strong>#{tagName}</strong> adult videos and streaming movies in HD quality.
+        Discover popular sex clips and scenes tagged with #{tagName}, refreshed daily on {SITE_CONFIG.name}.
+      </p>
+    </header>
+
+    <!-- ── Video Grid ── -->
+    {page.data.length > 0 ? (
+      <>
+        <div class="video-grid" id="video-grid" role="list" aria-label={`${tagName} video list`}>
+          {page.data.map((video: Video) => (
+            <VideoCard video={video} />
+          ))}
+        </div>
+
+        <!-- ── Pagination Controls ── -->
+        <Pagination page={page} baseUrl={`/tags/${tagSlug}`} />
+      </>
+    ) : (
+      <div class="empty-state">
+        <div class="empty-icon">🏷️</div>
+        <h3>No videos tagged with #{tagName}</h3>
+        <p>Explore other popular tags or <a href="/categories/" style="color:var(--accent)">browse categories</a>.</p>
+      </div>
+    )}
+
+  </div>
+</BaseLayout>
+
+<script>
+  // ── Load live view counts for cards ──
+  async function loadViewCounts() {
+    const countEls = document.querySelectorAll('.card-view-count[data-slug]');
+    const fetches = Array.from(countEls).map(async (el) => {
+      const slug = el.getAttribute('data-slug');
+      if (!slug) return;
+      try {
+        const res = await fetch(`/api/views?slug=${encodeURIComponent(slug)}`);
+        if (!res.ok) return;
+        const { views } = await res.json();
+        el.textContent = formatViews(views);
+        el.setAttribute('data-raw-views', String(views));
+      } catch {
+        el.textContent = '—';
+      }
+    });
+    await Promise.all(fetches);
+  }
+
+  function formatViews(n: number) {
+    if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'M';
+    if (n >= 1_000)     return Math.floor(n / 1_000) + 'K';
+    return String(n);
+  }
+
+  loadViewCounts();
+</script>
