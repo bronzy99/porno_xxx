@@ -11,5 +11,5 @@ pages_build_output_dir = "./dist"
 # ─────────────────────────────────────────────────────────
 [[kv_namespaces]]
 binding = "VIEWS_KV"
-id = "f6c2e267546b43a592b11b507544a951"
-preview_id = "ab5e117ffdf747e19db51f874e6947a3"
+id = "3003dbf5617446a6a5c9804d4eceb0c8"
+preview_id = "862c10a4d8f94eb2be37a3a53ec36d2c"
