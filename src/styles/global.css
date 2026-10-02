@@ -1110,6 +1110,10 @@ main { flex: 1; }
   padding: 24px 0 12px;
 }
 
+.load-more-wrap + .pagination-wrap {
+  margin-top: 10px;
+}
+
 .pagination-nav {
   display: flex;
   align-items: center;
@@ -1134,6 +1138,7 @@ main { flex: 1; }
   text-decoration: none;
   transition: all var(--transition);
   box-shadow: var(--shadow-sm);
+  cursor: pointer;
 }
 
 .pagination-btn:hover:not(.disabled):not(.active) {
