@@ -20,7 +20,7 @@ export const SITE_CONFIG = {
   name:         'Porno XXX',
   tagline:      'Free Porn Videos & Sex Movies',
   accentColor:  '#e63946',
-  siteUrl:      'https://YOUR-DOMAIN.com',
+  siteUrl:      'https://pornoxxx.top',
   videosPerPage: 20,
 };
 
@@ -34,7 +34,8 @@ export const ALLOWED_EMBED_HOSTS: string[] = [
   "www.xhamster.com",
   "xhamster.com",
   "player.example.com",
-  "embed.example.com"
+  "embed.example.com",
+  "stream.xcloud1.lol"
 ];
 
 export const CATEGORIES = [
@@ -103,6 +104,17 @@ export const CATEGORIES = [
 export type Category = (typeof CATEGORIES)[number];
 
 export const videos: Video[] = [
+  {
+    "id": "115",
+    "title": "test",
+    "thumbnail": "https://images.usercontent.cv/423bf999c3cafbada11122d786be915e/images/d850455136b74a97bd2c5042e81e7ce7.webp",
+    "preview": "https://images.usercontent.cv/423bf999c3cafbada11122d786be915e/preview_2d00088052344fd39dc73d29f1376787.webp",
+    "embedUrl": "https://stream.xcloud1.lol/0c0b94d8ab5e15f",
+    "category": "Amateur",
+    "tags": [],
+    "duration": "8:00",
+    "date": "2026-10-03"
+  },
   {
     "id": "114",
     "title": "HardX Abella Danger Squirts Repeatedly from That Good D!",
@@ -466,7 +478,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/80f084f1-6b6d-4a7a-8fd1-2bf445e53f37/5/xv_30_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/80f084f1-6b6d-4a7a-8fd1-2bf445e53f37/5/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/opevkui06ed",
-    "category": "shaved-pussy-hair",
+    "category": "amateur",
     "tags": [
       "1080p",
       "sexy",
@@ -485,7 +497,6 @@ export const videos: Video[] = [
       "multiple-orgasms",
       "creamy-pussy",
       "hard-and-fast-fucking",
-      "shaved-pussy-hair",
       "squirting-from-pussy-fucking"
     ],
     "duration": "13:23",
