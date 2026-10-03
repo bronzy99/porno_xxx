@@ -3,7 +3,7 @@
 // URL: /videos/gorgeous-amateur-couple-home-session/
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import VideoCard  from '../../components/VideoCard.astro';
-import { videos, slugify, formatDate, isAllowedEmbedUrl, getQualityTag, SITE_CONFIG } from '../../data/videos';
+import { videos, slugify, formatDate, isAllowedEmbedUrl, getQualityTag, SITE_CONFIG, normalizeCategory } from '../../data/videos';
 
 export function getStaticPaths() {
   return videos.map((video) => ({
@@ -16,10 +16,11 @@ const { video }  = Astro.props;
 const slug        = slugify(video.title);
 const isAllowed   = isAllowedEmbedUrl(video.embedUrl);
 const quality     = getQualityTag(video.tags);
+const category    = normalizeCategory(video.category, video.tags);
 
-// Related: same category, exclude self, up to 8
+// Related: same canonical category, exclude self, up to 8
 const related = videos
-  .filter((v) => v.id !== video.id && v.category === video.category)
+  .filter((v) => v.id !== video.id && normalizeCategory(v.category, v.tags) === category)
   .slice(0, 8);
 
 // Fallback: if no same-category videos, show latest from any category
@@ -94,8 +95,8 @@ const canonical = `${SITE_CONFIG.siteUrl}/videos/${slug}/`;
                 <span class="quality-badge-inline">{quality}</span>
               )}
 
-              <a href={`/category/${slugify(video.category)}/`} class="category-tag">
-                {video.category}
+              <a href={`/category/${slugify(category)}/`} class="category-tag">
+                {category}
               </a>
             </div>
 

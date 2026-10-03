@@ -5,15 +5,20 @@ import VideoCard  from '../components/VideoCard.astro';
 import { videos, CATEGORIES, SITE_CONFIG, slugify, getVideosForCategory } from '../data/videos';
 
 const CATEGORY_ICONS: Record<string, string> = {
-  Latest:      '🆕',
-  Popular:     '🔥',
-  Trending:    '📈',
-  Amateur:     '🎥',
-  Couples:     '💑',
-  Solo:        '⭐',
-  Compilation: '🎞️',
-  Squirting:   '💦',
-  Teen:        '🌸',
+  Amateur:   '🎥',
+  Squirting: '💦',
+  'Big Cock': '🍆',
+  Teen:      '🌸',
+  BBW:       '🍑',
+  ASMR:      '🎧',
+  Anal:      '🔥',
+  Creampie:  '💧',
+  African:   '🌍',
+  '3D':      '🖥️',
+  AI:        '🤖',
+  Blowjob:   '💋',
+  Straight:  '⭐',
+  Popular:   '📈',
 };
 
 const sorted = [...videos].sort(
@@ -35,12 +40,7 @@ const sorted = [...videos].sort(
 
     <!-- ── Category Cards (Direct links for SEO) ── -->
     <div class="categories-grid" role="list">
-      <a href="/category/popular/" class="category-card" role="listitem">
-        <div class="cat-icon">🔥</div>
-        <h3>Popular</h3>
-        <p>{videos.length} videos</p>
-      </a>
-      {CATEGORIES.filter(c => c !== 'Popular').map(cat => {
+      {CATEGORIES.map(cat => {
         const catVids = getVideosForCategory(cat);
         const count = catVids.length;
         const icon = CATEGORY_ICONS[cat] ?? '🎬';
@@ -53,6 +53,7 @@ const sorted = [...videos].sort(
         );
       })}
     </div>
+
 
     <div class="divider"></div>
 

@@ -1,6 +1,6 @@
 ---
 // src/layouts/BaseLayout.astro
-import { SITE_CONFIG, CATEGORIES, slugify } from '../data/videos';
+import { SITE_CONFIG, NAV_CATEGORIES, slugify } from '../data/videos';
 import '../styles/global.css';
 
 interface Props {
@@ -123,7 +123,7 @@ const currentPath = Astro.url.pathname;
               Browse All Categories &rarr;
             </a>
             <div class="nav-dropdown-divider"></div>
-            {CATEGORIES.map((cat) => (
+            {NAV_CATEGORIES.map((cat) => (
               <a href={`/category/${slugify(cat)}/`} class="nav-dropdown-item" role="menuitem">
                 {cat}
               </a>
@@ -165,7 +165,7 @@ const currentPath = Astro.url.pathname;
       <a href="/" class={`cat-btn ${currentPath === '/' ? 'active' : ''}`} aria-current={currentPath === '/' ? 'page' : undefined}>
         All
       </a>
-      {CATEGORIES.map((cat) => {
+      {NAV_CATEGORIES.map((cat) => {
         const catSlug = slugify(cat);
         const isActive = currentPath === `/category/${catSlug}/` || currentPath === `/category/${catSlug.replace(/-/g, '_')}/`;
         return (
@@ -186,7 +186,7 @@ const currentPath = Astro.url.pathname;
     <a href="/"            aria-current={currentPath === '/' ? 'page' : undefined}>Home</a>
     <a href="/categories/" aria-current={currentPath === '/categories/' ? 'page' : undefined}>All Categories</a>
     <div class="mobile-categories" style="display:flex;flex-wrap:wrap;gap:6px;padding:4px 16px 10px;">
-      {CATEGORIES.map((cat) => (
+      {NAV_CATEGORIES.map((cat) => (
         <a
           href={`/category/${slugify(cat)}/`}
           style="font-size:0.8rem;padding:5px 12px;background:var(--surface-2);border-radius:var(--radius-pill);color:var(--text);text-decoration:none;"

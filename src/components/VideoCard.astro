@@ -1,7 +1,7 @@
 ---
 // src/components/VideoCard.astro
 import type { Video } from '../data/videos';
-import { slugify, formatDate, getQualityTag } from '../data/videos';
+import { slugify, formatDate, getQualityTag, normalizeCategory } from '../data/videos';
 
 interface Props {
   video: Video;
@@ -19,11 +19,12 @@ const formattedViews = initialViews >= 1_000_000
   : initialViews >= 1_000
     ? Math.floor(initialViews / 1_000) + 'K'
     : (initialViews > 0 ? String(initialViews) : '—');
+const category = normalizeCategory(video.category, video.tags);
 ---
 
 <article
   class="video-card"
-  data-category={video.category}
+  data-category={category}
   data-date={video.date}
   data-title={video.title.toLowerCase()}
   data-tags={video.tags.join(',')}
@@ -105,7 +106,7 @@ const formattedViews = initialViews >= 1_000_000
             {formatDate(video.date)}
           </span>
         </div>
-        <span class="category-tag">{video.category}</span>
+        <span class="category-tag">{category}</span>
       </div>
     </div>
   </a>

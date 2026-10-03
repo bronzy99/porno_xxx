@@ -38,41 +38,163 @@ export const ALLOWED_EMBED_HOSTS: string[] = [
   "stream.xcloud1.lol"
 ];
 
+// ── Canonical Categories ─────────────────────────────────────
+// All videos are mapped to one of these 14 categories at runtime.
 export const CATEGORIES = [
-  "Latest",
   "Amateur",
   "Squirting",
-  "Teen",
   "Big Cock",
+  "Teen",
   "BBW",
   "ASMR",
-  "Big dick",
-  "BBW",
-  "Blowjob",
-  "Big Tits",
-  "straight",
-  "AI",
+  "Anal",
+  "Creampie",
+  "African",
   "3D",
-  "Anal"
+  "AI",
+  "Blowjob",
+  "Straight",
+  "Popular",
 ] as const;
+
+// ── Nav Strip Config ──────────────────────────────────────────
+// Only these categories appear in the horizontal category strip
+// and the "Categories" dropdown in the header. Edit this list to
+// control exactly what shows (and in what order).
+export const NAV_CATEGORIES: string[] = [
+  "Amateur",
+  "Squirting",
+  "Big Cock",
+  "Teen",
+  "BBW",
+  "Anal",
+  "Creampie",
+  "Blowjob",
+];
+
+// ── Category Normalization ────────────────────────────────────
+// Maps a video's raw category + tags to one of the canonical CATEGORIES.
+// Falls back to "Amateur" when nothing matches.
+export function normalizeCategory(rawCategory: string, tags: string[] = []): string {
+  const all = [rawCategory, ...tags].map((s) => s.toLowerCase().replace(/[-_\s]+/g, ''));
+
+  const has = (...terms: string[]) =>
+    terms.some((t) => all.some((s) => s.includes(t.toLowerCase().replace(/[-_\s]+/g, ''))));
+
+  if (has('3d', 'cartoon', 'animated', 'hentai', 'animation', 'filledwithcum3d', 'hugeboobs3d', 'busty3d', 'blowjob3d', 'curvy3d', 'mature3d', 'cuteoutfit3d')) return '3D';
+  if (has('ai', 'aigenerated', 'aixxxshad')) return 'AI';
+  if (has('asmr')) return 'ASMR';
+  if (has('squirt', 'squirting', 'femaleejaculation', 'femalecum')) return 'Squirting';
+  if (has('anal', 'mranal', 'analgape', 'tightanalgape', 'analwhore')) return 'Anal';
+  if (has('creampie', 'cuminpanties', 'cumswallowing', 'deepcreampie')) return 'Creampie';
+  if (has('blowjob', 'deepthroat', 'facefucking', 'blowjobtease', 'sloppy')) return 'Blowjob';
+  if (has('bbw', 'chubby', 'hugebody', 'fatass', 'plussize')) return 'BBW';
+  if (has('bigcock', 'bigdick', 'monstercock', 'bbc', 'blackcock', 'hugecocks', 'fatdick')) return 'Big Cock';
+  if (has('teen', 'teens', 'teen18', 'teens18', '18yo', 'young', 'petite')) return 'Teen';
+  if (has('africa', 'african', 'nigeria', 'ebony', 'naija')) return 'African';
+  if (has('amateur', 'homemade', 'couple', 'pov')) return 'Amateur';
+  if (has('straight', 'missionary', 'doggystyle', 'riding', 'cowgirl', 'hardcore', 'pussy', 'sex', 'fucking')) return 'Straight';
+
+  return 'Amateur'; // default fallback
+}
+
+
 
 export type Category = (typeof CATEGORIES)[number];
 
 export const videos: Video[] = [
+  {
+    "id": "135",
+    "title": "BBC Pato Fucking Creampie. SkinnySarah. Pussy",
+    "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/dcc44f59-ad13-48bd-955b-e975e74fb599/0/xv_6_t.jpg",
+    "preview": "https://thumb-cdn77.xvideos-cdn.com/dcc44f59-ad13-48bd-955b-e975e74fb599/0/preview.mp4",
+    "embedUrl": "https://www.xvideos.com/embedframe/ohmvptm75cf",
+    "category": "Creampie",
+    "tags": [
+      "1080p",
+      "black",
+      "sexy",
+      "milf",
+      "slut",
+      "amateur",
+      "homemade",
+      "moaning",
+      "legs",
+      "female",
+      "cream",
+      "casting",
+      "big-cock",
+      "bbc",
+      "filming",
+      "1-on-1",
+      "making-love",
+      "slim-body",
+      "slimthick",
+      "fun-sex",
+      "slim-waist",
+      "teens-18"
+    ],
+    "duration": "12:28",
+    "date": "2026-10-03"
+  },
+  {
+    "id": "134",
+    "title": "My friend's girlfriend is begging for an internal orgasm, but I couldn't last 5 minutes inside her.",
+    "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/359020c1-9a4f-4859-82b3-364fce59fe9b/0/xv_30_t.jpg",
+    "preview": "https://thumb-cdn77.xvideos-cdn.com/359020c1-9a4f-4859-82b3-364fce59fe9b/0/preview.mp4",
+    "embedUrl": "https://www.xvideos.com/embedframe/okluvaheb8f",
+    "category": "Creampie",
+    "tags": [
+      "1080p",
+      "latina",
+      "sexy",
+      "babe",
+      "ass",
+      "petite",
+      "brunette",
+      "tattoo",
+      "amateur",
+      "homemade",
+      "curvy",
+      "fishnet",
+      "booty",
+      "asian",
+      "fetish",
+      "cute",
+      "huge-ass",
+      "brazil",
+      "beauty",
+      "cream",
+      "couple",
+      "big-tits",
+      "hotwife",
+      "gostosa",
+      "exhibitionist",
+      "culona",
+      "big-butt",
+      "perfect-ass",
+      "natural-tits",
+      "perfect-tits",
+      "ass-clapping",
+      "curvy-body"
+    ],
+    "duration": "10:14",
+    "date": "2026-10-03"
+  },
   {
     "id": "133",
     "title": "Skylars Anal Romp",
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/780a4915-1216-44d5-bdba-4bc48b546bbf/0/xv_26_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/780a4915-1216-44d5-bdba-4bc48b546bbf/0/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/ubkftekc35a",
-    "category": "BBW",
+    "category": "bbw",
     "tags": [
       "1080p",
       "anal",
       "big-ass",
       "anal-creampie",
-      "BBW",
-      "BBW"
+      "bbw",
+      "big-butt"
     ],
     "duration": "44:53",
     "date": "2026-10-03"
@@ -104,7 +226,7 @@ export const videos: Video[] = [
       "piss-drinking",
       "big-tits",
       "pink-pussy",
-      "Big Cock",
+      "bbc",
       "perfect-ass",
       "ass-fisting",
       "anal-slut",
@@ -117,7 +239,7 @@ export const videos: Video[] = [
       "only-anal",
       "double-anal-dap",
       "intense-anal",
-      "Amateur",
+      "0-pussy",
       "big-ass-gape",
       "man-pissing-on-girl",
       "destroyed-gape",
@@ -175,7 +297,7 @@ export const videos: Video[] = [
       "big-tits",
       "blowbang",
       "big-cock",
-      "Big Cock",
+      "bbc",
       "wet-pussy",
       "blow-bang",
       "beautiful-face",
@@ -185,12 +307,12 @@ export const videos: Video[] = [
       "fat-dick",
       "wild-sex",
       "pretty-face",
-      "Amateur-lover",
+      "black-cock-lover",
       "cock-play",
       "black-guy",
       "cock-rubbing",
-      "Amateur",
-      "Blowjob",
+      "girl-enjoying-sex",
+      "blowjob-tease",
       "only-black-men"
     ],
     "duration": "15:02",
@@ -234,11 +356,11 @@ export const videos: Video[] = [
       "perfect-tits",
       "butt-plugs",
       "white-skin",
-      "Amateur",
+      "curvy-body",
       "balls-deep-anal",
       "double-penetration-dp",
       "gapes-gaping-asshole",
-      "Amateur",
+      "hard-and-fast-fucking",
       "average-ass",
       "crazy-curves",
       "circular-anal-gape"
@@ -265,7 +387,7 @@ export const videos: Video[] = [
       "big-ass",
       "hardsex",
       "big-tits",
-      "Amateur",
+      "black-cock",
       "anal-sex"
     ],
     "duration": "11:51",
@@ -312,9 +434,9 @@ export const videos: Video[] = [
       "pinay",
       "boy",
       "brasil",
-      "Amateur",
+      "gostosa",
       "gays",
-      "Big dick",
+      "big-dick",
       "comshot",
       "lesbicas",
       "suruba",
@@ -326,7 +448,7 @@ export const videos: Video[] = [
       "natural-tits",
       "real-orgasm",
       "anal-slut",
-      "Anal",
+      "anal-whore",
       "beautiful-face",
       "perfect-tits",
       "pretty-face",
@@ -334,7 +456,7 @@ export const videos: Video[] = [
       "anal-queen",
       "anal-orgasm",
       "wet-blowjob",
-      "Amateur",
+      "curvy-body",
       "balls-deep-anal",
       "kali-roses",
       "abela-danger",
@@ -349,7 +471,7 @@ export const videos: Video[] = [
       "indian-blackmail",
       "cap-d’agde",
       "မြမြ",
-      "Amateur",
+      "balls-deep-vaginal",
       "ass-to-pussy-atp",
       "milana-milka",
       "bi-casal",
@@ -373,13 +495,13 @@ export const videos: Video[] = [
       "cowgirl",
       "missionary",
       "big-tits",
-      "BBW",
+      "big-butt",
       "anal-queen",
-      "Amateur",
+      "black-women",
       "anal-creampies",
       "balls-deep-anal",
       "spoon-position",
-      "Amateur",
+      "hard-and-fast-fucking",
       "big-ass-gape",
       "circular-anal-gape",
       "average-anal-gape",
@@ -405,7 +527,7 @@ export const videos: Video[] = [
       "dp",
       "big-ass",
       "rough-sex",
-      "Amateur",
+      "sloppy",
       "anal-gape",
       "ass-fuck",
       "anal-toys",
@@ -421,8 +543,8 @@ export const videos: Video[] = [
   {
     "id": "123",
     "title": "nasty anal",
-    "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/134102ee-57b3-4ac4-Big Cock8-ddd884061885/0/xv_24_t.jpg",
-    "preview": "https://thumb-cdn77.xvideos-cdn.com/134102ee-57b3-4ac4-Big Cock8-ddd884061885/0/preview.mp4",
+    "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/134102ee-57b3-4ac4-bbc8-ddd884061885/0/xv_24_t.jpg",
+    "preview": "https://thumb-cdn77.xvideos-cdn.com/134102ee-57b3-4ac4-bbc8-ddd884061885/0/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/hvtflooa2ed",
     "category": "Anal",
     "tags": [
@@ -431,9 +553,9 @@ export const videos: Video[] = [
       "sex",
       "creampie",
       "amateur",
-      "BBW",
+      "bbw",
       "lover",
-      "Big Cock"
+      "bbc"
     ],
     "duration": "2:05",
     "date": "2026-10-03"
@@ -459,29 +581,29 @@ export const videos: Video[] = [
       "culona",
       "big-cock",
       "round-ass",
-      "Big Cock",
+      "bbc",
       "twerk",
-      "BBW",
+      "big-butt",
       "perfect-ass",
       "big-booty",
       "1-on-1",
       "monster-cock",
       "anal-slut",
-      "Anal",
+      "anal-whore",
       "anal-fingering",
       "slim-body",
       "beautiful-face",
       "ass-bouncing",
       "perfect-tits",
       "pretty-face",
-      "BBW",
+      "ebony-ass",
       "anal-orgasm",
       "balls-deep-anal",
-      "Anal",
+      "real-ass",
       "intense-anal",
-      "Big Cock-in-ass",
-      "Amateur",
-      "Amateur",
+      "bbc-in-ass",
+      "hard-and-fast-fucking",
+      "0-pussy",
       "solo-anal-masturbation"
     ],
     "duration": "3:09",
@@ -509,21 +631,21 @@ export const videos: Video[] = [
       "cream",
       "big-tits",
       "pussy-eating",
-      "Amateur",
+      "gostosa",
       "culona",
       "big-cock",
       "pink-pussy",
-      "Big Cock",
+      "bbc",
       "pawg",
       "monster-cock",
       "big-pussy",
       "long-cock",
       "fat-dick",
-      "Squirting",
+      "creamy-pussy",
       "fit-body",
-      "Amateur",
-      "Teen",
-      "BBW"
+      "curvy-body",
+      "teens-18",
+      "huge-body"
     ],
     "duration": "8:27",
     "date": "2026-10-03"
@@ -544,12 +666,12 @@ export const videos: Video[] = [
       "doggystyle",
       "missionary",
       "big-cock",
-      "Big Cock",
+      "bbc",
       "anal-slut",
-      "Anal",
+      "anal-whore",
       "slim-body",
-      "BBW",
-      "Amateur-lover",
+      "ebony-ass",
+      "black-cock-lover",
       "anal-queen",
       "anal-orgasm",
       "balls-deep-anal",
@@ -579,7 +701,7 @@ export const videos: Video[] = [
       "solo-girl",
       "anal-masturbation",
       "public-farting",
-      "Amateur"
+      "only-women"
     ],
     "duration": "5:45",
     "date": "2026-10-03"
@@ -614,24 +736,24 @@ export const videos: Video[] = [
       "screaming",
       "big-cock",
       "cumload",
-      "Big Cock",
-      "BBW",
+      "bbc",
+      "big-butt",
       "big-booty",
       "ass-play",
       "anal-fingering",
       "long-cock",
       "wild-sex",
-      "BBW",
+      "ebony-ass",
       "anal-orgasm",
       "anal-creampies",
       "yummy-asshole",
-      "Teen",
+      "teens-18",
       "huge-cumload",
-      "Big Cock-in-ass",
+      "bbc-in-ass",
       "spoon-position",
-      "Amateur",
-      "Amateur",
-      "Anal",
+      "hard-and-fast-fucking",
+      "0-pussy",
+      "tight-anal-gape",
       "cum-dripping-from-asshole"
     ],
     "duration": "0:49",
@@ -652,33 +774,33 @@ export const videos: Video[] = [
       "curvy",
       "cowgirl",
       "huge-ass",
-      "Amateur",
+      "kissing",
       "beauty",
       "big-tits",
       "dirty-talk",
-      "Big Cock",
+      "bbc",
       "face-fucking",
-      "BBW",
+      "big-butt",
       "perfect-ass",
       "big-booty",
       "1-on-1",
       "monster-cock",
       "real-orgasm",
       "anal-slut",
-      "Anal",
+      "anal-whore",
       "long-cock",
-      "BBW",
-      "Amateur-lover",
+      "ebony-ass",
+      "black-cock-lover",
       "anal-queen",
       "anal-orgasm",
       "multiple-orgasms",
-      "Amateur",
+      "black-women",
       "big-black-tits",
       "submissive-girl",
-      "BBW-worship",
+      "ebony-ass-worship",
       "balls-deep-anal",
       "total-slut",
-      "Amateur"
+      "hard-and-fast-fucking"
     ],
     "duration": "14:05",
     "date": "2026-10-03"
@@ -698,33 +820,33 @@ export const videos: Video[] = [
       "curvy",
       "cowgirl",
       "huge-ass",
-      "Amateur",
+      "kissing",
       "beauty",
       "big-tits",
       "dirty-talk",
-      "Big Cock",
+      "bbc",
       "face-fucking",
-      "BBW",
+      "big-butt",
       "perfect-ass",
       "big-booty",
       "1-on-1",
       "monster-cock",
       "real-orgasm",
       "anal-slut",
-      "Anal",
+      "anal-whore",
       "long-cock",
-      "BBW",
-      "Amateur-lover",
+      "ebony-ass",
+      "black-cock-lover",
       "anal-queen",
       "anal-orgasm",
       "multiple-orgasms",
-      "Amateur",
+      "black-women",
       "big-black-tits",
       "submissive-girl",
-      "BBW-worship",
+      "ebony-ass-worship",
       "balls-deep-anal",
       "total-slut",
-      "Amateur"
+      "hard-and-fast-fucking"
     ],
     "duration": "14:05",
     "date": "2026-10-03"
@@ -750,9 +872,9 @@ export const videos: Video[] = [
       "feet",
       "big-tits",
       "doggy-style",
-      "Big dick",
+      "big-dick",
       "rimjob",
-      "Big Cock",
+      "bbc",
       "face-fuck",
       "anal-sex",
       "ass-to-pussy",
@@ -772,7 +894,7 @@ export const videos: Video[] = [
       "1080p",
       "hardcore",
       "pornstar",
-      "Amateur",
+      "brunette",
       "squirting",
       "squirt",
       "hairy",
@@ -807,7 +929,7 @@ export const videos: Video[] = [
       "pussyfucking",
       "big-ass",
       "hardsex",
-      "Big dick",
+      "big-dick",
       "small-tits",
       "new-sensations",
       "female-cum",
@@ -833,7 +955,7 @@ export const videos: Video[] = [
       "big-booty",
       "natural-tits",
       "perfect-tits",
-      "BBW"
+      "ebony-ass"
     ],
     "duration": "13:46",
     "date": "2026-10-02"
@@ -848,13 +970,13 @@ export const videos: Video[] = [
     "tags": [
       "1080p",
       "milf",
-      "Amateur",
+      "brunette",
       "pussy-fucking",
       "missionary",
       "big-cock",
       "step-mom",
       "mature-woman",
-      "Amateur",
+      "hard-and-fast-fucking",
       "squirting-from-pussy-fucking",
       "airplane-position"
     ],
@@ -863,7 +985,7 @@ export const videos: Video[] = [
   },
   {
     "id": "110",
-    "title": "Big Cock MAKING HER SQUIRT!",
+    "title": "BBC MAKING HER SQUIRT!",
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/c869cfdc-cf3e-44eb-9772-d67f26291eb8/0/xv_3_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/c869cfdc-cf3e-44eb-9772-d67f26291eb8/0/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/uiiehlf24e5",
@@ -875,7 +997,7 @@ export const videos: Video[] = [
       "tattoo",
       "ebony",
       "fat-pussy",
-      "wet-Squirting",
+      "wet-creamy-pussy",
       "big-chocolate-dick"
     ],
     "duration": "7:55",
@@ -900,12 +1022,12 @@ export const videos: Video[] = [
       "big-ass",
       "horny",
       "big-cock",
-      "Amateur",
-      "BBW",
+      "nigeria",
+      "big-butt",
       "big-booty",
-      "Amateur",
+      "black-cock",
       "south-africa",
-      "Teen"
+      "teens-18"
     ],
     "duration": "9:54",
     "date": "2026-10-02"
@@ -930,11 +1052,11 @@ export const videos: Video[] = [
       "18yo",
       "usa",
       "big-cock",
-      "Big dick",
+      "big-dick",
       "big-boobs",
       "africa",
-      "Amateur",
-      "Big Tits",
+      "nigeria",
+      "big-natural-tits",
       "south-africa",
       "hot-student"
     ],
@@ -947,19 +1069,19 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/834e823a-671e-419e-8d33-b4d84867d2a3/0/xv_30_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/834e823a-671e-419e-8d33-b4d84867d2a3/0/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/uhlcemo83cb",
-    "category": "Anal",
+    "category": "mr-anal",
     "tags": [
       "1080p",
       "anal",
       "hot",
       "sexy",
       "bangbros",
-      "Amateur",
+      "brunette",
       "wet",
       "squirting",
       "squirt",
       "bush",
-      "Amateur",
+      "gostosa",
       "pipi",
       "hairy-pussy",
       "pinkeln",
@@ -968,8 +1090,8 @@ export const videos: Video[] = [
       "mranal",
       "adriana-chechik",
       "markus-dupree",
-      "Anal",
-      "Big Cock17033"
+      "mr-anal",
+      "bbc17033"
     ],
     "duration": "10:26",
     "date": "2026-10-02"
@@ -996,7 +1118,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/4f53cd5a-a81f-4632-86ac-158b2d5e4982/0/xv_10_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/4f53cd5a-a81f-4632-86ac-158b2d5e4982/0/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/udcdvkfab52",
-    "category": "Amateur",
+    "category": "kissing",
     "tags": [
       "720p",
       "blonde",
@@ -1005,8 +1127,8 @@ export const videos: Video[] = [
       "amateur",
       "chubby",
       "squirting",
-      "Amateur",
-      "Teen"
+      "kissing",
+      "teens-18"
     ],
     "duration": "11:08",
     "date": "2026-10-02"
@@ -1017,7 +1139,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/71d900a3-61d4-4f08-91f8-b8918c378757/0/xv_27_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/71d900a3-61d4-4f08-91f8-b8918c378757/0/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/ucpcpoh6cb3",
-    "category": "Amateur",
+    "category": "nigeria",
     "tags": [
       "720p",
       "cumshot",
@@ -1036,9 +1158,9 @@ export const videos: Video[] = [
       "indian",
       "18yo",
       "big-cock",
-      "Big dick",
+      "big-dick",
       "africa",
-      "Amateur",
+      "nigeria",
       "south-africa"
     ],
     "duration": "9:06",
@@ -1050,7 +1172,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/451f8db0-ce97-4ec0-b567-36f1e77716c7/3/xv_1_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/451f8db0-ce97-4ec0-b567-36f1e77716c7/3/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/oudcama969e",
-    "category": "Teen",
+    "category": "teens-18",
     "tags": [
       "720p",
       "cumshot",
@@ -1061,13 +1183,13 @@ export const videos: Video[] = [
       "squirt",
       "big-ass",
       "horny",
-      "Amateur",
+      "couple",
       "big-cock",
-      "Big dick",
-      "Amateur",
+      "big-dick",
+      "nigeria",
       "big-booty",
       "1-on-1",
-      "Teen",
+      "teens-18",
       "south-africa-sex-videos"
     ],
     "duration": "12:31",
@@ -1079,7 +1201,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumbs-gcore.xvideos-cdn.com/3602d567-e145-4671-8271-f7abd07c0ce0/0/xv_29_t.jpg",
     "preview": "https://thumbs-gcore.xvideos-cdn.com/3602d567-e145-4671-8271-f7abd07c0ce0/0/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/udkhmlkd380",
-    "category": "Amateur",
+    "category": "nigeria",
     "tags": [
       "1080p",
       "cumshot",
@@ -1094,9 +1216,9 @@ export const videos: Video[] = [
       "piss",
       "big-tits",
       "big-cock",
-      "Big dick",
+      "big-dick",
       "africa",
-      "Amateur",
+      "nigeria",
       "south-africa"
     ],
     "duration": "7:16",
@@ -1104,15 +1226,15 @@ export const videos: Video[] = [
   },
   {
     "id": "101",
-    "title": "Hardcore Amateur Fucking",
+    "title": "Hardcore Couple Fucking",
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/7589532b-92e7-40a2-9a1b-7e03856e4174/0/xv_22_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/7589532b-92e7-40a2-9a1b-7e03856e4174/0/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/uuvmfei49b5",
-    "category": "Amateur",
+    "category": "couple",
     "tags": [
       "1080p",
       "chubby",
-      "Amateur",
+      "couple",
       "missionary"
     ],
     "duration": "6:41",
@@ -1141,8 +1263,8 @@ export const videos: Video[] = [
       "big-cock",
       "real-orgasm",
       "multiple-orgasms",
-      "Squirting",
-      "Amateur",
+      "creamy-pussy",
+      "hard-and-fast-fucking",
       "squirting-from-pussy-fucking"
     ],
     "duration": "13:23",
@@ -1154,14 +1276,14 @@ export const videos: Video[] = [
     "thumbnail": "https://thumbs-gcore.xvideos-cdn.com/5b5c04aa-95e8-4fec-9e4b-5550efa7949f/0/xv_6_t.jpg",
     "preview": "https://thumbs-gcore.xvideos-cdn.com/5b5c04aa-95e8-4fec-9e4b-5550efa7949f/0/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/hpvotot1bc1",
-    "category": "Amateur",
+    "category": "brooks",
     "tags": [
       "720p",
       "hardcore",
       "pornstar",
       "bangbros",
       "massage",
-      "Amateur",
+      "brooks",
       "mischa"
     ],
     "duration": "4:00",
@@ -1173,7 +1295,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/ef687b3e-8c43-4be0-9790-546f34f260cb/0/xv_6_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/ef687b3e-8c43-4be0-9790-546f34f260cb/0/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/oticiokbac7",
-    "category": "Amateur",
+    "category": "perfect-shape-tits",
     "tags": [
       "sexy",
       "rough",
@@ -1198,12 +1320,12 @@ export const videos: Video[] = [
       "foot-sucking",
       "cum-eater",
       "muscular-guy",
-      "Teen",
-      "Anal",
-      "Amateur",
-      "Amateur",
+      "teens-18",
+      "real-ass",
+      "hard-and-fast-fucking",
+      "balls-deep-vaginal",
       "man-rimming-girl",
-      "Amateur",
+      "perfect-shape-tits",
       "spit-in-pussy"
     ],
     "duration": "0:33",
@@ -1215,7 +1337,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/52eb37d8-7dc6-41a9-b1b0-eab7e46a624f/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/52eb37d8-7dc6-41a9-b1b0-eab7e46a624f/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omtlmli7ae3",
-    "category": "Amateur",
+    "category": "curvy-body",
     "tags": [
       "1080p",
       "perfect-ass",
@@ -1223,19 +1345,19 @@ export const videos: Video[] = [
       "big-pussy",
       "ass-bouncing",
       "juicy-pussy",
-      "Amateur",
-      "Anal"
+      "curvy-body",
+      "real-ass"
     ],
     "duration": "10:31",
     "date": "2026-10-02"
   },
   {
     "id": "096",
-    "title": "Juicy pussy fucked by African Big Cock",
+    "title": "Juicy pussy fucked by African BBC",
     "thumbnail": "https://thumbs-gcore.xvideos-cdn.com/46a5cf6f-e70d-4822-9b32-bc95362fa677/4/xv_22_t.jpg",
     "preview": "https://thumbs-gcore.xvideos-cdn.com/46a5cf6f-e70d-4822-9b32-bc95362fa677/4/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/oofetfdd6ab",
-    "category": "BBW",
+    "category": "big-butt",
     "tags": [
       "1080p",
       "blowjob",
@@ -1244,8 +1366,8 @@ export const videos: Video[] = [
       "pussy-fucking",
       "missionary",
       "big-cock",
-      "BBW",
-      "BBW"
+      "big-butt",
+      "ebony-ass"
     ],
     "duration": "10:21",
     "date": "2026-10-02"
@@ -1269,7 +1391,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/12f9977c-1ae8-4f7f-aa45-8025e048203f/6/xv_5_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/12f9977c-1ae8-4f7f-aa45-8025e048203f/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omitdcu98db",
-    "category": "Anal",
+    "category": "real-ass",
     "tags": [
       "1080p",
       "licking",
@@ -1286,25 +1408,25 @@ export const videos: Video[] = [
       "screaming",
       "rough-sex",
       "missionary",
-      "Amateur",
+      "sloppy",
       "big-cock",
       "round-ass",
-      "Big Cock",
-      "BBW",
+      "bbc",
+      "big-butt",
       "perfect-ass",
       "big-booty",
       "fat-ass",
       "ass-bouncing",
       "wild-sex",
       "onion-booty",
-      "BBW",
+      "ebony-ass",
       "pretty-pussy",
-      "Analping",
+      "ass-clapping",
       "slimthick",
-      "Amateur",
+      "curvy-body",
       "skinny-body",
-      "Amateur",
-      "Anal",
+      "thick-body",
+      "real-ass",
       "pear-ass"
     ],
     "duration": "10:45",
@@ -1316,17 +1438,17 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/3bdee701-2b0d-4577-9c78-c92e0a1f81c6/6/xv_27_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/3bdee701-2b0d-4577-9c78-c92e0a1f81c6/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omtvefl2469",
-    "category": "BBW",
+    "category": "ebony-ass",
     "tags": [
       "1080p",
       "black",
       "curvy",
       "missionary",
       "big-cock",
-      "Big Cock",
+      "bbc",
       "fat-dick",
-      "BBW",
-      "Amateur-lover"
+      "ebony-ass",
+      "black-cock-lover"
     ],
     "duration": "7:09",
     "date": "2026-10-02"
@@ -1337,7 +1459,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/3ca81be9-8e11-4b03-b839-253dafc88690/6/xv_9_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/3ca81be9-8e11-4b03-b839-253dafc88690/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omhdtticb45",
-    "category": "Amateur",
+    "category": "hard-and-fast-fucking",
     "tags": [
       "1080p",
       "black",
@@ -1359,20 +1481,20 @@ export const videos: Video[] = [
       "big-tits",
       "big-cock",
       "round-ass",
-      "Big Cock",
-      "BBW",
+      "bbc",
+      "big-butt",
       "perfect-ass",
       "big-booty",
       "wet-pussy",
       "fat-ass",
-      "Big Tits",
-      "BBW",
+      "big-natural-tits",
+      "ebony-ass",
       "pretty-pussy",
       "dripping-wet-pussy",
-      "Amateur",
-      "Big Cock-worship",
-      "Anal",
-      "Amateur",
+      "thick-body",
+      "bbc-worship",
+      "real-ass",
+      "hard-and-fast-fucking",
       "ass-drop"
     ],
     "duration": "12:12",
@@ -1384,16 +1506,16 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/f39b4015-a91b-4aa5-ab95-ae5c7731e914/5/xv_10_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/f39b4015-a91b-4aa5-ab95-ae5c7731e914/5/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/opemvhmc734",
-    "category": "3D",
+    "category": "huge-boobs-3d",
     "tags": [
       "1080p",
       "busty-3d",
       "blowjob-3d",
-      "AI",
+      "ai-generated",
       "big-boobs-3d",
       "curvy-3d",
       "mature-3d",
-      "3D",
+      "huge-boobs-3d",
       "cute-outfit-3d"
     ],
     "duration": "10:07",
@@ -1405,12 +1527,12 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/7f5ed252-93e6-42ba-95a9-cdcc6de6434d/6/xv_3_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/7f5ed252-93e6-42ba-95a9-cdcc6de6434d/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omtviamdada",
-    "category": "Amateur",
+    "category": "sloppy",
     "tags": [
       "1080p",
       "black",
       "doggystyle",
-      "Amateur",
+      "sloppy",
       "pretty-face"
     ],
     "duration": "12:27",
@@ -1418,11 +1540,11 @@ export const videos: Video[] = [
   },
   {
     "id": "089",
-    "title": "AISHA THE SEXY STREET SELLER MUSLIM GIRL FROM NORTHERN Amateur ..",
+    "title": "AISHA THE SEXY STREET SELLER MUSLIM GIRL FROM NORTHERN NIGERIA ..",
     "thumbnail": "https://thumbs-gcore.xvideos-cdn.com/deb4ba3e-da35-4f7d-ba83-7913e0d0e06b/5/xv_30_t.jpg",
     "preview": "https://thumbs-gcore.xvideos-cdn.com/deb4ba3e-da35-4f7d-ba83-7913e0d0e06b/5/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/opelvhp05fb",
-    "category": "Amateur",
+    "category": "brown-pussy",
     "tags": [
       "1080p",
       "pornstar",
@@ -1439,16 +1561,16 @@ export const videos: Video[] = [
       "wet-pussy",
       "romantic-sex",
       "making-love",
-      "Squirting",
+      "big-clit",
       "long-cock",
       "large-labia",
       "juicy-pussy",
       "slimthick",
-      "Squirting",
+      "creamy-pussy",
       "brown-skin",
       "meaty-pussy-lips",
-      "Amateur",
-      "Amateur"
+      "brown-pussy",
+      "fun-sex"
     ],
     "duration": "10:42",
     "date": "2026-10-02"
@@ -1459,7 +1581,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/80f084f1-6b6d-4a7a-8fd1-2bf445e53f37/5/xv_30_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/80f084f1-6b6d-4a7a-8fd1-2bf445e53f37/5/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/opevkui06ed",
-    "category": "Amateur",
+    "category": "shaved-pussy-hair",
     "tags": [
       "1080p",
       "sexy",
@@ -1476,9 +1598,9 @@ export const videos: Video[] = [
       "big-cock",
       "real-orgasm",
       "multiple-orgasms",
-      "Squirting",
-      "Amateur",
-      "Amateur",
+      "creamy-pussy",
+      "hard-and-fast-fucking",
+      "shaved-pussy-hair",
       "squirting-from-pussy-fucking"
     ],
     "duration": "13:23",
@@ -1490,7 +1612,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/c21104b9-5484-4306-b754-641e5962d025/6/xv_30_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/c21104b9-5484-4306-b754-641e5962d025/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/opfplvf3aa7",
-    "category": "Amateur",
+    "category": "black-women",
     "tags": [
       "1080p",
       "sexy",
@@ -1498,11 +1620,11 @@ export const videos: Video[] = [
       "rough-sex",
       "big-cock",
       "wet-pussy",
-      "BBW",
+      "ebony-ass",
       "juicy-pussy",
       "black-guy",
-      "Amateur",
-      "Squirting"
+      "black-women",
+      "creamy-pussy"
     ],
     "duration": "15:51",
     "date": "2026-10-02"
@@ -1513,7 +1635,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/57774342-8866-4c7d-a73a-084fc094dea5/6/xv_13_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/57774342-8866-4c7d-a73a-084fc094dea5/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omocvpl7c6f",
-    "category": "Amateur",
+    "category": "passionate-sex",
     "tags": [
       "1080p",
       "ass",
@@ -1523,14 +1645,14 @@ export const videos: Video[] = [
       "amateur",
       "POV",
       "moaning",
-      "BBW",
+      "bbw",
       "dirty-talk",
       "cumload",
-      "Big Cock",
+      "bbc",
       "romantic-sex",
       "making-love",
       "multiple-orgasms",
-      "Amateur",
+      "passionate-sex",
       "muscular-guy"
     ],
     "duration": "24:29",
@@ -1542,7 +1664,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/d5d89a4b-f25e-459f-bdc3-ddfe3d64a98b/6/xv_8_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/d5d89a4b-f25e-459f-bdc3-ddfe3d64a98b/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/ometovkcdb9",
-    "category": "Amateur",
+    "category": "gostosa",
     "tags": [
       "latina",
       "sexy",
@@ -1556,15 +1678,15 @@ export const videos: Video[] = [
       "girlfriend",
       "beauty",
       "cream",
-      "Amateur",
-      "Amateur"
+      "gostosa",
+      "curvy-body"
     ],
     "duration": "8:23",
     "date": "2026-10-02"
   },
   {
     "id": "084",
-    "title": "Anal BBW",
+    "title": "Anal bbw",
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/6525f351-b60a-4233-8857-e0cf6b94e4d1/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/6525f351-b60a-4233-8857-e0cf6b94e4d1/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omdupbcfcf5",
@@ -1581,7 +1703,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/ab300cf5-4d3d-4828-a881-c82b4be87322/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/ab300cf5-4d3d-4828-a881-c82b4be87322/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omdevupeca9",
-    "category": "Amateur",
+    "category": "white-girl",
     "tags": [
       "1080p",
       "blonde",
@@ -1593,8 +1715,8 @@ export const videos: Video[] = [
       "missionary",
       "perfect-ass",
       "big-booty",
-      "Amateur",
-      "BBW"
+      "white-girl",
+      "huge-body"
     ],
     "duration": "11:06",
     "date": "2026-10-02"
@@ -1605,20 +1727,20 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/9bee84b4-c44c-45cb-b20f-7a7182690638/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/9bee84b4-c44c-45cb-b20f-7a7182690638/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omkhfho7ce0",
-    "category": "Anal",
+    "category": "ass-clap",
     "tags": [
       "1080p",
       "chubby",
       "spanking",
       "screaming",
-      "Amateur",
+      "couple",
       "slapping",
       "ass-shaking",
       "perfect-ass",
       "perfect-tits",
       "pretty-face",
-      "Anal",
-      "Anal"
+      "ass-clap",
+      "real-ass"
     ],
     "duration": "19:56",
     "date": "2026-10-02"
@@ -1629,26 +1751,26 @@ export const videos: Video[] = [
     "thumbnail": "https://thumbs-gcore.xvideos-cdn.com/0ba2c27e-d6f2-48d8-bda3-67bc52224ae9/6/xv_15_t.jpg",
     "preview": "https://thumbs-gcore.xvideos-cdn.com/0ba2c27e-d6f2-48d8-bda3-67bc52224ae9/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omcdoafd358",
-    "category": "Amateur",
+    "category": "white-girl",
     "tags": [
       "1080p",
       "latina",
       "blowjob",
-      "Amateur",
+      "brunette",
       "amateur",
       "homemade",
       "deep-throat",
       "moaning",
       "brazil",
-      "Amateur",
+      "gostosa",
       "uncensored",
       "big-cock",
       "round-ass",
-      "BBW",
+      "big-butt",
       "perfect-ass",
       "step-sister",
       "natural-tits",
-      "Amateur",
+      "white-girl",
       "beautiful-face"
     ],
     "duration": "5:30",
@@ -1660,13 +1782,13 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/5bdcf776-01ab-4cab-aa93-12a9e0bd97a7/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/5bdcf776-01ab-4cab-aa93-12a9e0bd97a7/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omdidvf462b",
-    "category": "Amateur",
+    "category": "group-sex",
     "tags": [
       "720p",
       "asian",
       "japanese",
       "jav",
-      "Amateur",
+      "group-sex",
       "hot-milf"
     ],
     "duration": "7:55",
@@ -1678,7 +1800,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/64a2d91b-d0fa-48bd-9600-f4c03710bf5a/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/64a2d91b-d0fa-48bd-9600-f4c03710bf5a/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omvvfkd0dfb",
-    "category": "Anal",
+    "category": "anal-whore",
     "tags": [
       "1080p",
       "anal",
@@ -1689,22 +1811,22 @@ export const videos: Video[] = [
       "deep-throat",
       "big-cock",
       "anal-slut",
-      "Anal",
-      "Anal"
+      "anal-whore",
+      "real-ass"
     ],
     "duration": "12:14",
     "date": "2026-10-02"
   },
   {
     "id": "078",
-    "title": "AI cartoon. A redhead barista is having sex with a customer in the coffee shop's back room.",
+    "title": "AI-generated cartoon. A redhead barista is having sex with a customer in the coffee shop's back room.",
     "thumbnail": "https://thumbs-gcore.xvideos-cdn.com/c99ec26b-1fde-4ea4-a841-2940bdee5b12/6/xv_15_t.jpg",
     "preview": "https://thumbs-gcore.xvideos-cdn.com/c99ec26b-1fde-4ea4-a841-2940bdee5b12/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omdkcld7392",
-    "category": "AI",
+    "category": "ai-generated",
     "tags": [
       "1080p",
-      "AI"
+      "ai-generated"
     ],
     "duration": "5:31",
     "date": "2026-10-02"
@@ -1715,10 +1837,10 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/9149f819-2382-463f-9f3d-67201f6cc6a8/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/9149f819-2382-463f-9f3d-67201f6cc6a8/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omcffibc24e",
-    "category": "AI",
+    "category": "ai-generated",
     "tags": [
       "1080p",
-      "AI"
+      "ai-generated"
     ],
     "duration": "10:49",
     "date": "2026-10-02"
@@ -1729,7 +1851,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/8ce1a82f-8ee9-4ff5-b007-cee8ef1beafc/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/8ce1a82f-8ee9-4ff5-b007-cee8ef1beafc/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omdpbhf95ca",
-    "category": "3D",
+    "category": "filled-with-cum-3d",
     "tags": [
       "1080p",
       "3d",
@@ -1737,11 +1859,11 @@ export const videos: Video[] = [
       "anal-3d",
       "teen-3d",
       "blowjob-3d",
-      "AI",
+      "ai-generated",
       "huge-cock-3d",
       "creampie-3d",
       "huge-cumshot-3d",
-      "3D",
+      "filled-with-cum-3d",
       "cute-outfit-3d"
     ],
     "duration": "10:54",
@@ -1753,7 +1875,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/ea559071-b8fa-43dd-8b48-c83e85a8d67e/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/ea559071-b8fa-43dd-8b48-c83e85a8d67e/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omattea162f",
-    "category": "BBW",
+    "category": "voluptous-body",
     "tags": [
       "1080p",
       "sexy",
@@ -1767,7 +1889,7 @@ export const videos: Video[] = [
       "close-up",
       "beauty",
       "plump",
-      "BBW",
+      "bbw",
       "belly",
       "big-tits",
       "green-eyes",
@@ -1777,7 +1899,7 @@ export const videos: Video[] = [
       "monster-tits",
       "curly-hair",
       "long-hair",
-      "Big Tits",
+      "big-natural-tits",
       "living-room",
       "massive-tits",
       "giant-boobs",
@@ -1785,29 +1907,29 @@ export const videos: Video[] = [
       "dining-room",
       "mature-woman",
       "wide-hips",
-      "Amateur",
-      "Amateur",
+      "curvy-body",
+      "thick-body",
       "sagging-tits",
-      "BBW",
-      "BBW",
-      "Amateur"
+      "huge-body",
+      "voluptous-body",
+      "perfect-shape-tits"
     ],
     "duration": "11:34",
     "date": "2026-10-02"
   },
   {
     "id": "074",
-    "title": "Thick Brazilian Amateur Rough Fucked By Maximo Garcia!!!!!!",
+    "title": "Thick Brazilian Brunette Rough Fucked By Maximo Garcia!!!!!!",
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/3be6195b-db07-469f-a12f-0befc142f3f5/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/3be6195b-db07-469f-a12f-0befc142f3f5/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omehidu1c78",
-    "category": "Amateur",
+    "category": "thick-body",
     "tags": [
       "1080p",
       "babe",
       "pornstar",
       "blowjob",
-      "Amateur",
+      "brunette",
       "slut",
       "tattoo",
       "homemade",
@@ -1819,12 +1941,12 @@ export const videos: Video[] = [
       "beauty",
       "big-tits",
       "stud",
-      "Amateur",
+      "gostosa",
       "culona",
       "big-cock",
       "cum-in-mouth",
       "face-fucking",
-      "BBW",
+      "big-butt",
       "big-booty",
       "1-on-1",
       "wet-pussy",
@@ -1836,10 +1958,10 @@ export const videos: Video[] = [
       "multiple-orgasms",
       "cum-eater",
       "wet-blowjob",
-      "Amateur",
+      "passionate-sex",
       "muscular-guy",
-      "Amateur",
-      "Amateur"
+      "thick-body",
+      "girl-enjoying-sex"
     ],
     "duration": "10:03",
     "date": "2026-10-02"
@@ -1850,7 +1972,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/41e1462e-80ed-4274-8121-b5a32ffb968b/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/41e1462e-80ed-4274-8121-b5a32ffb968b/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omlheve02e9",
-    "category": "Amateur",
+    "category": "balls-deep-vaginal",
     "tags": [
       "1080p",
       "anal",
@@ -1882,14 +2004,14 @@ export const videos: Video[] = [
       "brown-skin",
       "mature-anal",
       "wet-blowjob",
-      "Amateur",
+      "fun-sex",
       "cock-rubbing",
       "pretty-boy",
       "intense-anal",
       "handsome-man",
-      "Amateur",
-      "Blowjob",
-      "Amateur",
+      "hard-and-fast-fucking",
+      "blowjob-tease",
+      "balls-deep-vaginal",
       "guys-who-top"
     ],
     "duration": "11:12",
@@ -1901,7 +2023,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/fba62373-897f-4797-afb4-a16deeb4b221/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/fba62373-897f-4797-afb4-a16deeb4b221/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omdmmdfe938",
-    "category": "Squirting",
+    "category": "close-up-orgasm",
     "tags": [
       "1080p",
       "fingering",
@@ -1916,12 +2038,12 @@ export const videos: Video[] = [
       "open-pussy",
       "rubbing-pussy",
       "meaty-pussy",
-      "Squirting",
+      "creamy-pussy",
       "amateur-solo",
       "huge-pussy-lips",
       "chubby-pussy",
       "plump-pussy",
-      "Squirting",
+      "close-up-orgasm",
       "close-up-pussy-cum"
     ],
     "duration": "7:33",
@@ -1929,11 +2051,11 @@ export const videos: Video[] = [
   },
   {
     "id": "071",
-    "title": "ALWAYS A GOOD TIME WITH MY Big Cock BOYFRIEND",
+    "title": "ALWAYS A GOOD TIME WITH MY BBC BOYFRIEND",
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/d81f47cd-641d-4ca4-9d1b-990ba7791d92/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/d81f47cd-641d-4ca4-9d1b-990ba7791d92/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omeielo3078",
-    "category": "BBW",
+    "category": "very-dark-skin",
     "tags": [
       "1080p",
       "black",
@@ -1941,16 +2063,16 @@ export const videos: Video[] = [
       "amateur",
       "exotic",
       "big-cock",
-      "Big Cock",
+      "bbc",
       "wet-pussy",
       "slim-body",
-      "Amateur-lover",
+      "black-cock-lover",
       "juicy-pussy",
       "black-guy",
-      "Squirting",
+      "creamy-pussy",
       "dripping-wet-pussy",
-      "Amateur",
-      "BBW",
+      "shaved-pussy-hair",
+      "very-dark-skin",
       "average-size-tits"
     ],
     "duration": "11:56",
@@ -1962,7 +2084,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/9ac9d18f-15d3-4952-9823-bbdb6d76aeed/6/xv_8_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/9ac9d18f-15d3-4952-9823-bbdb6d76aeed/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omvldca76bb",
-    "category": "AI",
+    "category": "ai-generated",
     "tags": [
       "1080p",
       "anal",
@@ -1990,7 +2112,7 @@ export const videos: Video[] = [
       "cum-on-tits",
       "interactive",
       "anal-slut",
-      "Anal",
+      "anal-whore",
       "sex-toy",
       "cum-covered",
       "anal-queen",
@@ -1999,8 +2121,8 @@ export const videos: Video[] = [
       "sagging-tits",
       "huge-cumload",
       "toy-blowjob",
-      "Blowjob",
-      "AI",
+      "blowjob-tease",
+      "ai-generated",
       "cum-on-belly-button"
     ],
     "duration": "10:49",
@@ -2025,7 +2147,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/d9dbdcaa-59a7-4a1a-94da-8001f7029473/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/d9dbdcaa-59a7-4a1a-94da-8001f7029473/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omeopbaf024",
-    "category": "Amateur",
+    "category": "queen-kali-rain",
     "tags": [
       "1080p",
       "gaping",
@@ -2046,7 +2168,7 @@ export const videos: Video[] = [
       "double-domme",
       "dominafire",
       "two-dominatrixes",
-      "Amateur",
+      "queen-kali-rain",
       "pegged-slut"
     ],
     "duration": "10:47",
@@ -2058,7 +2180,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/06d27f3a-175c-4307-8553-cab46cc754ef/5/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/06d27f3a-175c-4307-8553-cab46cc754ef/5/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/oppoiut5f4d",
-    "category": "Big Tits",
+    "category": "big-natural-tits",
     "tags": [
       "1080p",
       "cumshot",
@@ -2077,9 +2199,9 @@ export const videos: Video[] = [
       "big-tits",
       "reverse-cowgirl",
       "double-penetration",
-      "Amateur",
+      "group-sex",
       "cum-in-mouth",
-      "Big Tits",
+      "big-natural-tits",
       "young-woman"
     ],
     "duration": "37:19",
@@ -2091,7 +2213,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/109a6085-308e-4c44-a35b-9b975d949ed0/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/109a6085-308e-4c44-a35b-9b975d949ed0/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omeikvp12b9",
-    "category": "Amateur",
+    "category": "fun-sex",
     "tags": [
       "1080p",
       "babe",
@@ -2107,9 +2229,9 @@ export const videos: Video[] = [
       "multiple-orgasms",
       "mature-woman",
       "mature-man",
-      "Amateur",
-      "Amateur",
-      "Amateur"
+      "passionate-sex",
+      "fun-sex",
+      "girl-enjoying-sex"
     ],
     "duration": "10:13",
     "date": "2026-10-02"
@@ -2120,7 +2242,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/acef4128-7429-4a2e-999b-98a2ad82ad63/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/acef4128-7429-4a2e-999b-98a2ad82ad63/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omdvaef0320",
-    "category": "Amateur",
+    "category": "fun-sex",
     "tags": [
       "1080p",
       "blonde",
@@ -2139,11 +2261,11 @@ export const videos: Video[] = [
       "missionary",
       "big-tits",
       "big-cock",
-      "Amateur",
+      "white-girl",
       "wild-sex",
       "white-skin",
-      "Amateur",
-      "Amateur"
+      "fun-sex",
+      "hard-and-fast-fucking"
     ],
     "duration": "10:05",
     "date": "2026-10-02"
@@ -2154,7 +2276,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/30f6948b-2e96-4c97-af4e-13d49dd87729/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/30f6948b-2e96-4c97-af4e-13d49dd87729/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omcmefh449e",
-    "category": "Amateur",
+    "category": "only-women",
     "tags": [
       "1080p",
       "sexy",
@@ -2184,7 +2306,7 @@ export const videos: Video[] = [
       "slim-waist",
       "skinny-body",
       "flat-tits",
-      "Amateur",
+      "only-women",
       "light-brown-skin"
     ],
     "duration": "28:02",
@@ -2196,7 +2318,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/abcacc3d-6111-47a5-82dc-4090b6f71442/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/abcacc3d-6111-47a5-82dc-4090b6f71442/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omoledv6dc7",
-    "category": "Amateur",
+    "category": "shaved-pussy-hair",
     "tags": [
       "1080p",
       "european",
@@ -2208,13 +2330,13 @@ export const videos: Video[] = [
       "POV",
       "close-up",
       "housewife",
-      "Amateur",
+      "couple",
       "hotwife",
       "big-cock",
       "pink-pussy",
       "cumload",
       "wet-pussy",
-      "Amateur",
+      "white-girl",
       "romantic-sex",
       "tight-pussy",
       "cum-covered",
@@ -2225,8 +2347,8 @@ export const videos: Video[] = [
       "sensual-sex",
       "average-dick",
       "cum-on-bush",
-      "Amateur",
-      "Amateur",
+      "girl-enjoying-sex",
+      "shaved-pussy-hair",
       "trimmed-pussy-hair"
     ],
     "duration": "10:02",
@@ -2238,7 +2360,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/d60bf324-4b23-47e2-b611-7319e8252de0/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/d60bf324-4b23-47e2-b611-7319e8252de0/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omdlmtc98eb",
-    "category": "Blowjob",
+    "category": "blowjob-tease",
     "tags": [
       "1080p",
       "blonde",
@@ -2255,15 +2377,15 @@ export const videos: Video[] = [
       "big-tits",
       "reverse-cowgirl",
       "big-cock",
-      "Big Cock",
-      "BBW",
+      "bbc",
+      "big-butt",
       "big-booty",
       "double-blowjob",
       "big-pussy",
-      "Big Tits",
-      "Squirting",
+      "big-natural-tits",
+      "big-clit",
       "big-lips",
-      "deep-Amateur",
+      "deep-kissing",
       "cum-eater",
       "big-mouth",
       "big-pussy-lips",
@@ -2271,9 +2393,9 @@ export const videos: Video[] = [
       "real-blonde",
       "big-bush",
       "puffy-pussy-lips",
-      "Big Cock-worship",
-      "Amateur",
-      "Blowjob",
+      "bbc-worship",
+      "hard-and-fast-fucking",
+      "blowjob-tease",
       "big-ass-gape"
     ],
     "duration": "10:29",
@@ -2285,7 +2407,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/0df2ea97-9bd1-4d01-b621-3a0aab9f150a/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/0df2ea97-9bd1-4d01-b621-3a0aab9f150a/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omdvkcv22af",
-    "category": "Anal",
+    "category": "tight-anal-gape",
     "tags": [
       "1080p",
       "anal",
@@ -2321,11 +2443,11 @@ export const videos: Video[] = [
       "perfect-tits",
       "balloon-tits",
       "young-man",
-      "Analping",
+      "ass-clapping",
       "standing-sex",
       "yummy-asshole",
-      "Anal",
-      "Amateur"
+      "tight-anal-gape",
+      "perfect-shape-tits"
     ],
     "duration": "14:22",
     "date": "2026-10-02"
@@ -2336,12 +2458,12 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/7dbf53f6-c93a-41c4-9e66-4f2ca70f4afd/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/7dbf53f6-c93a-41c4-9e66-4f2ca70f4afd/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omeolkdbfce",
-    "category": "Amateur",
+    "category": "girl-enjoying-sex",
     "tags": [
       "1080p",
       "sexy",
       "babe",
-      "Amateur",
+      "brunette",
       "doggystyle",
       "tattoo",
       "pink-pussy",
@@ -2357,7 +2479,7 @@ export const videos: Video[] = [
       "wet-blowjob",
       "step-family",
       "slim-waist",
-      "Amateur",
+      "girl-enjoying-sex",
       "average-size-tits"
     ],
     "duration": "40:46",
@@ -2369,7 +2491,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/4e0b1e4f-7c8b-4a4c-9251-58fbe4c55722/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/4e0b1e4f-7c8b-4a4c-9251-58fbe4c55722/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omeucpd80b8",
-    "category": "Squirting",
+    "category": "big-clit",
     "tags": [
       "1080p",
       "lesbian",
@@ -2377,8 +2499,8 @@ export const videos: Video[] = [
       "scissoring",
       "girl-on-girl",
       "wet-pussy",
-      "Squirting",
-      "Amateur"
+      "big-clit",
+      "only-women"
     ],
     "duration": "10:27",
     "date": "2026-10-02"
@@ -2389,7 +2511,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/39e929a0-5541-45f2-9009-1ff8336df575/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/39e929a0-5541-45f2-9009-1ff8336df575/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omclpoc990f",
-    "category": "BBW",
+    "category": "ebony-ass",
     "tags": [
       "720p",
       "pornstar",
@@ -2397,8 +2519,8 @@ export const videos: Video[] = [
       "amateur",
       "threesome",
       "making-love",
-      "BBW",
-      "Amateur"
+      "ebony-ass",
+      "girl-enjoying-sex"
     ],
     "duration": "11:23",
     "date": "2026-10-02"
@@ -2409,7 +2531,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/d7875c5e-8afb-4e53-a31d-d30519aee4b7/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/d7875c5e-8afb-4e53-a31d-d30519aee4b7/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omdiebk3423",
-    "category": "Amateur",
+    "category": "first-porn",
     "tags": [
       "1080p",
       "blowjob",
@@ -2420,13 +2542,13 @@ export const videos: Video[] = [
       "girlfriend",
       "boss",
       "bedroom",
-      "Amateur",
+      "couple",
       "first-time",
       "desi",
       "husband",
       "fuck-my-wife",
       "romantic-sex",
-      "Amateur",
+      "first-porn",
       "family-relationship"
     ],
     "duration": "23:58",
@@ -2438,7 +2560,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/bf418a70-b008-45f5-b71a-59e9eca4dc1b/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/bf418a70-b008-45f5-b71a-59e9eca4dc1b/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omekiom0c25",
-    "category": "Squirting",
+    "category": "creamy-pussy",
     "tags": [
       "720p",
       "blowjob",
@@ -2452,9 +2574,9 @@ export const videos: Video[] = [
       "uniforms",
       "big-cock",
       "real-orgasm",
-      "BBW",
-      "Squirting",
-      "Amateur"
+      "ebony-ass",
+      "creamy-pussy",
+      "hard-and-fast-fucking"
     ],
     "duration": "12:19",
     "date": "2026-10-02"
@@ -2465,7 +2587,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/0bdc2983-0621-426f-b782-99fc67bbf549/3/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/0bdc2983-0621-426f-b782-99fc67bbf549/3/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/oopiito7198",
-    "category": "Amateur",
+    "category": "adultmobile",
     "tags": [
       "1080p",
       "moaning",
@@ -2482,9 +2604,9 @@ export const videos: Video[] = [
       "tight-pussy",
       "cum-on-pussy",
       "sweet-sinner",
-      "Amateur",
+      "side-fuck",
       "deep-sex",
-      "Amateur",
+      "adultmobile",
       "fast-thrusting"
     ],
     "duration": "10:01",
@@ -2496,7 +2618,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/7c66b5ae-176c-49ac-923d-61093387c81d/6/xv_4_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/7c66b5ae-176c-49ac-923d-61093387c81d/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omduuat513a",
-    "category": "BBW",
+    "category": "huge-body",
     "tags": [
       "1080p",
       "sexy",
@@ -2513,7 +2635,7 @@ export const videos: Video[] = [
       "cream",
       "older",
       "crazy",
-      "BBW",
+      "bbw",
       "big-tits",
       "hotwife",
       "crushing",
@@ -2521,21 +2643,21 @@ export const videos: Video[] = [
       "perfect-ass",
       "big-booty",
       "fat-ass",
-      "Big Tits",
+      "big-natural-tits",
       "young-man",
       "onion-booty",
-      "BBW",
+      "ebony-ass",
       "slimthick",
       "wide-hips",
       "fit-body",
       "mature-man",
-      "Amateur",
+      "curvy-body",
       "big-woman",
       "young-woman",
       "no-tattoos",
-      "Amateur",
-      "BBW",
-      "Anal"
+      "thick-body",
+      "huge-body",
+      "real-ass"
     ],
     "duration": "11:33",
     "date": "2026-10-02"
@@ -2546,7 +2668,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/48361259-34e6-4aee-a0a9-052cde37073f/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/48361259-34e6-4aee-a0a9-052cde37073f/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omekfma4d41",
-    "category": "Amateur",
+    "category": "girl-enjoying-sex",
     "tags": [
       "1080p",
       "licking",
@@ -2566,13 +2688,13 @@ export const videos: Video[] = [
       "big-cock",
       "perfect-ass",
       "wild-sex",
-      "BBW",
+      "ebony-ass",
       "cock-play",
       "pretty-pussy",
       "standing-sex",
       "cock-rubbing",
-      "Amateur",
-      "Amateur"
+      "girl-enjoying-sex",
+      "hard-and-fast-fucking"
     ],
     "duration": "11:33",
     "date": "2026-10-02"
@@ -2583,7 +2705,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/bcecaf50-2a09-4e36-85e8-c427d4c751d0/6/xv_30_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/bcecaf50-2a09-4e36-85e8-c427d4c751d0/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omdeflo682e",
-    "category": "Squirting",
+    "category": "cum-in-panties",
     "tags": [
       "1080p",
       "cumshot",
@@ -2600,10 +2722,10 @@ export const videos: Video[] = [
       "outside",
       "stranger",
       "big-cock",
-      "Big dick",
+      "big-dick",
       "risky",
       "big-cumshot",
-      "Squirting",
+      "cum-in-panties",
       "cum-panties"
     ],
     "duration": "7:34",
@@ -2615,7 +2737,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/e7bcb7f8-2e1d-40d4-88db-0c29556bd6cd/6/xv_5_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/e7bcb7f8-2e1d-40d4-88db-0c29556bd6cd/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/ometuca2f18",
-    "category": "Squirting",
+    "category": "creamy-pussy",
     "tags": [
       "720p",
       "black",
@@ -2626,10 +2748,10 @@ export const videos: Video[] = [
       "college",
       "cum-on-ass",
       "big-cock",
-      "BBW",
-      "Amateur-lover",
-      "Squirting",
-      "Amateur"
+      "ebony-ass",
+      "black-cock-lover",
+      "creamy-pussy",
+      "hard-and-fast-fucking"
     ],
     "duration": "10:13",
     "date": "2026-10-02"
@@ -2640,7 +2762,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/6cff7ea2-5126-4878-a2be-4d1e2e31d536/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/6cff7ea2-5126-4878-a2be-4d1e2e31d536/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/ometfec99ad",
-    "category": "Amateur",
+    "category": "black-cock",
     "tags": [
       "1080p",
       "facial",
@@ -2653,13 +2775,13 @@ export const videos: Video[] = [
       "ebony",
       "big-ass",
       "thick",
-      "Big dick",
+      "big-dick",
       "facial-cumshot",
       "big-boobs",
       "cum-in-mouth",
       "big-booty",
-      "Amateur",
-      "Big Tits"
+      "black-cock",
+      "big-natural-tits"
     ],
     "duration": "11:05",
     "date": "2026-10-02"
@@ -2670,14 +2792,14 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/3a5d2b0c-ecb9-4dd6-8b82-ddf641378501/6/xv_5_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/3a5d2b0c-ecb9-4dd6-8b82-ddf641378501/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omaioaae57f",
-    "category": "3D",
+    "category": "filled-with-cum-3d",
     "tags": [
       "1080p",
       "3d",
       "anal-3d",
       "teen-3d",
       "bdsm-3d",
-      "AI",
+      "ai-generated",
       "huge-cock-3d",
       "interracial-3d",
       "big-boobs-3d",
@@ -2685,7 +2807,7 @@ export const videos: Video[] = [
       "creampie-3d",
       "huge-cumshot-3d",
       "mature-3d",
-      "3D",
+      "filled-with-cum-3d",
       "squirting-3d"
     ],
     "duration": "11:36",
@@ -2697,14 +2819,14 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/cdf93021-2398-4164-8b19-4caea0ce43b9/0/xv_2_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/cdf93021-2398-4164-8b19-4caea0ce43b9/0/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/uhullbf723f",
-    "category": "Big Cock",
+    "category": "bbc",
     "tags": [
       "720p",
       "interracial",
       "pounded",
       "used",
       "hammered",
-      "Big Cock",
+      "bbc",
       "owned"
     ],
     "duration": "0:40",
@@ -2712,11 +2834,11 @@ export const videos: Video[] = [
   },
   {
     "id": "047",
-    "title": "Petite slim Brazilian, Latina Small fucked by 4 robbers with huge dicks (DAP, Anal only, Monster cocks, gapes, Big Cock) OB357",
+    "title": "Petite slim Brazilian, Latina Small fucked by 4 robbers with huge dicks (DAP, Anal only, Monster cocks, gapes, BBC) OB357",
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/6342746e-985a-48af-9153-3c457ed59fd0/0/xv_22_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/6342746e-985a-48af-9153-3c457ed59fd0/0/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/uekhbhm036b",
-    "category": "Amateur",
+    "category": "0-pussy",
     "tags": [
       "1080p",
       "anal",
@@ -2732,7 +2854,7 @@ export const videos: Video[] = [
       "reverse-cowgirl",
       "dirty-talk",
       "big-cock",
-      "Big Cock",
+      "bbc",
       "butt-plug",
       "monster-cock",
       "natural-tits",
@@ -2744,9 +2866,9 @@ export const videos: Video[] = [
       "only-anal",
       "slim-waist",
       "double-anal-dap",
-      "Big Cock-in-ass",
+      "bbc-in-ass",
       "spoon-position",
-      "Amateur",
+      "0-pussy",
       "slutty-clothes"
     ],
     "duration": "2:19",
@@ -2758,7 +2880,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/e279f5df-a7fc-4299-8429-dead36f6dc3a/5/xv_9_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/e279f5df-a7fc-4299-8429-dead36f6dc3a/5/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/opvbvfvc055",
-    "category": "Amateur",
+    "category": "small-height",
     "tags": [
       "1080p",
       "anal",
@@ -2781,23 +2903,23 @@ export const videos: Video[] = [
       "round-ass",
       "newbie",
       "face-fucking",
-      "BBW",
+      "big-butt",
       "1-on-1",
-      "Big Tits",
+      "big-natural-tits",
       "fat-dick",
       "piss-in-mouth",
       "piss-on-tits",
       "gape-farts",
       "young-woman",
       "balls-deep-anal",
-      "Teen",
+      "teens-18",
       "piss-on-body",
       "huge-anal-gape",
-      "Amateur",
-      "Amateur",
+      "hard-and-fast-fucking",
+      "0-pussy",
       "mouthful-of-piss",
       "big-ass-gape",
-      "Amateur",
+      "small-height",
       "man-pissing-on-girl"
     ],
     "duration": "10:09",
@@ -2809,14 +2931,14 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/2f06d197-e564-4e3d-9278-4b9780a894f0/0/xv_2_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/2f06d197-e564-4e3d-9278-4b9780a894f0/0/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/humdthb8baa",
-    "category": "Amateur",
+    "category": "brunette",
     "tags": [
       "teen",
       "hardcore",
       "pornstar",
       "petite",
       "blowjob",
-      "Amateur",
+      "brunette",
       "big-cock"
     ],
     "duration": "6:10",
@@ -2828,12 +2950,12 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/4c983621-e920-4750-a2dc-7cc30a9e5607/0/xv_30_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/4c983621-e920-4750-a2dc-7cc30a9e5607/0/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/kothufhcd2d",
-    "category": "Amateur",
+    "category": "side-fuck",
     "tags": [
       "1080p",
       "babe",
       "blowjob",
-      "Amateur",
+      "brunette",
       "young",
       "shaved-pussy",
       "oral",
@@ -2846,7 +2968,7 @@ export const videos: Video[] = [
       "spooning",
       "cock-sucking",
       "from-behind",
-      "Amateur",
+      "side-fuck",
       "bedroom-sex"
     ],
     "duration": "10:41",
@@ -2858,7 +2980,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/2299de4f-9634-4a47-8bce-16552a8fd5c9/6/xv_30_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/2299de4f-9634-4a47-8bce-16552a8fd5c9/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omthavl3262",
-    "category": "Amateur",
+    "category": "teen-18",
     "tags": [
       "1080p",
       "teen",
@@ -2874,12 +2996,12 @@ export const videos: Video[] = [
       "huge-dick",
       "small-tits",
       "stepdad",
-      "Big Cock",
-      "big-Amateur",
+      "bbc",
+      "big-black-cock",
       "huge-cock",
       "black-porn",
       "ebony-porn",
-      "Amateur",
+      "teen-18",
       "step-daughter"
     ],
     "duration": "5:24",
@@ -2891,7 +3013,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumbs-gcore.xvideos-cdn.com/f846b582-7b85-45eb-9579-9079f1f088ee/0/xv_30_t.jpg",
     "preview": "https://thumbs-gcore.xvideos-cdn.com/f846b582-7b85-45eb-9579-9079f1f088ee/0/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/uefvvad79f6",
-    "category": "Big dick",
+    "category": "big-dick",
     "tags": [
       "1080p",
       "black",
@@ -2912,8 +3034,8 @@ export const videos: Video[] = [
       "black-hair",
       "big-cock",
       "husband",
-      "Big dick",
-      "Amateur"
+      "big-dick",
+      "black-cock"
     ],
     "duration": "10:31",
     "date": "2026-10-01"
@@ -2997,7 +3119,7 @@ export const videos: Video[] = [
       "rough-sex",
       "missionary",
       "hotwife",
-      "Amateur",
+      "sloppy",
       "big-cock",
       "facial-cumshot",
       "perfect-ass",
@@ -3044,7 +3166,7 @@ export const videos: Video[] = [
       "big-tits",
       "cumload",
       "facial-cumshot",
-      "Big Cock",
+      "bbc",
       "cum-in-mouth",
       "cum-on-tits",
       "double-blowjob",
@@ -3053,7 +3175,7 @@ export const videos: Video[] = [
       "double-bj",
       "black-and-white",
       "cum-covered",
-      "Amateur-lover",
+      "black-cock-lover",
       "juicy-pussy",
       "black-guy",
       "cum-eater",
@@ -3061,29 +3183,29 @@ export const videos: Video[] = [
       "wet-blowjob",
       "multiple-cumshots",
       "huge-cumload",
-      "Big Cock-worship",
-      "Amateur",
-      "Amateur",
+      "bbc-worship",
+      "girl-enjoying-sex",
+      "hard-and-fast-fucking",
       "long-fingernails",
-      "Amateur"
+      "balls-deep-vaginal"
     ],
     "duration": "0:30",
     "date": "2026-10-01"
   },
   {
     "id": "037",
-    "title": "I enjoy a huge cock from my stepbrother while we are alone at home -amateur Amateur- nysdel",
+    "title": "I enjoy a huge cock from my stepbrother while we are alone at home -amateur couple- nysdel",
     "thumbnail": "https://thumbs-gcore.xvideos-cdn.com/1adbd027-1858-4ed1-81a1-cb625c2a4921/0/xv_27_t.jpg",
     "preview": "https://thumbs-gcore.xvideos-cdn.com/1adbd027-1858-4ed1-81a1-cb625c2a4921/0/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/ufpeecoe3c5",
-    "category": "Teen",
+    "category": "teens-18",
     "tags": [
       "1080p",
       "latina",
       "sexy",
       "pornstar",
       "handjob",
-      "Amateur",
+      "brunette",
       "amateur",
       "bathroom",
       "POV",
@@ -3091,9 +3213,9 @@ export const videos: Video[] = [
       "cute",
       "whore",
       "ball-licking",
-      "Amateur",
+      "gostosa",
       "big-cock",
-      "Big Cock",
+      "bbc",
       "big-booty",
       "step-sister",
       "1-on-1",
@@ -3102,7 +3224,7 @@ export const videos: Video[] = [
       "perfect-tits",
       "dick-sucking-lips",
       "step-family",
-      "Teen",
+      "teens-18",
       "blowjob-3d"
     ],
     "duration": "7:01",
@@ -3122,7 +3244,7 @@ export const videos: Video[] = [
       "cum",
       "teen",
       "petite",
-      "Amateur",
+      "brunette",
       "doggystyle",
       "fingering",
       "young",
@@ -3167,9 +3289,9 @@ export const videos: Video[] = [
       "pussyfucking",
       "big-tits",
       "big-cock",
-      "Big dick",
+      "big-dick",
       "impregnated",
-      "Big Cock",
+      "bbc",
       "msnovember",
       "sheisnovember"
     ],
@@ -3182,7 +3304,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/8dfccda2-a474-4db7-b613-63254725d25e/6/xv_15_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/8dfccda2-a474-4db7-b613-63254725d25e/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omodoecdf24",
-    "category": "ASMR",
+    "category": "asmr",
     "tags": [
       "1080p",
       "black",
@@ -3190,13 +3312,13 @@ export const videos: Video[] = [
       "riding",
       "POV",
       "big-cock",
-      "BBW",
+      "big-butt",
       "perfect-ass",
       "ass-bouncing",
       "onion-booty",
-      "Amateur-lover",
-      "ASMR",
-      "Teen"
+      "black-cock-lover",
+      "asmr",
+      "teens-18"
     ],
     "duration": "8:38",
     "date": "2026-08-30"
@@ -3207,7 +3329,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/bc95ecf1-56ec-44b5-a91d-807ef51df522/5/xv_19_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/bc95ecf1-56ec-44b5-a91d-807ef51df522/5/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/opeutic26fa",
-    "category": "Big Cock-porn",
+    "category": "bbc-porn",
     "tags": [
       "interracial",
       "big-cock",
@@ -3217,7 +3339,7 @@ export const videos: Video[] = [
       "interracial-sex",
       "interracial-teen",
       "big-cock-fucking",
-      "Big Cock-fucking",
+      "bbc-fucking",
       "petite-girl-porn",
       "interracial-porn-videos",
       "big-cock-fuck",
@@ -3227,7 +3349,7 @@ export const videos: Video[] = [
       "big-cock-blowjob",
       "sex-story",
       "big-cock-teen",
-      "Big Cock-porn",
+      "bbc-porn",
       "interracial-blonde-teen"
     ],
     "duration": "8:00",
@@ -3239,7 +3361,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/22a95589-b4ab-45b4-85ca-20934e6e3e8c/0/xv_28_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/22a95589-b4ab-45b4-85ca-20934e6e3e8c/0/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/ucuohao46a1",
-    "category": "Amateur",
+    "category": "perfect-shape-tits",
     "tags": [
       "1080p",
       "ass",
@@ -3247,7 +3369,7 @@ export const videos: Video[] = [
       "doggystyle",
       "squirting",
       "screaming",
-      "Amateur",
+      "kissing",
       "cum-swallowing",
       "shaking",
       "rough-sex",
@@ -3267,11 +3389,11 @@ export const videos: Video[] = [
       "submissive-girl",
       "creamy-squirt",
       "huge-squirt",
-      "Anal",
+      "real-ass",
       "squirt-drinking",
-      "Amateur",
+      "hard-and-fast-fucking",
       "easy-squirter",
-      "Amateur",
+      "perfect-shape-tits",
       "squirt-covered"
     ],
     "duration": "14:44",
@@ -3283,7 +3405,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumbs-gcore.xvideos-cdn.com/1d690556-570e-455c-843d-21c7d716e468/0/xv_8_t.jpg",
     "preview": "https://thumbs-gcore.xvideos-cdn.com/1d690556-570e-455c-843d-21c7d716e468/0/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/ikafmhh3432",
-    "category": "BBW",
+    "category": "bbw",
     "tags": [
       "1080p",
       "black",
@@ -3292,8 +3414,8 @@ export const videos: Video[] = [
       "ebony",
       "booty",
       "big-ass",
-      "BBW",
-      "Big dick"
+      "bbw",
+      "big-dick"
     ],
     "duration": "22:37",
     "date": "2018-07-06"
@@ -3359,9 +3481,9 @@ export const videos: Video[] = [
       "fat-dick",
       "pretty-face",
       "gapes-gaping-asshole",
-      "Amateur",
+      "0-pussy",
       "slutty-clothes",
-      "Amateur"
+      "perfect-shape-tits"
     ],
     "duration": "2:15",
     "date": "2024-05-18"
@@ -3372,14 +3494,14 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/8018fa7e-6230-4b73-ba97-34c7f0545c45/0/xv_6_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/8018fa7e-6230-4b73-ba97-34c7f0545c45/0/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/oihbvuvfea6",
-    "category": "BBW",
+    "category": "big-butt",
     "tags": [
       "1080p",
       "milf",
-      "BBW",
-      "ssBBW",
+      "bbw",
+      "ssbbw",
       "big-cock",
-      "BBW",
+      "big-butt",
       "big-woman"
     ],
     "duration": "11:01",
@@ -3387,18 +3509,18 @@ export const videos: Video[] = [
   },
   {
     "id": "027",
-    "title": "2 guys Big Cock huge cocks destroyed my tight blonde pussy and creampie me in front of my cuckold husband without a condom! I'm a naughty milf.(AI)",
+    "title": "2 guys BBC huge cocks destroyed my tight blonde pussy and creampie me in front of my cuckold husband without a condom! I'm a naughty milf.(AI-GENERATED)",
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/164605d8-b6d7-43b0-bc9c-1f3eb5fa2f7d/6/xv_19_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/164605d8-b6d7-43b0-bc9c-1f3eb5fa2f7d/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omkukpc2e20",
-    "category": "3D",
+    "category": "filled-with-cum-3d",
     "tags": [
       "1080p",
       "3d",
       "anal-3d",
       "teen-3d",
       "bdsm-3d",
-      "AI",
+      "ai-generated",
       "huge-cock-3d",
       "interracial-3d",
       "big-boobs-3d",
@@ -3406,7 +3528,7 @@ export const videos: Video[] = [
       "creampie-3d",
       "huge-cumshot-3d",
       "mature-3d",
-      "3D",
+      "filled-with-cum-3d",
       "squirting-3d"
     ],
     "duration": "10:48",
@@ -3435,7 +3557,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/921e8d96-2356-437e-a23a-02070f9ee531/3/xv_16_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/921e8d96-2356-437e-a23a-02070f9ee531/3/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/ultkdbvd20a",
-    "category": "BBW",
+    "category": "big-butt",
     "tags": [
       "european",
       "latina",
@@ -3444,8 +3566,8 @@ export const videos: Video[] = [
       "indian",
       "big-tits",
       "big-cock",
-      "Big Cock",
-      "BBW",
+      "bbc",
+      "big-butt",
       "big-pussy"
     ],
     "duration": "5:09",
@@ -3457,7 +3579,7 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/593fbf44-f7e1-42ab-a5c9-cfd0048fd8cd/6/xv_10_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/593fbf44-f7e1-42ab-a5c9-cfd0048fd8cd/6/preview.mp4",
     "embedUrl": "https://www.xvideos.com/embedframe/omvvico214a",
-    "category": "Amateur-blowjob",
+    "category": "sloppy-blowjob",
     "tags": [
       "1080p",
       "interracial",
@@ -3470,8 +3592,8 @@ export const videos: Video[] = [
       "reverse-cowgirl",
       "cum-in-mouth",
       "titty-fuck",
-      "big-Amateur",
-      "Amateur-blowjob",
+      "big-black-cock",
+      "sloppy-blowjob",
       "busty-blonde-milf"
     ],
     "duration": "16:29",
@@ -3489,7 +3611,7 @@ export const videos: Video[] = [
       "stockings",
       "interracial",
       "blowjob",
-      "Amateur",
+      "brunette",
       "riding",
       "doggystyle",
       "wife",
@@ -3511,18 +3633,18 @@ export const videos: Video[] = [
     "thumbnail": "https://thumb-cdn77.xvideos-cdn.com/c904e9a1-d63d-412f-b26e-4e299ee8f011/0/xv_20_t.jpg",
     "preview": "https://thumb-cdn77.xvideos-cdn.com/c904e9a1-d63d-412f-b26e-4e299ee8f011/0/preview.mp4",
     "embedUrl": "",
-    "category": "Big Cock",
+    "category": "bbc",
     "tags": [
       "anal",
       "interracial",
       "blowjob",
-      "Amateur",
+      "brunette",
       "lingerie",
       "deep-throat",
       "usa",
       "airtight",
       "facial-cumshot",
-      "Big Cock",
+      "bbc",
       "double-penetration-dp"
     ],
     "duration": "1:00",
@@ -3545,7 +3667,7 @@ export const videos: Video[] = [
       "squirt",
       "ebony",
       "pussy-licking",
-      "Big dick",
+      "big-dick",
       "female-orgasm",
       "eating-pussy",
       "black-on-black",
@@ -3575,7 +3697,7 @@ export const videos: Video[] = [
       "POV",
       "cuckold",
       "big-cock",
-      "Amateur"
+      "hard-and-fast-fucking"
     ],
     "duration": "8:19",
     "date": "2025-01-05"
@@ -3624,9 +3746,9 @@ export const videos: Video[] = [
       "big-ass",
       "freeporn",
       "big-tits",
-      "Big Cock",
-      "Amateur",
-      "big-Amateur",
+      "bbc",
+      "black-cock",
+      "big-black-cock",
       "black-porn",
       "ebony-porn",
       "free-porno",
@@ -3656,7 +3778,7 @@ export const videos: Video[] = [
       "big-cock",
       "monster-cock",
       "anal-slut",
-      "Anal",
+      "anal-whore",
       "long-cock",
       "young-man",
       "fat-dick",
@@ -3665,7 +3787,7 @@ export const videos: Video[] = [
       "mature-anal",
       "lesbian-pussy-licking",
       "real-blonde",
-      "Amateur",
+      "shaved-pussy-hair",
       "Maturenl",
       "Julia North",
       "Angelica",
@@ -3725,8 +3847,8 @@ export const videos: Video[] = [
       "squirting",
       "missionary",
       "big-cock",
-      "Amateur-lover",
-      "Squirting"
+      "black-cock-lover",
+      "creamy-pussy"
     ],
     "duration": "11:26",
     "date": "2026-10-01",
@@ -3833,12 +3955,8 @@ export function getQualityTag(tags: string[] = []): string | null {
 }
 
 export function getAllCategories(): string[] {
-  const set = new Set<string>();
-  CATEGORIES.forEach((c) => set.add(c));
-  videos.forEach((v) => {
-    if (v.category?.trim()) set.add(v.category.trim());
-  });
-  return Array.from(set);
+  // Only return the 14 canonical categories (no raw video categories leaking through)
+  return [...CATEGORIES];
 }
 
 export function getAllTags(): string[] {
@@ -3856,7 +3974,7 @@ export function getVideosForCategory(categorySlugOrName: string): Video[] {
   const slug = slugify(categorySlugOrName);
   let result: Video[] = [];
 
-  if (slug === 'Amateur') {
+  if (slug === 'popular') {
     result = [...videos].sort((a, b) => (b.views || 0) - (a.views || 0));
   } else if (slug === 'trending') {
     result = [...videos].sort((a, b) => {
@@ -3867,19 +3985,16 @@ export function getVideosForCategory(categorySlugOrName: string): Video[] {
   } else if (slug === 'latest') {
     result = [...videos].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   } else {
+    // Match by normalizing each video's category + tags to canonical, then compare slug
     result = videos.filter((v) => {
-      const catSlug = slugify(v.category);
-      const isCat = catSlug === slug || catSlug.replace(/-/g, '_') === slug.replace(/-/g, '_');
-      const isTag = (v.tags || []).some((t) => {
-        const tSlug = slugify(t);
-        return tSlug === slug || tSlug.replace(/-/g, '_') === slug.replace(/-/g, '_');
-      });
-      return isCat || isTag;
+      const canonical = normalizeCategory(v.category, v.tags);
+      return slugify(canonical) === slug;
     });
     result.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   }
   return result;
 }
+
 
 export function getVideosForTag(tagSlugOrName: string): Video[] {
   const slug = slugify(tagSlugOrName);
