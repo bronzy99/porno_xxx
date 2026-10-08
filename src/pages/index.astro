@@ -33,29 +33,29 @@ if (totalPages <= 7) {
 
     <!-- ── Sort + Heading ── -->
     <div class="sort-bar">
-      <h1 id="grid-heading" style="font-size:1.1rem;font-weight:700">Latest Videos</h1>
-      <div class="sort-options" role="group" aria-label="Sort videos">
+      <h1 id="grid-heading" style="font-size:1.1rem;font-weight:700">Latest Movies & Scenes</h1>
+      <div class="sort-options" role="group" aria-label="Sort movies">
         <button class="sort-btn active" data-sort="date"  aria-pressed="true">Latest</button>
         <button class="sort-btn"        data-sort="views" aria-pressed="false">Most Viewed</button>
         <button class="sort-btn"        data-sort="alpha" aria-pressed="false">A–Z</button>
       </div>
     </div>
 
-    <!-- ── Video Grid (pre-rendered for SEO) ── -->
-    <div class="video-grid" id="video-grid" role="list" aria-label="Video list">
-      {sorted.map(video => <VideoCard video={video} />)}
+    <!-- ── Movie Poster Grid (Post title hidden on homepage for pure poster-focused UI) ── -->
+    <div class="video-grid movie-poster-grid" id="video-grid" role="list" aria-label="Movie list">
+      {sorted.map(video => <VideoCard video={video} showTitle={false} />)}
     </div>
 
     <!-- ── Empty State (hidden by default) ── -->
     <div class="empty-state" id="empty-state" style="display:none" aria-live="polite">
       <div class="empty-icon">🎬</div>
-      <h3>No videos found</h3>
+      <h3>No movies found</h3>
       <p>Try a different category.</p>
     </div>
 
     <!-- ── View More ── -->
     <div class="load-more-wrap" id="load-more-wrap">
-      <button class="btn btn-ghost" id="load-more-btn">View More Videos</button>
+      <button class="btn btn-ghost" id="load-more-btn">View More Movies</button>
     </div>
 
     <!-- ── Pagination Navigation ── -->

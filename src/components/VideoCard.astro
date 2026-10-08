@@ -1,52 +1,57 @@
 ---
 // src/components/VideoCard.astro
 import type { Video } from '../data/videos';
-import { slugify, formatDate, getQualityTag, normalizeCategory } from '../data/videos';
+import { slugify, formatDate, getQualityTierBadge } from '../data/videos';
 
 interface Props {
   video: Video;
+  showTitle?: boolean;
 }
 
-const { video } = Astro.props;
-const slug       = slugify(video.title);
-const previewUrl = video.preview?.trim() || '';
-const hasPreview = Boolean(previewUrl);
-const isGif      = Boolean(previewUrl.toLowerCase().endsWith('.gif'));
-const quality    = getQualityTag(video.tags);
+const { video, showTitle = true } = Astro.props;
+const slug         = slugify(video.title);
+const previewUrl   = video.preview?.trim() || '';
+const hasPreview   = Boolean(previewUrl);
+const isGif        = Boolean(previewUrl.toLowerCase().endsWith('.gif'));
+const qualityTier  = getQualityTierBadge(video);
 const initialViews = video.views || 0;
 const formattedViews = initialViews >= 1_000_000
   ? (initialViews / 1_000_000).toFixed(1) + 'M'
   : initialViews >= 1_000
     ? Math.floor(initialViews / 1_000) + 'K'
     : (initialViews > 0 ? String(initialViews) : '—');
-const category = normalizeCategory(video.category, video.tags);
+const category = video.category || 'Movies';
+const posterImg = video.poster || video.thumbnail;
+const sceneCount = video.scenes?.length;
 ---
 
 <article
-  class="video-card"
+  class={`video-card ${!showTitle ? 'video-card-poster-only' : ''}`}
   data-category={category}
   data-date={video.date}
   data-title={video.title.toLowerCase()}
   data-tags={video.tags.join(',')}
   data-views={initialViews}
 >
-  <a href={`/videos/${slug}/`} class="card-link">
+  <a href={`/videos/${slug}/`} class="card-link" title={video.title}>
     <div class="card-thumb" data-has-preview={hasPreview ? 'true' : 'false'}>
-      {quality && (
-        <span class="quality-badge" aria-label={`Quality: ${quality}`}>
-          {quality}
-        </span>
-      )}
+      <!-- Quality Tier Tag Badge -->
+      <span class={`quality-badge ${qualityTier.tierClass}`} aria-label={`Quality: ${qualityTier.label}`}>
+        {qualityTier.label}
+      </span>
+
+      <!-- Poster Image -->
       <img
         class="thumb-img"
-        src={video.thumbnail}
+        src={posterImg}
         alt={video.title}
         loading="lazy"
-        width="640"
-        height="360"
+        width="400"
+        height="600"
         referrerpolicy="no-referrer"
-        onerror="this.src='https://picsum.photos/640/360?grayscale'"
+        onerror="this.src='https://picsum.photos/400/600?grayscale'"
       />
+
       {hasPreview && (
         <div class="preview-wrap">
           {!isGif && (
@@ -68,47 +73,60 @@ const category = normalizeCategory(video.category, video.tags);
             alt={`Preview of ${video.title}`}
             referrerpolicy="no-referrer"
             loading="lazy"
-            width="640"
-            height="360"
+            width="400"
+            height="600"
             style={!isGif ? "display: none;" : ""}
             src={isGif ? previewUrl : undefined}
           />
         </div>
       )}
+
       <div class="card-play-overlay" aria-hidden="true">
         <div class="card-play-circle">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
           </svg>
         </div>
       </div>
+
+      <!-- Scenes badge if available -->
+      {sceneCount ? (
+        <span class="scene-count-badge" aria-label={`${sceneCount} Scenes`}>
+          {sceneCount} Scenes
+        </span>
+      ) : null}
+
+      <!-- Duration badge -->
       <span class="duration-badge" aria-label={`Duration: ${video.duration}`}>
         {video.duration}
       </span>
     </div>
 
-    <div class="card-body">
-      <h3 class="card-title">{video.title}</h3>
-      <div class="card-meta">
-        <div class="card-meta-left">
-          <span>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-              <circle cx="12" cy="12" r="3"/>
-            </svg>
-            <span class="card-view-count" data-slug={slug} data-raw-views={initialViews}>{formattedViews}</span>
-          </span>
-          <span>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="10"/>
-              <polyline points="12 6 12 12 16 14"/>
-            </svg>
-            {formatDate(video.date)}
-          </span>
+    <!-- Post Title and Meta (Omitted on homepage as requested) -->
+    {showTitle && (
+      <div class="card-body">
+        <h3 class="card-title">{video.cleanTitle || video.title}</h3>
+        <div class="card-meta">
+          <div class="card-meta-left">
+            <span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+              <span class="card-view-count" data-slug={slug} data-raw-views={initialViews}>{formattedViews}</span>
+            </span>
+            <span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+              {formatDate(video.date)}
+            </span>
+          </div>
+          <span class="category-tag">{category}</span>
         </div>
-        <span class="category-tag">{category}</span>
       </div>
-    </div>
+    )}
   </a>
 </article>
 

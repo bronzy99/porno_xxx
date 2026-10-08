@@ -1,0 +1,184 @@
+---
+// src/pages/genres/[genre]/[...page].astro
+// URLs: /genres/milf/ (page 1), /genres/milf/2/ (page 2), etc.
+import BaseLayout  from '../../../layouts/BaseLayout.astro';
+import VideoCard   from '../../../components/VideoCard.astro';
+import Pagination  from '../../../components/Pagination.astro';
+import {
+  getAllGenres,
+  getVideosForGenre,
+  slugify,
+  SITE_CONFIG,
+  type Video,
+} from '../../../data/videos';
+
+export async function getStaticPaths({ paginate }: { paginate: any }) {
+  const genres = getAllGenres().filter((g) => slugify(g).length > 0);
+  const paths: any[] = [];
+  const pageSize = SITE_CONFIG.videosPerPage;
+
+  for (const genre of genres) {
+    const genreVideos = getVideosForGenre(genre);
+    const genreSlug = slugify(genre);
+
+    // Primary route (standard hyphenated slug)
+    const paginatedPrimary = paginate(genreVideos, {
+      params: { genre: genreSlug },
+      pageSize,
+      props: { genreName: genre, genreSlug },
+    });
+    paths.push(...paginatedPrimary);
+
+    // If slug has hyphens, also generate underscore variant for compatibility
+    if (genreSlug.includes('-')) {
+      const underscoreSlug = genreSlug.replace(/-/g, '_');
+      const paginatedAlt = paginate(genreVideos, {
+        params: { genre: underscoreSlug },
+        pageSize,
+        props: { genreName: genre, genreSlug },
+      });
+      paths.push(...paginatedAlt);
+    }
+  }
+
+  return paths;
+}
+
+const { page, genreName, genreSlug } = Astro.props;
+const current = page.currentPage;
+const isFirstPage = current === 1;
+
+// Optimized SEO Title and Description
+const pageTitle = isFirstPage
+  ? `${genreName} Porn Videos & Movies – Watch Free HD Clips | ${SITE_CONFIG.name}`
+  : `${genreName} Porn Videos – Page ${current} | ${SITE_CONFIG.name}`;
+
+const pageDesc = isFirstPage
+  ? `Watch free HD ${genreName} porn videos and streaming sex movies on ${SITE_CONFIG.name}. Full split scenes updated daily.`
+  : `Browse page ${current} of ${genreName} adult videos and HD movies on ${SITE_CONFIG.name}.`;
+
+const canonicalUrl = isFirstPage
+  ? `${SITE_CONFIG.siteUrl}/genres/${genreSlug}/`
+  : `${SITE_CONFIG.siteUrl}/genres/${genreSlug}/${current}/`;
+
+const firstThumb = page.data?.[0]?.thumbnail;
+
+// JSON-LD Breadcrumb Schema
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
+    {
+      '@type': 'ListItem',
+      'position': 1,
+      'name': 'Home',
+      'item': SITE_CONFIG.siteUrl,
+    },
+    {
+      '@type': 'ListItem',
+      'position': 2,
+      'name': genreName,
+      'item': `${SITE_CONFIG.siteUrl}/genres/${genreSlug}/`,
+    },
+  ],
+};
+
+// JSON-LD CollectionPage Schema
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  'name': pageTitle,
+  'description': pageDesc,
+  'url': canonicalUrl,
+  'isPartOf': {
+    '@type': 'WebSite',
+    'name': SITE_CONFIG.name,
+    'url': SITE_CONFIG.siteUrl,
+  },
+  'numberOfItems': page.total,
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  ogTitle={pageTitle}
+  ogImage={firstThumb}
+  canonical={canonicalUrl}
+>
+  <!-- SEO Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
+
+  <div class="container">
+
+    <!-- ── Breadcrumb Navigation ── -->
+    <nav class="breadcrumbs" aria-label="Breadcrumb navigation">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <span class="active">📁 {genreName} {current > 1 && `(Page ${current})`}</span>
+    </nav>
+
+    <!-- ── Genre SEO Header ── -->
+    <header class="tax-header">
+      <div class="tax-title-wrap">
+        <h1 class="tax-title">📁 {genreName} Videos</h1>
+        <span class="tax-count-badge">{page.total} Video{page.total !== 1 ? 's' : ''}</span>
+      </div>
+      <p class="tax-desc">
+        Watch free <strong>{genreName}</strong> adult videos and streaming movies in HD quality.
+        Stream hot sex clips and scenes tagged with {genreName} on {SITE_CONFIG.name}.
+      </p>
+    </header>
+
+    <!-- ── Video Grid ── -->
+    {page.data.length > 0 ? (
+      <>
+        <div class="video-grid" id="video-grid" role="list" aria-label={`${genreName} video list`}>
+          {page.data.map((video: Video) => (
+            <VideoCard video={video} />
+          ))}
+        </div>
+
+        <!-- ── Pagination Controls ── -->
+        <Pagination page={page} baseUrl={`/genres/${genreSlug}`} />
+      </>
+    ) : (
+      <div class="empty-state">
+        <div class="empty-icon">📁</div>
+        <h3>No videos in {genreName}</h3>
+        <p>Explore other popular categories or <a href="/categories/" style="color:var(--accent)">browse categories</a>.</p>
+      </div>
+    )}
+
+  </div>
+</BaseLayout>
+
+<script>
+  // ── Load live view counts for cards ──
+  async function loadViewCounts() {
+    const countEls = document.querySelectorAll('.card-view-count[data-slug]');
+    const fetches = Array.from(countEls).map(async (el) => {
+      const slug = el.getAttribute('data-slug');
+      if (!slug) return;
+      try {
+        const res = await fetch(`/api/views?slug=${encodeURIComponent(slug)}`);
+        if (!res.ok) return;
+        const { views } = await res.json();
+        el.textContent = formatViews(views);
+        el.setAttribute('data-raw-views', String(views));
+      } catch {
+        el.textContent = '—';
+      }
+    });
+    await Promise.all(fetches);
+  }
+
+  function formatViews(n: number) {
+    if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'M';
+    if (n >= 1_000)     return Math.floor(n / 1_000) + 'K';
+    return String(n);
+  }
+
+  loadViewCounts();
+</script>

@@ -1,6 +1,6 @@
 // src/pages/sitemap.xml.ts
-// Generates /sitemap.xml at build time with all static pages,
-// video detail pages, category pages, and tag pages.
+// Generates /sitemap.xml at build time with all indexable static pages,
+// video detail pages, category pages, genre pages, cast pages, and tag pages.
 
 import type { APIRoute } from 'astro';
 import {
@@ -8,6 +8,8 @@ import {
   SITE_CONFIG,
   slugify,
   getAllCategories,
+  getAllGenres,
+  getAllCast,
   getAllTags,
 } from '../data/videos';
 
@@ -52,42 +54,81 @@ function buildSitemap(entries: UrlEntry[]): string {
 export const GET: APIRoute = () => {
   const today = new Date().toISOString().split('T')[0];
   const entries: UrlEntry[] = [];
+  const seenLocs = new Set<string>();
 
-  // ── Static pages ────────────────────────────────────────────
+  function addEntry(entry: UrlEntry) {
+    if (!seenLocs.has(entry.loc)) {
+      seenLocs.add(entry.loc);
+      entries.push(entry);
+    }
+  }
+
+  // ── Static pages (Indexable only; /search/ excluded due to noindex) ──
   const staticPages: UrlEntry[] = [
     { loc: '/',             changefreq: 'daily',   priority: '1.0', lastmod: today },
     { loc: '/categories/',  changefreq: 'weekly',  priority: '0.8', lastmod: today },
-    { loc: '/search/',      changefreq: 'monthly', priority: '0.5', lastmod: today },
     { loc: '/about/',       changefreq: 'monthly', priority: '0.4', lastmod: today },
   ];
-  entries.push(...staticPages);
+  staticPages.forEach(addEntry);
 
-  // ── Video pages ─────────────────────────────────────────────
+  // ── Video detail pages ──────────────────────────────────────
   for (const video of videos) {
-    entries.push({
-      loc: `/videos/${slugify(video.title)}/`,
+    const slug = slugify(video.title);
+    if (!slug) continue;
+    addEntry({
+      loc: `/videos/${slug}/`,
       lastmod: video.date ?? today,
       changefreq: 'monthly',
       priority: '0.7',
     });
   }
 
-  // ── Category pages ───────────────────────────────────────────
+  // ── Category pages ──────────────────────────────────────────
   const categories = getAllCategories();
   for (const cat of categories) {
-    entries.push({
-      loc: `/category/${slugify(cat)}/`,
+    const slug = slugify(cat);
+    if (!slug) continue;
+    addEntry({
+      loc: `/category/${slug}/`,
       lastmod: today,
       changefreq: 'daily',
       priority: '0.6',
     });
   }
 
-  // ── Tag pages ────────────────────────────────────────────────
+  // ── Genre pages (Indexable taxonomy) ────────────────────────
+  const genres = getAllGenres();
+  for (const genre of genres) {
+    const slug = slugify(genre);
+    if (!slug) continue;
+    addEntry({
+      loc: `/genres/${slug}/`,
+      lastmod: today,
+      changefreq: 'weekly',
+      priority: '0.6',
+    });
+  }
+
+  // ── Cast / Pornstar pages (Indexable taxonomy) ──────────────
+  const cast = getAllCast();
+  for (const actor of cast) {
+    const slug = slugify(actor);
+    if (!slug) continue;
+    addEntry({
+      loc: `/cast/${slug}/`,
+      lastmod: today,
+      changefreq: 'weekly',
+      priority: '0.6',
+    });
+  }
+
+  // ── Tag pages ───────────────────────────────────────────────
   const tags = getAllTags();
   for (const tag of tags) {
-    entries.push({
-      loc: `/tags/${slugify(tag)}/`,
+    const slug = slugify(tag);
+    if (!slug) continue;
+    addEntry({
+      loc: `/tags/${slug}/`,
       lastmod: today,
       changefreq: 'weekly',
       priority: '0.5',

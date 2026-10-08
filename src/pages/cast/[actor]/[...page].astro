@@ -1,0 +1,192 @@
+---
+// src/pages/cast/[actor]/[...page].astro
+// URLs: /cast/lauren-phillips/ (page 1), /cast/lauren-phillips/2/ (page 2), etc.
+import BaseLayout  from '../../../layouts/BaseLayout.astro';
+import VideoCard   from '../../../components/VideoCard.astro';
+import Pagination  from '../../../components/Pagination.astro';
+import {
+  getAllCast,
+  getVideosForCast,
+  slugify,
+  SITE_CONFIG,
+  type Video,
+} from '../../../data/videos';
+
+export async function getStaticPaths({ paginate }: { paginate: any }) {
+  const actors = getAllCast().filter((a) => slugify(a).length > 0);
+  const paths: any[] = [];
+  const pageSize = SITE_CONFIG.videosPerPage;
+
+  for (const actor of actors) {
+    const actorVideos = getVideosForCast(actor);
+    const actorSlug = slugify(actor);
+
+    // Primary route (standard hyphenated slug)
+    const paginatedPrimary = paginate(actorVideos, {
+      params: { actor: actorSlug },
+      pageSize,
+      props: { actorName: actor, actorSlug },
+    });
+    paths.push(...paginatedPrimary);
+
+    // If slug has hyphens, also generate underscore variant for compatibility
+    if (actorSlug.includes('-')) {
+      const underscoreSlug = actorSlug.replace(/-/g, '_');
+      const paginatedAlt = paginate(actorVideos, {
+        params: { actor: underscoreSlug },
+        pageSize,
+        props: { actorName: actor, actorSlug },
+      });
+      paths.push(...paginatedAlt);
+    }
+  }
+
+  return paths;
+}
+
+const { page, actorName, actorSlug } = Astro.props;
+const current = page.currentPage;
+const isFirstPage = current === 1;
+
+// Optimized SEO Title and Description
+const pageTitle = isFirstPage
+  ? `${actorName} Porn Videos & Movies – Watch Free HD Clips | ${SITE_CONFIG.name}`
+  : `${actorName} Porn Videos – Page ${current} | ${SITE_CONFIG.name}`;
+
+const pageDesc = isFirstPage
+  ? `Watch free HD porn videos and sex movies starring ${actorName} on ${SITE_CONFIG.name}. Full streamable scenes updated daily.`
+  : `Browse page ${current} of adult videos starring ${actorName} on ${SITE_CONFIG.name}.`;
+
+const canonicalUrl = isFirstPage
+  ? `${SITE_CONFIG.siteUrl}/cast/${actorSlug}/`
+  : `${SITE_CONFIG.siteUrl}/cast/${actorSlug}/${current}/`;
+
+const firstThumb = page.data?.[0]?.thumbnail;
+
+// JSON-LD Breadcrumb Schema
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
+    {
+      '@type': 'ListItem',
+      'position': 1,
+      'name': 'Home',
+      'item': SITE_CONFIG.siteUrl,
+    },
+    {
+      '@type': 'ListItem',
+      'position': 2,
+      'name': actorName,
+      'item': `${SITE_CONFIG.siteUrl}/cast/${actorSlug}/`,
+    },
+  ],
+};
+
+// JSON-LD CollectionPage & Person Schema
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  'name': actorName,
+  'url': canonicalUrl,
+};
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  'name': pageTitle,
+  'description': pageDesc,
+  'url': canonicalUrl,
+  'isPartOf': {
+    '@type': 'WebSite',
+    'name': SITE_CONFIG.name,
+    'url': SITE_CONFIG.siteUrl,
+  },
+  'numberOfItems': page.total,
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  ogTitle={pageTitle}
+  ogImage={firstThumb}
+  canonical={canonicalUrl}
+>
+  <!-- SEO Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
+
+  <div class="container">
+
+    <!-- ── Breadcrumb Navigation ── -->
+    <nav class="breadcrumbs" aria-label="Breadcrumb navigation">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <span class="active">⭐ {actorName} {current > 1 && `(Page ${current})`}</span>
+    </nav>
+
+    <!-- ── Cast SEO Header ── -->
+    <header class="tax-header">
+      <div class="tax-title-wrap">
+        <h1 class="tax-title">⭐ {actorName} Movies</h1>
+        <span class="tax-count-badge">{page.total} Video{page.total !== 1 ? 's' : ''}</span>
+      </div>
+      <p class="tax-desc">
+        Stream free HD adult movies, videos, and full scenes starring <strong>{actorName}</strong>.
+        Watch online in high quality on {SITE_CONFIG.name}.
+      </p>
+    </header>
+
+    <!-- ── Video Grid ── -->
+    {page.data.length > 0 ? (
+      <>
+        <div class="video-grid" id="video-grid" role="list" aria-label={`${actorName} video list`}>
+          {page.data.map((video: Video) => (
+            <VideoCard video={video} />
+          ))}
+        </div>
+
+        <!-- ── Pagination Controls ── -->
+        <Pagination page={page} baseUrl={`/cast/${actorSlug}`} />
+      </>
+    ) : (
+      <div class="empty-state">
+        <div class="empty-icon">⭐</div>
+        <h3>No videos starring {actorName}</h3>
+        <p>Explore other popular stars or <a href="/categories/" style="color:var(--accent)">browse categories</a>.</p>
+      </div>
+    )}
+
+  </div>
+</BaseLayout>
+
+<script>
+  // ── Load live view counts for cards ──
+  async function loadViewCounts() {
+    const countEls = document.querySelectorAll('.card-view-count[data-slug]');
+    const fetches = Array.from(countEls).map(async (el) => {
+      const slug = el.getAttribute('data-slug');
+      if (!slug) return;
+      try {
+        const res = await fetch(`/api/views?slug=${encodeURIComponent(slug)}`);
+        if (!res.ok) return;
+        const { views } = await res.json();
+        el.textContent = formatViews(views);
+        el.setAttribute('data-raw-views', String(views));
+      } catch {
+        el.textContent = '—';
+      }
+    });
+    await Promise.all(fetches);
+  }
+
+  function formatViews(n: number) {
+    if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'M';
+    if (n >= 1_000)     return Math.floor(n / 1_000) + 'K';
+    return String(n);
+  }
+
+  loadViewCounts();
+</script>
