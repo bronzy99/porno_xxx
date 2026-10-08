@@ -22,7 +22,6 @@ const formattedViews = initialViews >= 1_000_000
     : (initialViews > 0 ? String(initialViews) : '—');
 const category = video.category || 'Movies';
 const posterImg = video.poster || video.thumbnail;
-const sceneCount = video.scenes?.length;
 ---
 
 <article
@@ -88,13 +87,6 @@ const sceneCount = video.scenes?.length;
           </svg>
         </div>
       </div>
-
-      <!-- Scenes badge if available -->
-      {sceneCount ? (
-        <span class="scene-count-badge" aria-label={`${sceneCount} Scenes`}>
-          {sceneCount} Scenes
-        </span>
-      ) : null}
 
       <!-- Duration badge -->
       <span class="duration-badge" aria-label={`Duration: ${video.duration}`}>
