@@ -815,3 +815,54 @@ export function getVideosForTag(tagSlugOrName: string): Video[] {
   result.sort((a, b) => (b.views || 0) - (a.views || 0) || new Date(b.date).getTime() - new Date(a.date).getTime());
   return result;
 }
+
+export function getAllGenres(): string[] {
+  const set = new Set<string>();
+  videos.forEach((v) => {
+    (v.genres || []).forEach((g) => {
+      const trimmed = g.trim();
+      if (trimmed) set.add(trimmed);
+    });
+  });
+  return Array.from(set);
+}
+
+export function getAllCast(): string[] {
+  const set = new Set<string>();
+  videos.forEach((v) => {
+    (v.cast || []).forEach((c) => {
+      const trimmed = c.trim();
+      if (trimmed) set.add(trimmed);
+    });
+  });
+  return Array.from(set);
+}
+
+export function getVideosForGenre(genreSlugOrName: string): Video[] {
+  const slug = slugify(genreSlugOrName);
+  const result = videos.filter((v) => {
+    const matchGenre = (v.genres || []).some((g) => {
+      const gSlug = slugify(g);
+      return gSlug === slug || gSlug.replace(/-/g, '_') === slug.replace(/-/g, '_');
+    });
+    const matchTag = (v.tags || []).some((t) => {
+      const tSlug = slugify(t);
+      return tSlug === slug || tSlug.replace(/-/g, '_') === slug.replace(/-/g, '_');
+    });
+    return matchGenre || matchTag;
+  });
+  result.sort((a, b) => (b.views || 0) - (a.views || 0) || new Date(b.date).getTime() - new Date(a.date).getTime());
+  return result;
+}
+
+export function getVideosForCast(actorSlugOrName: string): Video[] {
+  const slug = slugify(actorSlugOrName);
+  const result = videos.filter((v) =>
+    (v.cast || []).some((c) => {
+      const cSlug = slugify(c);
+      return cSlug === slug || cSlug.replace(/-/g, '_') === slug.replace(/-/g, '_');
+    })
+  );
+  result.sort((a, b) => (b.views || 0) - (a.views || 0) || new Date(b.date).getTime() - new Date(a.date).getTime());
+  return result;
+}
