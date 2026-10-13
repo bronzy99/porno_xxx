@@ -6,8 +6,8 @@
 export interface MovieScene {
   sceneNumber: number;
   title: string;
-  filename: string;
-  size: string;
+  filename?: string;
+  size?: string;
   downloadUrl?: string;
   streamUrl?: string;
   duration?: string;
@@ -45,6 +45,7 @@ export interface Video {
   studio?: string;            // e.g. "Reality Kings", "Team Skeet", "Zero Tolerance"
   size?: string;              // e.g. "5.69 GB", "2.38 GB"
   downloadUrl?: string;       // Direct Movie Download link
+  streamUrl?: string;         // External Streamable URL
   likes?: number;
   dislikes?: number;
   cast?: string[];
@@ -87,45 +88,419 @@ export const CATEGORIES = [
   "Life Selector",
   "Mile High Media",
   "Lesbian Older Younger",
-  "Evil Angel"
+  "Evil Angel",
+  "True Amateurs",
+  "All Niche Productions"
 ] as const;
 
 export const NAV_CATEGORIES: string[] = [
   "Team Skeet",
-  "Zero Tolerance",
   "Reality Kings",
-  "Anal",
-  "Blowjob",
-  "Creampie",
-  "Family Roleplay",
-  "Latina"
+  "MILFY",
+  "Mommys Girl",
+  "Life Selector",
+  "Mile High Media",
+  "Lesbian Older Younger",
+  "Evil Angel",
+  "True Amateurs",
+  "All Niche Productions"
 ];
 
 export function normalizeCategory(rawCategory: string, tags: string[] = []): string {
-  const all = [rawCategory, ...tags].map((s) => s.toLowerCase().replace(/[-_\s]+/g, ''));
-
-  const has = (...terms: string[]) =>
-    terms.some((t) => all.some((s) => s.includes(t.toLowerCase().replace(/[-_\s]+/g, ''))));
-
-  if (has('teamskeet', 'team-skeet', 'skeet')) return 'Team Skeet';
-  if (has('zerotolerance', 'zero-tolerance')) return 'Zero Tolerance';
-  if (has('realitykings', 'reality-kings')) return 'Reality Kings';
-  if (has('family', 'stepbrother', 'stepsister', 'roleplay', 'stepmom')) return 'Family Roleplay';
-  if (has('latina', 'latin')) return 'Latina';
-  if (has('anal', 'mranal', 'analgape', 'tightanalgape', 'analwhore')) return 'Anal';
-  if (has('creampie', 'cuminpanties', 'cumswallowing', 'deepcreampie')) return 'Creampie';
-  if (has('blowjob', 'deepthroat', 'facefucking', 'blowjobtease', 'sloppy')) return 'Blowjob';
-  if (has('bbw', 'chubby', 'hugebody', 'fatass', 'plussize')) return 'BBW';
-  if (has('bigcock', 'bigdick', 'monstercock', 'bbc', 'blackcock', 'hugecocks', 'fatdick')) return 'Big Cock';
-  if (has('teen', 'teens', 'teen18', 'teens18', '18yo', 'young', 'petite')) return 'Teen';
-  if (has('amateur', 'homemade', 'couple', 'pov')) return 'Amateur';
-
-  return rawCategory || 'Movies';
+  if (rawCategory && rawCategory.trim()) {
+    return rawCategory.trim();
+  }
+  return 'Movies';
 }
 
 export type Category = (typeof CATEGORIES)[number];
 
 export const videos: Video[] = [
+  {
+    "id": "movie-11",
+    "title": "Anal Teachings 2026 | Free Watch Porn Video",
+    "cleanTitle": "Anal Teachings 2026",
+    "thumbnail": "https://imgxclub.com/p/2026/10/12/6accc803cfda4.jpeg",
+    "poster": "https://imgxclub.com/p/2026/10/12/6accc803cfda4.jpeg",
+    "category": "Evil Angel",
+    "studio": "Evil Angel",
+    "quality": "720p",
+    "duration": "2 hrs and 45 min",
+    "cast": [
+      "Dallas Rae",
+      "Julia James",
+      "McKenzie Mae",
+      "Nicole Nichols"
+    ],
+    "genres": [
+      "Anal",
+      "Blowjob",
+      "Cumshot",
+      "Facial",
+      "Rough Sex"
+    ],
+    "tags": [
+      "Anal",
+      "Blowjob",
+      "Cumshot",
+      "Facial",
+      "Rough Sex"
+    ],
+    "synopsis": "Anal Teachings [Evil Angel] (2026) HD 720p Split Scenes",
+    "splitScenes": true,
+    "scenes": [
+      {
+        "sceneNumber": 1,
+        "title": "Scene 1",
+        "filename": "scene-1.mp4",
+        "duration": "27:56",
+        "streamUrl": "https://stream.xcloud1.lol/acf5f46ec34c2c7",
+        "downloadUrl": "https://stream.xcloud1.lol/acf5f46ec34c2c7"
+      },
+      {
+        "sceneNumber": 2,
+        "title": "Scene 2",
+        "filename": "scene-2.mp4",
+        "duration": "42:05",
+        "streamUrl": "https://stream.xcloud1.lol/d27d3e9f1e8ece0",
+        "downloadUrl": "https://stream.xcloud1.lol/d27d3e9f1e8ece0"
+      },
+      {
+        "sceneNumber": 3,
+        "title": "Scene 3",
+        "filename": "scene-3.mp4",
+        "duration": "47:05",
+        "streamUrl": "https://stream.xcloud1.lol/ada8292e3167101",
+        "downloadUrl": "https://stream.xcloud1.lol/ada8292e3167101"
+      },
+      {
+        "sceneNumber": 4,
+        "title": "Scene 4",
+        "filename": "scene-4.mp4",
+        "duration": "46:30",
+        "streamUrl": "https://stream.xcloud1.lol/69b35147283c244",
+        "downloadUrl": "https://stream.xcloud1.lol/69b35147283c244"
+      }
+    ],
+    "screenshots": [
+      "https://rintor.space/images/2026/10/07/Anal-Teachings-1.jpg",
+      "https://rintor.space/images/2026/10/07/Anal-Teachings-2.jpg",
+      "https://rintor.space/images/2026/10/07/Anal-Teachings-3.jpg",
+      "https://rintor.space/images/2026/10/07/Anal-Teachings-4.jpg"
+    ],
+    "releaseYear": "2026"
+  },
+  {
+    "id": "movie-10",
+    "title": "Hello Titties! | Free Watch Porn Video",
+    "thumbnail": "https://imgxclub.com/p/2026/10/12/6acc20fb1204e.jpeg",
+    "poster": "https://imgxclub.com/p/2026/10/12/6acc20fb1204e.jpeg",
+    "category": "All Niche Productions",
+    "studio": "All Niche Productions",
+    "quality": "1080p",
+    "duration": "1 hr  43 mins",
+    "cast": [
+      "Katie Kox",
+      "Honey West",
+      "Mitch Hawkins",
+      "Trinity Maze",
+      "Mark Zane",
+      "Juliana Jolene",
+      "Jonny Slim"
+    ],
+    "genres": [
+      "Appearance",
+      "Big Tits",
+      "Blowjobs",
+      "Oral"
+    ],
+    "tags": [
+      "Appearance",
+      "Big Tits",
+      "Blowjobs",
+      "Oral"
+    ],
+    "synopsis": "Sweet babes with impressive tits take on cock every way possible! Ain't much better than a big rack and a tight pussy to fuck, and these horny bimbos want nothing more than to suck and fuck and drain some cock!",
+    "splitScenes": true,
+    "scenes": [
+      {
+        "sceneNumber": 1,
+        "title": "Scene 1",
+        "filename": "scene-1.mp4",
+        "duration": "20:25",
+        "streamUrl": "https://stream.xcloud1.lol/ab293b0df293c65",
+        "downloadUrl": "https://stream.xcloud1.lol/ab293b0df293c65"
+      },
+      {
+        "sceneNumber": 2,
+        "title": "Scene 2",
+        "filename": "scene-2.mp4",
+        "duration": "27:53",
+        "streamUrl": "https://stream.xcloud1.lol/2b280d0ac47e2f8",
+        "downloadUrl": "https://stream.xcloud1.lol/2b280d0ac47e2f8"
+      },
+      {
+        "sceneNumber": 3,
+        "title": "Scene 3",
+        "filename": "scene-3.mp4",
+        "duration": "36:30",
+        "streamUrl": "https://stream.xcloud1.lol/79439d8dd33a523",
+        "downloadUrl": "https://stream.xcloud1.lol/79439d8dd33a523"
+      },
+      {
+        "sceneNumber": 4,
+        "title": "Scene 4",
+        "filename": "scene-4.mp4",
+        "duration": "18:21",
+        "streamUrl": "https://stream.xcloud1.lol/b9766ef4ea66fce",
+        "downloadUrl": "https://stream.xcloud1.lol/b9766ef4ea66fce"
+      }
+    ],
+    "screenshots": [
+      "https://imgtraffic.com/1/2026/10/12/6acc206ca4fd2.jpeg",
+      "https://imgtraffic.com/1/2026/10/12/6acc206cb2677.jpeg",
+      "https://imgtraffic.com/1/2026/10/12/6acc206ccda32.jpeg",
+      "https://imgtraffic.com/1/2026/10/12/6acc206ce8c12.jpeg"
+    ],
+    "releaseYear": "2026"
+  },
+  {
+    "id": "movie-9",
+    "title": "Horny Anal Babes | Free Watch Porn Video",
+    "cleanTitle": "Horny Anal Babes",
+    "thumbnail": "https://imgxclub.com/p/2026/10/12/6acc20ff4886e.jpeg",
+    "poster": "https://imgxclub.com/p/2026/10/12/6acc20ff4886e.jpeg",
+    "category": "Evil Angel",
+    "studio": "Evil Angel",
+    "quality": "1080p",
+    "duration": "2 hrs. 25 mins.",
+    "cast": [
+      "Claire Roos",
+      "Jena LaRose",
+      "Mercy Muse",
+      "Texas Patti",
+      "Mick Blue"
+    ],
+    "genres": [
+      "4K Ultra HD",
+      "Anal",
+      "Appearance",
+      "Ass to Mouth",
+      "Big Dicks",
+      "Creampie",
+      "Cumshots",
+      "Deep Throat",
+      "Gaping",
+      "Oral",
+      "Short Hair & Pixie"
+    ],
+    "tags": [
+      "4K Ultra HD",
+      "Anal",
+      "Appearance",
+      "Ass to Mouth",
+      "Big Dicks",
+      "Creampie",
+      "Cumshots",
+      "Deep Throat",
+      "Gaping",
+      "Oral",
+      "Short Hair & Pixie"
+    ],
+    "synopsis": "The prurient pornographers at BAM Visions, co-director/award-winning stud Mick Blue and co-director/master cinematographer Maestro Claudio, present hot, lusty ladies that love taking big cocks up the bunghole in Horny Anal Babes. Every scene includes passionate backdoor reaming and tasty, ass-to-mouth fellatio. Curvaceous porn star Jena LaRose models a skimpy swimsuit with matching leg warmers and sexy high heels.",
+    "splitScenes": true,
+    "scenes": [
+      {
+        "sceneNumber": 1,
+        "title": "Scene 1",
+        "filename": "scene-1.mp4",
+        "duration": "36:16",
+        "streamUrl": "https://stream.xcloud1.lol/0ec3dd9b1f52eda",
+        "downloadUrl": "https://stream.xcloud1.lol/0ec3dd9b1f52eda"
+      },
+      {
+        "sceneNumber": 2,
+        "title": "Scene 2",
+        "filename": "scene-2.mp4",
+        "duration": "35:42",
+        "streamUrl": "https://stream.xcloud1.lol/dbb2adc88a8f34b",
+        "downloadUrl": "https://stream.xcloud1.lol/dbb2adc88a8f34b"
+      },
+      {
+        "sceneNumber": 3,
+        "title": "Scene 3",
+        "filename": "scene-3.mp4",
+        "duration": "36:42",
+        "streamUrl": "https://stream.xcloud1.lol/609a693241e021b",
+        "downloadUrl": "https://stream.xcloud1.lol/609a693241e021b"
+      },
+      {
+        "sceneNumber": 4,
+        "title": "Scene 4",
+        "filename": "scene-4.mp4",
+        "duration": "34:04",
+        "streamUrl": "https://stream.xcloud1.lol/47ac99dfbbbbfda",
+        "downloadUrl": "https://stream.xcloud1.lol/47ac99dfbbbbfda"
+      }
+    ],
+    "screenshots": [
+      "https://imgtraffic.com/1/2026/10/12/6acc209e88061.jpeg",
+      "https://imgtraffic.com/1/2026/10/12/6acc209e99939.jpeg",
+      "https://imgtraffic.com/1/2026/10/12/6acc209ea619a.jpeg",
+      "https://imgtraffic.com/1/2026/10/12/6acc209eb2b13.jpeg"
+    ],
+    "releaseYear": "2026"
+  },
+  {
+    "id": "movie-8",
+    "title": "The Return Of The Wedding Crasher | Free Watch Porn Video",
+    "cleanTitle": "The Return Of The Wedding Crasher",
+    "thumbnail": "https://media.themoviedb.org/t/p/w440_and_h660_face/z7u0x2mnoXJPqdX1uek4bvgQpZD.jpg",
+    "poster": "https://media.themoviedb.org/t/p/w440_and_h660_face/z7u0x2mnoXJPqdX1uek4bvgQpZD.jpg",
+    "category": "Life Selector",
+    "studio": "Life Selector",
+    "quality": "1080p",
+    "duration": "2h 36m",
+    "cast": [
+      "Alexa Flexy",
+      "Alexis Crystal",
+      "Eva Generosi",
+      "Karina King",
+      "Leya Desantis",
+      "Lily Blossom",
+      "Milan Cheek",
+      "Shalina Devine",
+      "Frank Major",
+      "Kristof Cale"
+    ],
+    "tags": [],
+    "synopsis": "Meet the kinky Waitress (Leya Desantis), discover the secret of the Mother of the Bride (Shalina Devine), support the revenge of the Groom's ex (Karina King) and the Bride's ex (Lily Blossom), keep the Sexy Bridesmaid (Alexis Crystal) company with the Groom's pretty guest (Eva Generosi), and help out the Beautiful Bride (Milan Cheek) and her other cute Bridesmaid (Alexa Flexy) in a time of need.",
+    "splitScenes": true,
+    "scenes": [
+      {
+        "sceneNumber": 1,
+        "title": "Scene 1",
+        "filename": "scene-1.mp4",
+        "duration": "50:07",
+        "streamUrl": "https://stream.xcloud1.lol/1464a42946eec36",
+        "downloadUrl": "https://stream.xcloud1.lol/1464a42946eec36"
+      },
+      {
+        "sceneNumber": 2,
+        "title": "Scene 2",
+        "filename": "scene-2.mp4",
+        "duration": "25:15",
+        "streamUrl": "https://stream.xcloud1.lol/a9be8909dbf4342",
+        "downloadUrl": "https://stream.xcloud1.lol/a9be8909dbf4342"
+      },
+      {
+        "sceneNumber": 3,
+        "title": "Scene 3",
+        "filename": "scene-3.mp4",
+        "duration": "45:12",
+        "streamUrl": "https://stream.xcloud1.lol/f90d73c671b492c",
+        "downloadUrl": "https://stream.xcloud1.lol/f90d73c671b492c"
+      },
+      {
+        "sceneNumber": 4,
+        "title": "Scene 4",
+        "filename": "scene-4.mp4",
+        "duration": "35:31",
+        "streamUrl": "https://stream.xcloud1.lol/626b63205d991d4",
+        "downloadUrl": "https://stream.xcloud1.lol/626b63205d991d4"
+      }
+    ],
+    "screenshots": [
+      "https://imgtraffic.com/1/2026/10/12/6acc20d44915d.jpeg",
+      "https://imgtraffic.com/1/2026/10/12/6acc20d45ac87.jpeg",
+      "https://imgtraffic.com/1/2026/10/12/6acc20d48465c.jpeg",
+      "https://imgtraffic.com/1/2026/10/12/6acc20d490ec8.jpeg"
+    ],
+    "releaseYear": "2024"
+  },
+  {
+    "id": "movie-7",
+    "title": "True Amateurs Homemade Anal 2 | Free Watch Porn Video",
+    "cleanTitle": "True Amateurs Homemade Anal 2",
+    "thumbnail": "https://imgxclub.com/p/2026/10/12/6acc21018beab.jpeg",
+    "poster": "https://imgxclub.com/p/2026/10/12/6acc21018beab.jpeg",
+    "category": "True Amateurs",
+    "studio": "True Amateurs",
+    "quality": "HD",
+    "duration": "1 hrs. 33 mins.",
+    "genres": [
+      "Amateur",
+      "Anal",
+      "Blowjobs",
+      "Couples",
+      "Gonzo",
+      "Homemade Movies",
+      "Oral",
+      "POV"
+    ],
+    "tags": [
+      "Amateur",
+      "Anal",
+      "Blowjobs",
+      "Couples",
+      "Gonzo",
+      "Homemade Movies",
+      "Oral",
+      "POV"
+    ],
+    "synopsis": "True Amateurs: Homemade Anal 2 shows real amateur couples who love to please their partners anyway possible, including hot anal sex.",
+    "splitScenes": true,
+    "scenes": [
+      {
+        "sceneNumber": 1,
+        "title": "Scene 1",
+        "filename": "scene-1.mp4",
+        "duration": "13:28",
+        "streamUrl": "https://stream.xcloud1.lol/1390e9306073711",
+        "downloadUrl": "https://stream.xcloud1.lol/1390e9306073711"
+      },
+      {
+        "sceneNumber": 2,
+        "title": "Scene 2",
+        "filename": "scene-2.mp4",
+        "duration": "18:03",
+        "streamUrl": "https://stream.xcloud1.lol/823d3c43d086955",
+        "downloadUrl": "https://stream.xcloud1.lol/823d3c43d086955"
+      },
+      {
+        "sceneNumber": 3,
+        "title": "Scene 3",
+        "filename": "scene-3.mp4",
+        "duration": "23:09",
+        "streamUrl": "https://stream.xcloud1.lol/779b587da8a44bc",
+        "downloadUrl": "https://stream.xcloud1.lol/779b587da8a44bc"
+      },
+      {
+        "sceneNumber": 4,
+        "title": "Scene 4",
+        "filename": "scene-4.mp4",
+        "duration": "20:43",
+        "streamUrl": "https://stream.xcloud1.lol/844e1d66adc66c2",
+        "downloadUrl": "https://stream.xcloud1.lol/844e1d66adc66c2"
+      },
+      {
+        "sceneNumber": 5,
+        "title": "Scene 5",
+        "filename": "scene-5.mp4",
+        "duration": "18:30",
+        "streamUrl": "https://stream.xcloud1.lol/16a1ddcf8771a08",
+        "downloadUrl": "https://stream.xcloud1.lol/16a1ddcf8771a08"
+      }
+    ],
+    "screenshots": [
+      "https://imgtraffic.com/1/2026/10/12/6acc20b88adf6.jpeg",
+      "https://imgtraffic.com/1/2026/10/12/6acc20b898572.jpeg",
+      "https://imgtraffic.com/1/2026/10/12/6acc20b8c15db.jpeg",
+      "https://imgtraffic.com/1/2026/10/12/6acc20b8d5e12.jpeg",
+      "https://imgtraffic.com/1/2026/10/12/6acc20b8e2a4a.jpeg"
+    ],
+    "releaseYear": "2026"
+  },
   {
     "id": "movie-6",
     "title": "Hookup Hotshot Internet Sex Addicts Vol. 10 [Evil Angel 2026] XXX WEB-DL 1080p",
