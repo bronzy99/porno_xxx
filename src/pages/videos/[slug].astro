@@ -32,6 +32,7 @@ const screenshots  = video.screenshots || [];
 const hasScreens   = screenshots.length > 0;
 const castMembers  = video.cast || [];
 const streamLink   = video.streamUrl || video.downloadUrl || video.embedUrl || `#stream-movie`;
+const downloadLink = video.downloadUrl || video.streamUrl || streamLink;
 const likesCount   = video.likes ?? 6;
 const dislikesCount = video.dislikes ?? 2;
 
@@ -141,7 +142,7 @@ if (metaDesc.length > 155) {
             )}
 
             <div class="desc-meta-row">
-              <span class="row-label">Category / Studio:</span>
+              <span class="row-label">Studio:</span>
               <div class="meta-inline-items">
                 <a href={`/category/${slugify(category)}/`} class="studio-link">{category}</a>
                 {video.studio && video.studio !== category && (
@@ -199,6 +200,54 @@ if (metaDesc.length > 155) {
                   </svg>
                   <span class="scene-btn-text">Stream Movie</span>
                   {video.duration && <span class="scene-btn-duration">({video.duration})</span>}
+                </a>
+              )}
+            </div>
+          </div>
+
+          <!-- Download Action Buttons (Individual Scene Downloads) -->
+          <div class="meta-scene-downloads">
+            <div class="meta-scene-heading">
+              <span class="scene-heading-title">Download:</span>
+              {hasScenes && <span class="scene-heading-count">({scenes.length} Scenes)</span>}
+            </div>
+            <div class="scene-download-buttons">
+              {hasScenes ? (
+                scenes.map((scene) => {
+                  const dLink = scene.downloadUrl || scene.streamUrl || downloadLink;
+                  return (
+                    <a
+                      href={dLink}
+                      class="btn btn-scene-card btn-scene-card-download"
+                      title={`Download Scene ${scene.sceneNumber}: ${scene.title || scene.filename || ''}`}
+                    >
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+                      </svg>
+                      <span class="scene-btn-text">Scene {scene.sceneNumber}</span>
+                      {scene.size ? (
+                        <span class="scene-btn-size">({scene.size})</span>
+                      ) : scene.duration ? (
+                        <span class="scene-btn-duration">({scene.duration})</span>
+                      ) : null}
+                    </a>
+                  );
+                })
+              ) : (
+                <a
+                  href={downloadLink}
+                  class="btn btn-scene-card btn-scene-card-download"
+                  title={`Download ${video.cleanTitle || video.title}`}
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+                  </svg>
+                  <span class="scene-btn-text">Download Movie</span>
+                  {video.size ? (
+                    <span class="scene-btn-size">({video.size})</span>
+                  ) : video.duration ? (
+                    <span class="scene-btn-duration">({video.duration})</span>
+                  ) : null}
                 </a>
               )}
             </div>

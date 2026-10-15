@@ -1658,19 +1658,29 @@
             <input type="text" class="form-control scene-input-filename" value="${scene.filename || ''}" placeholder="e.g. Studio - Movie Scene 1 1080p.mp4" />
           </div>
         </div>
-        <div class="form-row" style="margin-bottom:8px">
+        <div class="form-row-3" style="margin-bottom:8px">
           <div class="form-group">
             <label>Scene Duration <span class="req">*</span></label>
             <input type="text" class="form-control scene-input-duration" value="${scene.duration || ''}" placeholder="e.g. 25:30" />
+          </div>
+          <div class="form-group">
+            <label>Scene Size (Optional)</label>
+            <input type="text" class="form-control scene-input-size" value="${scene.size || ''}" placeholder="e.g. 850 MB" />
           </div>
           <div class="form-group">
             <label>Actors / Cast (comma-separated)</label>
             <input type="text" class="form-control scene-input-actors" value="${Array.isArray(scene.actors) ? scene.actors.join(', ') : (scene.actors || '')}" placeholder="e.g. Chloe Cherry" />
           </div>
         </div>
-        <div class="form-group" style="background:rgba(56,189,248,0.06);padding:8px 12px;border-radius:6px;border:1px solid rgba(56,189,248,0.25)">
-          <label style="color:#38bdf8;font-weight:700">▶️ Stream URL / External Streamable Link for this Scene</label>
-          <input type="text" class="form-control scene-input-stream" value="${scene.streamUrl || scene.downloadUrl || ''}" placeholder="https://streamable.com/... or https://player.example.com/..." />
+        <div class="form-row" style="margin-bottom:4px">
+          <div class="form-group" style="background:rgba(56,189,248,0.06);padding:8px 12px;border-radius:6px;border:1px solid rgba(56,189,248,0.25);margin-bottom:0">
+            <label style="color:#38bdf8;font-weight:700">▶️ Stream URL (Streamable / Player)</label>
+            <input type="text" class="form-control scene-input-stream" value="${scene.streamUrl || ''}" placeholder="https://streamable.com/... or https://player.example.com/..." />
+          </div>
+          <div class="form-group" style="background:rgba(34,197,94,0.06);padding:8px 12px;border-radius:6px;border:1px solid rgba(34,197,94,0.25);margin-bottom:0">
+            <label style="color:#22c55e;font-weight:700">⬇️ Download URL (Direct Download Link)</label>
+            <input type="text" class="form-control scene-input-download" value="${scene.downloadUrl || ''}" placeholder="https://download.example.com/... or https://..." />
+          </div>
         </div>
       `;
 
@@ -1704,22 +1714,25 @@
       const rows = scenesContainer.querySelectorAll('.scene-item-box');
       const scenes = [];
       rows.forEach((row, idx) => {
-        const title     = row.querySelector('.scene-input-title')?.value.trim() || '';
-        const filename  = row.querySelector('.scene-input-filename')?.value.trim() || '';
-        const duration  = row.querySelector('.scene-input-duration')?.value.trim() || '';
-        const streamUrl = row.querySelector('.scene-input-stream')?.value.trim() || '';
-        const actorsRaw = row.querySelector('.scene-input-actors')?.value.trim() || '';
+        const title       = row.querySelector('.scene-input-title')?.value.trim() || '';
+        const filename    = row.querySelector('.scene-input-filename')?.value.trim() || '';
+        const duration    = row.querySelector('.scene-input-duration')?.value.trim() || '';
+        const size        = row.querySelector('.scene-input-size')?.value.trim() || '';
+        const streamUrl   = row.querySelector('.scene-input-stream')?.value.trim() || '';
+        const downloadUrl = row.querySelector('.scene-input-download')?.value.trim() || '';
+        const actorsRaw   = row.querySelector('.scene-input-actors')?.value.trim() || '';
 
         const actors = actorsRaw.split(',').map(a => a.trim()).filter(Boolean);
 
-        if (title || filename || streamUrl || duration) {
+        if (title || filename || streamUrl || downloadUrl || duration) {
           scenes.push({
             sceneNumber: idx + 1,
             title: title || `Scene ${idx + 1}`,
             filename: filename || `scene-${idx + 1}.mp4`,
             duration: duration || '25:00',
+            size: size || undefined,
             streamUrl: streamUrl || undefined,
-            downloadUrl: streamUrl || undefined,
+            downloadUrl: downloadUrl || undefined,
             actors: actors.length ? actors : undefined
           });
         }
@@ -1791,7 +1804,12 @@
       previewMetaClean.textContent = cleanTitle !== title ? cleanTitle : '—';
       previewMetaCast.textContent = cast || '—';
       previewMetaSize.textContent = size || '—';
-      previewMetaLink.textContent = streamVal ? '✅ Configured' : '—';
+      const hasDl = isSplit ? scenes.some(s => s.downloadUrl) : Boolean(inputDownloadUrl?.value.trim());
+      const hasSt = isSplit ? scenes.some(s => s.streamUrl) : Boolean(inputStreamUrl?.value.trim());
+      if (hasSt && hasDl) previewMetaLink.textContent = '✅ Stream & Download';
+      else if (hasDl) previewMetaLink.textContent = '⬇️ Download Link';
+      else if (hasSt) previewMetaLink.textContent = '▶️ Stream Link';
+      else previewMetaLink.textContent = '—';
 
       slugPreview.innerHTML = `URL Slug: <code>/videos/${slugify(title) || '---'}/</code>`;
 
@@ -1937,7 +1955,8 @@
       filtered.forEach(video => {
         const slug = slugify(video.title);
         const tier = getQualityTier(video.quality, video.title, video.tags);
-        const hasStream = Boolean(video.streamUrl || video.downloadUrl);
+        const hasStream = Boolean(video.streamUrl || (Array.isArray(video.scenes) && video.scenes.some(s => s.streamUrl)));
+        const hasDownload = Boolean(video.downloadUrl || (Array.isArray(video.scenes) && video.scenes.some(s => s.downloadUrl)));
         const sceneCount = Array.isArray(video.scenes) ? video.scenes.length : 0;
         const posterImg = video.poster || video.thumbnail;
 
@@ -1967,7 +1986,7 @@
             ${sceneCount > 0 ? `<br><small style="color:#38bdf8">${sceneCount} Scenes</small>` : ''}
           </td>
           <td>
-            ${hasStream ? '<span class="badge-dl-ok">▶ Stream Link</span>' : '<span class="badge-dl-none">No Link</span>'}
+            ${hasStream && hasDownload ? '<span class="badge-dl-ok" style="background:#059669;color:#fff;border-color:#10b981">▶ Stream & ⬇ DL</span>' : hasStream ? '<span class="badge-dl-ok">▶ Stream Link</span>' : hasDownload ? '<span class="badge-dl-ok" style="background:#059669;color:#fff;border-color:#10b981">⬇ Download</span>' : '<span class="badge-dl-none">No Link</span>'}
           </td>
           <td>
             <small style="color:var(--text-muted)">${video.date}</small>
@@ -2008,8 +2027,8 @@
       inputStudio.value = v.studio || '';
       inputDuration.value = v.duration || '';
       inputSize.value = v.size || '';
-      if (inputStreamUrl) inputStreamUrl.value = v.streamUrl || v.downloadUrl || '';
-      inputDownloadUrl.value = v.downloadUrl || v.streamUrl || '';
+      if (inputStreamUrl) inputStreamUrl.value = v.streamUrl || '';
+      inputDownloadUrl.value = v.downloadUrl || '';
       inputThumbnail.value = v.thumbnail || v.poster || '';
       inputPreview.value = v.preview || '';
       inputEmbedUrl.value = v.embedUrl || '';
@@ -2166,7 +2185,8 @@
 
       const scenes = getScenesData();
       const isSplit = inputSplitScenes.checked && scenes.length > 0;
-      const streamUrlVal = (inputStreamUrl?.value || inputDownloadUrl?.value || '').trim();
+      const streamUrlVal = (inputStreamUrl?.value || '').trim();
+      const downloadUrlVal = (inputDownloadUrl?.value || '').trim();
 
       const videoObj = {
         id:          inputId.value.trim() || getNextId(),
@@ -2181,8 +2201,8 @@
         quality:     inputQuality.value || '1080p',
         duration:    inputDuration.value.trim() || '02:00:00',
         size:        inputSize.value.trim() || undefined,
-        streamUrl:   streamUrlVal || undefined,
-        downloadUrl: streamUrlVal || undefined,
+        streamUrl:   streamUrlVal || downloadUrlVal || undefined,
+        downloadUrl: downloadUrlVal || streamUrlVal || undefined,
         cast:        cast.length ? cast : undefined,
         genres:      genres.length ? genres : undefined,
         tags:        tags,

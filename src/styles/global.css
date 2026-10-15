@@ -1171,6 +1171,18 @@ main { flex: 1; }
   color: #fff;
 }
 
+.btn-scene-card.btn-scene-card-download {
+  background: #10b981;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-scene-card.btn-scene-card-download:hover {
+  background: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.45);
+  color: #fff;
+}
+
 .btn-scene-card .scene-btn-text {
   font-weight: 700;
 }

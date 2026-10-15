@@ -182,32 +182,36 @@ export const videos: Video[] = [
         "title": "Scene 1",
         "filename": "scene-1.mp4",
         "duration": "29:55",
+        "size": "1.17 GB",
         "streamUrl": "https://stream.xcloud1.lol/b95f0d5edb1e621",
-        "downloadUrl": "https://stream.xcloud1.lol/b95f0d5edb1e621"
+        "downloadUrl": "https://xcloud1.lol/b95f0d5edb1e621"
       },
       {
         "sceneNumber": 2,
         "title": "Scene 2",
         "filename": "scene-2.mp4",
         "duration": "32:01",
+        "size": "1.22 GB",
         "streamUrl": "https://stream.xcloud1.lol/38665a0f3f390f8",
-        "downloadUrl": "https://stream.xcloud1.lol/38665a0f3f390f8"
+        "downloadUrl": "https://xcloud1.lol/38665a0f3f390f8"
       },
       {
         "sceneNumber": 3,
         "title": "Scene 3",
         "filename": "scene-3.mp4",
         "duration": "31:01",
+        "size": "1.18 GB",
         "streamUrl": "https://stream.xcloud1.lol/0157a5c3675931a",
-        "downloadUrl": "https://stream.xcloud1.lol/0157a5c3675931a"
+        "downloadUrl": "https://xcloud1.lol/0157a5c3675931a"
       },
       {
         "sceneNumber": 4,
         "title": "Scene 4",
         "filename": "scene-4.mp4",
         "duration": "30:36",
+        "size": "1.18 GB",
         "streamUrl": "https://stream.xcloud1.lol/7bfc20f2b9ba6eb",
-        "downloadUrl": "https://stream.xcloud1.lol/7bfc20f2b9ba6eb"
+        "downloadUrl": "https://xcloud1.lol/7bfc20f2b9ba6eb"
       }
     ],
     "screenshots": [
@@ -243,32 +247,36 @@ export const videos: Video[] = [
         "title": "Scene 1",
         "filename": "scene-1.mp4",
         "duration": "20:05",
+        "size": "825 MB",
         "streamUrl": "https://stream.xcloud1.lol/abee873572f41b9",
-        "downloadUrl": "https://stream.xcloud1.lol/abee873572f41b9"
+        "downloadUrl": "https://xcloud1.lol/abee873572f41b9"
       },
       {
         "sceneNumber": 2,
         "title": "Scene 2",
         "filename": "scene-2.mp4",
         "duration": "20:05",
+        "size": "824 MB",
         "streamUrl": "https://stream.xcloud1.lol/0942b45f0b2dac7",
-        "downloadUrl": "https://stream.xcloud1.lol/0942b45f0b2dac7"
+        "downloadUrl": "https://xcloud1.lol/0942b45f0b2dac7"
       },
       {
         "sceneNumber": 3,
         "title": "Scene 3",
         "filename": "scene-3.mp4",
         "duration": "23:59",
+        "size": "941 MB",
         "streamUrl": "https://stream.xcloud1.lol/45eabdc38a6f97a",
-        "downloadUrl": "https://stream.xcloud1.lol/45eabdc38a6f97a"
+        "downloadUrl": "https://xcloud1.lol/45eabdc38a6f97a"
       },
       {
         "sceneNumber": 4,
         "title": "Scene 4",
         "filename": "scene-4.mp4",
         "duration": "29:35",
+        "size": "1.19 GB",
         "streamUrl": "https://stream.xcloud1.lol/8cc163053bac087",
-        "downloadUrl": "https://stream.xcloud1.lol/8cc163053bac087"
+        "downloadUrl": "https://xcloud1.lol/8cc163053bac087"
       }
     ],
     "screenshots": [
@@ -308,40 +316,45 @@ export const videos: Video[] = [
         "title": "Scene 1",
         "filename": "scene-1.mp4",
         "duration": "25:54",
+        "size": "999 MB",
         "streamUrl": "https://stream.xcloud1.lol/bbfac27ff16d479",
-        "downloadUrl": "https://stream.xcloud1.lol/bbfac27ff16d479"
+        "downloadUrl": "https://xcloud1.lol/bbfac27ff16d479"
       },
       {
         "sceneNumber": 2,
         "title": "Scene 2",
         "filename": "scene-2.mp4",
         "duration": "26:20",
+        "size": "994 MB",
         "streamUrl": "https://stream.xcloud1.lol/8b13b59538c3717",
-        "downloadUrl": "https://stream.xcloud1.lol/8b13b59538c3717"
+        "downloadUrl": "https://xcloud1.lol/8b13b59538c3717"
       },
       {
         "sceneNumber": 3,
         "title": "Scene 3",
         "filename": "scene-3.mp4",
         "duration": "22:34",
+        "size": "856 MB",
         "streamUrl": "https://stream.xcloud1.lol/50842ac631d36d5",
-        "downloadUrl": "https://stream.xcloud1.lol/50842ac631d36d5"
+        "downloadUrl": "https://xcloud1.lol/50842ac631d36d5"
       },
       {
         "sceneNumber": 4,
         "title": "Scene 4",
         "filename": "scene-4.mp4",
         "duration": "20:26",
+        "size": "775 MB",
         "streamUrl": "https://stream.xcloud1.lol/d71638c96590c6f",
-        "downloadUrl": "https://stream.xcloud1.lol/d71638c96590c6f"
+        "downloadUrl": "https://xcloud1.lol/d71638c96590c6f"
       },
       {
         "sceneNumber": 5,
         "title": "Scene 5",
         "filename": "scene-5.mp4",
         "duration": "19:25",
+        "size": "737 MB",
         "streamUrl": "https://stream.xcloud1.lol/1340f9d45626734",
-        "downloadUrl": "https://stream.xcloud1.lol/1340f9d45626734"
+        "downloadUrl": "https://xcloud1.lol/1340f9d45626734"
       }
     ],
     "screenshots": [
@@ -400,32 +413,36 @@ export const videos: Video[] = [
         "title": "Scene 1",
         "filename": "scene-1.mp4",
         "duration": "30:07",
+        "size": "1.13 GB",
         "streamUrl": "https://stream.xcloud1.lol/65aab206fd35b84",
-        "downloadUrl": "https://stream.xcloud1.lol/65aab206fd35b84"
+        "downloadUrl": "https://xcloud1.lol/65aab206fd35b84"
       },
       {
         "sceneNumber": 2,
         "title": "Scene 2",
         "filename": "scene-2.mp4",
         "duration": "35:48",
+        "size": "1.34 GB",
         "streamUrl": "https://stream.xcloud1.lol/c5c49bb0aaef34b",
-        "downloadUrl": "https://stream.xcloud1.lol/c5c49bb0aaef34b"
+        "downloadUrl": "https://xcloud1.lol/c5c49bb0aaef34b"
       },
       {
         "sceneNumber": 3,
         "title": "Scene 3",
         "filename": "scene-3.mp4",
         "duration": "30:43",
+        "size": "1.15 GB",
         "streamUrl": "https://stream.xcloud1.lol/08eeb17c06146b0",
-        "downloadUrl": "https://stream.xcloud1.lol/08eeb17c06146b0"
+        "downloadUrl": "https://xcloud1.lol/08eeb17c06146b0"
       },
       {
         "sceneNumber": 4,
         "title": "Scene 4",
         "filename": "scene-4.mp4",
         "duration": "34:12",
+        "size": "1.25 GB",
         "streamUrl": "https://stream.xcloud1.lol/cf52495fb2e3219",
-        "downloadUrl": "https://stream.xcloud1.lol/cf52495fb2e3219"
+        "downloadUrl": "https://xcloud1.lol/cf52495fb2e3219"
       }
     ],
     "screenshots": [
@@ -483,32 +500,36 @@ export const videos: Video[] = [
         "title": "Scene 1",
         "filename": "scene-1.mp4",
         "duration": "36:38",
+        "size": "1.48 GB",
         "streamUrl": "https://stream.xcloud1.lol/dae0318200accbf",
-        "downloadUrl": "https://stream.xcloud1.lol/dae0318200accbf"
+        "downloadUrl": "https://xcloud1.lol/dae0318200accbf"
       },
       {
         "sceneNumber": 2,
         "title": "Scene 2",
         "filename": "scene-2.mp4",
         "duration": "36:14",
+        "size": "1.45 GB",
         "streamUrl": "https://stream.xcloud1.lol/da464cc1d027c6b",
-        "downloadUrl": "https://stream.xcloud1.lol/da464cc1d027c6b"
+        "downloadUrl": "https://xcloud1.lol/da464cc1d027c6b"
       },
       {
         "sceneNumber": 3,
         "title": "Scene 3",
         "filename": "scene-3.mp4",
         "duration": "34:54",
+        "size": "1.39 GB",
         "streamUrl": "https://stream.xcloud1.lol/7b024d881ccaaa1",
-        "downloadUrl": "https://stream.xcloud1.lol/7b024d881ccaaa1"
+        "downloadUrl": "https://xcloud1.lol/7b024d881ccaaa1"
       },
       {
         "sceneNumber": 4,
         "title": "Scene 4",
         "filename": "scene-4.mp4",
         "duration": "40:27",
+        "size": "1.54 GB",
         "streamUrl": "https://stream.xcloud1.lol/40cbe880bf58c3f",
-        "downloadUrl": "https://stream.xcloud1.lol/40cbe880bf58c3f"
+        "downloadUrl": "https://xcloud1.lol/40cbe880bf58c3f"
       }
     ],
     "screenshots": [
@@ -548,32 +569,36 @@ export const videos: Video[] = [
         "title": "Scene 1",
         "filename": "scene-1.mp4",
         "duration": "31:21",
+        "size": "1.29 GB",
         "streamUrl": "https://stream.xcloud1.lol/496edc98d0c8a6e",
-        "downloadUrl": "https://stream.xcloud1.lol/496edc98d0c8a6e"
+        "downloadUrl": "https://xcloud1.lol/496edc98d0c8a6e"
       },
       {
         "sceneNumber": 2,
         "title": "Scene 2",
         "filename": "scene-2.mp4",
         "duration": "32:33",
+        "size": "1.31 GB",
         "streamUrl": "https://stream.xcloud1.lol/f98b55c2d5f3a07",
-        "downloadUrl": "https://stream.xcloud1.lol/f98b55c2d5f3a07"
+        "downloadUrl": "https://xcloud1.lol/f98b55c2d5f3a07"
       },
       {
         "sceneNumber": 3,
         "title": "Scene 3",
         "filename": "scene-3.mp4",
         "duration": "31:17",
+        "size": "1.26 GB",
         "streamUrl": "https://stream.xcloud1.lol/09abdf263fbdfe6",
-        "downloadUrl": "https://stream.xcloud1.lol/09abdf263fbdfe6"
+        "downloadUrl": "https://xcloud1.lol/09abdf263fbdfe6"
       },
       {
         "sceneNumber": 4,
         "title": "Scene 4",
         "filename": "scene-4.mp4",
         "duration": "33:49",
+        "size": "1.38 GB",
         "streamUrl": "https://stream.xcloud1.lol/3b8a621475db3b4",
-        "downloadUrl": "https://stream.xcloud1.lol/3b8a621475db3b4"
+        "downloadUrl": "https://xcloud1.lol/3b8a621475db3b4"
       }
     ],
     "screenshots": [
@@ -622,32 +647,36 @@ export const videos: Video[] = [
         "title": "Scene 1",
         "filename": "scene-1.mp4",
         "duration": "27:56",
+        "size": "775 MB",
         "streamUrl": "https://stream.xcloud1.lol/acf5f46ec34c2c7",
-        "downloadUrl": "https://stream.xcloud1.lol/acf5f46ec34c2c7"
+        "downloadUrl": "https://xcloud1.lol/acf5f46ec34c2c7"
       },
       {
         "sceneNumber": 2,
         "title": "Scene 2",
         "filename": "scene-2.mp4",
         "duration": "42:05",
+        "size": "995 MB",
         "streamUrl": "https://stream.xcloud1.lol/d27d3e9f1e8ece0",
-        "downloadUrl": "https://stream.xcloud1.lol/d27d3e9f1e8ece0"
+        "downloadUrl": "https://xcloud1.lol/d27d3e9f1e8ece0"
       },
       {
         "sceneNumber": 3,
         "title": "Scene 3",
         "filename": "scene-3.mp4",
         "duration": "47:05",
+        "size": "1.09 GB",
         "streamUrl": "https://stream.xcloud1.lol/ada8292e3167101",
-        "downloadUrl": "https://stream.xcloud1.lol/ada8292e3167101"
+        "downloadUrl": "https://xcloud1.lol/ada8292e3167101"
       },
       {
         "sceneNumber": 4,
         "title": "Scene 4",
         "filename": "scene-4.mp4",
         "duration": "46:30",
+        "size": "1.08 GB",
         "streamUrl": "https://stream.xcloud1.lol/69b35147283c244",
-        "downloadUrl": "https://stream.xcloud1.lol/69b35147283c244"
+        "downloadUrl": "https://xcloud1.lol/69b35147283c244"
       }
     ],
     "screenshots": [
@@ -696,32 +725,36 @@ export const videos: Video[] = [
         "title": "Scene 1",
         "filename": "scene-1.mp4",
         "duration": "20:25",
+        "size": "842 MB",
         "streamUrl": "https://stream.xcloud1.lol/ab293b0df293c65",
-        "downloadUrl": "https://stream.xcloud1.lol/ab293b0df293c65"
+        "downloadUrl": "https://xcloud1.lol/ab293b0df293c65"
       },
       {
         "sceneNumber": 2,
         "title": "Scene 2",
         "filename": "scene-2.mp4",
         "duration": "27:53",
+        "size": "1.12 GB",
         "streamUrl": "https://stream.xcloud1.lol/2b280d0ac47e2f8",
-        "downloadUrl": "https://stream.xcloud1.lol/2b280d0ac47e2f8"
+        "downloadUrl": "https://xcloud1.lol/2b280d0ac47e2f8"
       },
       {
         "sceneNumber": 3,
         "title": "Scene 3",
         "filename": "scene-3.mp4",
         "duration": "36:30",
+        "size": "1.49 GB",
         "streamUrl": "https://stream.xcloud1.lol/79439d8dd33a523",
-        "downloadUrl": "https://stream.xcloud1.lol/79439d8dd33a523"
+        "downloadUrl": "https://xcloud1.lol/79439d8dd33a523"
       },
       {
         "sceneNumber": 4,
         "title": "Scene 4",
         "filename": "scene-4.mp4",
         "duration": "18:21",
+        "size": "749 MB",
         "streamUrl": "https://stream.xcloud1.lol/b9766ef4ea66fce",
-        "downloadUrl": "https://stream.xcloud1.lol/b9766ef4ea66fce"
+        "downloadUrl": "https://xcloud1.lol/b9766ef4ea66fce"
       }
     ],
     "screenshots": [
@@ -782,32 +815,36 @@ export const videos: Video[] = [
         "title": "Scene 1",
         "filename": "scene-1.mp4",
         "duration": "36:16",
+        "size": "1.38 GB",
         "streamUrl": "https://stream.xcloud1.lol/0ec3dd9b1f52eda",
-        "downloadUrl": "https://stream.xcloud1.lol/0ec3dd9b1f52eda"
+        "downloadUrl": "https://xcloud1.lol/0ec3dd9b1f52eda"
       },
       {
         "sceneNumber": 2,
         "title": "Scene 2",
         "filename": "scene-2.mp4",
         "duration": "35:42",
+        "size": "1.33 GB",
         "streamUrl": "https://stream.xcloud1.lol/dbb2adc88a8f34b",
-        "downloadUrl": "https://stream.xcloud1.lol/dbb2adc88a8f34b"
+        "downloadUrl": "https://xcloud1.lol/dbb2adc88a8f34b"
       },
       {
         "sceneNumber": 3,
         "title": "Scene 3",
         "filename": "scene-3.mp4",
         "duration": "36:42",
+        "size": "1.38 GB",
         "streamUrl": "https://stream.xcloud1.lol/609a693241e021b",
-        "downloadUrl": "https://stream.xcloud1.lol/609a693241e021b"
+        "downloadUrl": "https://xcloud1.lol/609a693241e021b"
       },
       {
         "sceneNumber": 4,
         "title": "Scene 4",
         "filename": "scene-4.mp4",
         "duration": "34:04",
+        "size": "1.28 GB",
         "streamUrl": "https://stream.xcloud1.lol/47ac99dfbbbbfda",
-        "downloadUrl": "https://stream.xcloud1.lol/47ac99dfbbbbfda"
+        "downloadUrl": "https://xcloud1.lol/47ac99dfbbbbfda"
       }
     ],
     "screenshots": [
@@ -849,32 +886,36 @@ export const videos: Video[] = [
         "title": "Scene 1",
         "filename": "scene-1.mp4",
         "duration": "50:07",
+        "size": "1.83 GB",
         "streamUrl": "https://stream.xcloud1.lol/1464a42946eec36",
-        "downloadUrl": "https://stream.xcloud1.lol/1464a42946eec36"
+        "downloadUrl": "https://xcloud1.lol/1464a42946eec36"
       },
       {
         "sceneNumber": 2,
         "title": "Scene 2",
         "filename": "scene-2.mp4",
         "duration": "25:15",
+        "size": "950 MB",
         "streamUrl": "https://stream.xcloud1.lol/a9be8909dbf4342",
-        "downloadUrl": "https://stream.xcloud1.lol/a9be8909dbf4342"
+        "downloadUrl": "https://xcloud1.lol/a9be8909dbf4342"
       },
       {
         "sceneNumber": 3,
         "title": "Scene 3",
         "filename": "scene-3.mp4",
         "duration": "45:12",
+        "size": "1.68 GB",
         "streamUrl": "https://stream.xcloud1.lol/f90d73c671b492c",
-        "downloadUrl": "https://stream.xcloud1.lol/f90d73c671b492c"
+        "downloadUrl": "https://xcloud1.lol/f90d73c671b492c"
       },
       {
         "sceneNumber": 4,
         "title": "Scene 4",
         "filename": "scene-4.mp4",
         "duration": "35:31",
+        "size": "1.28 GB",
         "streamUrl": "https://stream.xcloud1.lol/626b63205d991d4",
-        "downloadUrl": "https://stream.xcloud1.lol/626b63205d991d4"
+        "downloadUrl": "https://xcloud1.lol/626b63205d991d4"
       }
     ],
     "screenshots": [
@@ -923,40 +964,45 @@ export const videos: Video[] = [
         "title": "Scene 1",
         "filename": "scene-1.mp4",
         "duration": "13:28",
+        "size": "198 MB",
         "streamUrl": "https://stream.xcloud1.lol/1390e9306073711",
-        "downloadUrl": "https://stream.xcloud1.lol/1390e9306073711"
+        "downloadUrl": "https://xcloud1.lol/1390e9306073711"
       },
       {
         "sceneNumber": 2,
         "title": "Scene 2",
         "filename": "scene-2.mp4",
         "duration": "18:03",
+        "size": "266 MB",
         "streamUrl": "https://stream.xcloud1.lol/823d3c43d086955",
-        "downloadUrl": "https://stream.xcloud1.lol/823d3c43d086955"
+        "downloadUrl": "https://xcloud1.lol/823d3c43d086955"
       },
       {
         "sceneNumber": 3,
         "title": "Scene 3",
         "filename": "scene-3.mp4",
         "duration": "23:09",
+        "size": "319 MB",
         "streamUrl": "https://stream.xcloud1.lol/779b587da8a44bc",
-        "downloadUrl": "https://stream.xcloud1.lol/779b587da8a44bc"
+        "downloadUrl": "https://xcloud1.lol/779b587da8a44bc"
       },
       {
         "sceneNumber": 4,
         "title": "Scene 4",
         "filename": "scene-4.mp4",
         "duration": "20:43",
+        "size": "304 MB",
         "streamUrl": "https://stream.xcloud1.lol/844e1d66adc66c2",
-        "downloadUrl": "https://stream.xcloud1.lol/844e1d66adc66c2"
+        "downloadUrl": "https://xcloud1.lol/844e1d66adc66c2"
       },
       {
         "sceneNumber": 5,
         "title": "Scene 5",
         "filename": "scene-5.mp4",
         "duration": "18:30",
+        "size": "269 MB",
         "streamUrl": "https://stream.xcloud1.lol/16a1ddcf8771a08",
-        "downloadUrl": "https://stream.xcloud1.lol/16a1ddcf8771a08"
+        "downloadUrl": "https://xcloud1.lol/16a1ddcf8771a08"
       }
     ],
     "screenshots": [
@@ -1025,25 +1071,28 @@ export const videos: Video[] = [
         "sceneNumber": 1,
         "title": "Scene 1",
         "filename": "scene-1.mp4",
-        "size": "500 MB",
         "duration": "38:26",
-        "downloadUrl": "https://stream.xcloud1.lol/5e4006eb0692c53"
+        "size": "1.41 GB",
+        "streamUrl": "https://stream.xcloud1.lol/5e4006eb0692c53",
+        "downloadUrl": "https://xcloud1.lol/5e4006eb0692c53"
       },
       {
         "sceneNumber": 2,
         "title": "Scene 2",
         "filename": "scene-2.mp4",
-        "size": "500 MB",
         "duration": "31:45",
-        "downloadUrl": "https://stream.xcloud1.lol/63a9e0d4f55ec07"
+        "size": "1.18 GB",
+        "streamUrl": "https://stream.xcloud1.lol/63a9e0d4f55ec07",
+        "downloadUrl": "https://xcloud1.lol/63a9e0d4f55ec07"
       },
       {
         "sceneNumber": 3,
         "title": "Scene 3",
         "filename": "scene-3.mp4",
-        "size": "500 MB",
         "duration": "43:22",
-        "downloadUrl": "https://stream.xcloud1.lol/d52a009310b0bd9"
+        "size": "1.59 GB",
+        "streamUrl": "https://stream.xcloud1.lol/d52a009310b0bd9",
+        "downloadUrl": "https://xcloud1.lol/d52a009310b0bd9"
       }
     ],
     "screenshots": [
@@ -1051,8 +1100,7 @@ export const videos: Video[] = [
       "https://imgtraffic.com/1/2026/10/06/6ac4e4955ec97.jpeg",
       "https://imgtraffic.com/1/2026/10/06/6ac4e4958976f.jpeg"
     ],
-    "releaseYear": "2026",
-    "date": "2026-10-08"
+    "releaseYear": "2026"
   },
   {
     "id": "movie-5",
@@ -1102,33 +1150,37 @@ export const videos: Video[] = [
         "sceneNumber": 1,
         "title": "Scene 1",
         "filename": "scene-1.mp4",
-        "size": "500 MB",
         "duration": "28:33",
-        "downloadUrl": "https://stream.xcloud1.lol/41dc23373fdedb0"
+        "size": "1.12 GB",
+        "streamUrl": "https://stream.xcloud1.lol/41dc23373fdedb0",
+        "downloadUrl": "https://xcloud1.lol/41dc23373fdedb0"
       },
       {
         "sceneNumber": 2,
         "title": "Scene 2",
         "filename": "scene-2.mp4",
-        "size": "500 MB",
         "duration": "31:15",
-        "downloadUrl": "https://stream.xcloud1.lol/79c813c68d92ae9"
+        "size": "1.21 GB",
+        "streamUrl": "https://stream.xcloud1.lol/79c813c68d92ae9",
+        "downloadUrl": "https://xcloud1.lol/79c813c68d92ae9"
       },
       {
         "sceneNumber": 3,
         "title": "Scene 3",
         "filename": "scene-3.mp4",
-        "size": "500 MB",
         "duration": "24:03",
-        "downloadUrl": "https://stream.xcloud1.lol/d7469af40ccd001"
+        "size": "955 MB",
+        "streamUrl": "https://stream.xcloud1.lol/d7469af40ccd001",
+        "downloadUrl": "https://xcloud1.lol/d7469af40ccd001"
       },
       {
         "sceneNumber": 4,
         "title": "Scene 4",
         "filename": "scene-4.mp4",
-        "size": "500 MB",
         "duration": "44:35",
-        "downloadUrl": "https://stream.xcloud1.lol/7cdb46425a20e1a"
+        "size": "1.79 GB",
+        "streamUrl": "https://stream.xcloud1.lol/7cdb46425a20e1a",
+        "downloadUrl": "https://xcloud1.lol/7cdb46425a20e1a"
       }
     ],
     "screenshots": [
@@ -1137,8 +1189,7 @@ export const videos: Video[] = [
       "https://imgtraffic.com/1/2026/10/06/6ac4e45bb0d54.jpeg",
       "https://imgtraffic.com/1/2026/10/06/6ac4e45bcded5.jpeg"
     ],
-    "releaseYear": "2026",
-    "date": "2026-10-08"
+    "releaseYear": "2026"
   },
   {
     "id": "movie-4",
@@ -1180,33 +1231,37 @@ export const videos: Video[] = [
         "sceneNumber": 1,
         "title": "Scene 1",
         "filename": "scene-1.mp4",
-        "size": "500 MB",
         "duration": "23:59",
-        "downloadUrl": "https://stream.xcloud1.lol/897bba87653868c"
+        "size": "1009 MB",
+        "streamUrl": "https://stream.xcloud1.lol/897bba87653868c",
+        "downloadUrl": "https://xcloud1.lol/897bba87653868c"
       },
       {
         "sceneNumber": 2,
         "title": "Scene 2",
         "filename": "scene-2.mp4",
-        "size": "500 MB",
         "duration": "24:07",
-        "downloadUrl": "https://stream.xcloud1.lol/daa7f6f3ccae69a"
+        "size": "987 MB",
+        "streamUrl": "https://stream.xcloud1.lol/daa7f6f3ccae69a",
+        "downloadUrl": "https://xcloud1.lol/daa7f6f3ccae69a"
       },
       {
         "sceneNumber": 3,
         "title": "Scene 3",
         "filename": "scene-3.mp4",
-        "size": "500 MB",
         "duration": "24:03",
-        "downloadUrl": "https://stream.xcloud1.lol/ef83d8fb4fb8525"
+        "size": "965 MB",
+        "streamUrl": "https://stream.xcloud1.lol/ef83d8fb4fb8525",
+        "downloadUrl": "https://xcloud1.lol/ef83d8fb4fb8525"
       },
       {
         "sceneNumber": 4,
         "title": "Scene 4",
         "filename": "scene-4.mp4",
-        "size": "500 MB",
         "duration": "24:45",
-        "downloadUrl": "https://stream.xcloud1.lol/7b5ed8e2484e02f"
+        "size": "991 MB",
+        "streamUrl": "https://stream.xcloud1.lol/7b5ed8e2484e02f",
+        "downloadUrl": "https://xcloud1.lol/7b5ed8e2484e02f"
       }
     ],
     "screenshots": [
@@ -1215,8 +1270,7 @@ export const videos: Video[] = [
       "https://imgtraffic.com/1/2026/10/06/6ac4e4765c6c8.jpeg",
       "https://imgtraffic.com/1/2026/10/06/6ac4e4767aaba.jpeg"
     ],
-    "releaseYear": "2026",
-    "date": "2026-10-08"
+    "releaseYear": "2026"
   },
   {
     "id": "movie-3",
@@ -1276,49 +1330,55 @@ export const videos: Video[] = [
         "sceneNumber": 1,
         "title": "Scene 1",
         "filename": "scene-1.mp4",
-        "size": "500 MB",
         "duration": "16:49",
-        "downloadUrl": "https://stream.xcloud1.lol/78dac80b97fb963"
+        "size": "664 MB",
+        "streamUrl": "https://stream.xcloud1.lol/78dac80b97fb963",
+        "downloadUrl": "https://xcloud1.lol/78dac80b97fb963"
       },
       {
         "sceneNumber": 2,
         "title": "Scene 2",
         "filename": "scene-2.mp4",
-        "size": "500 MB",
         "duration": "11:16",
-        "downloadUrl": "https://stream.xcloud1.lol/be6e6120097e65b"
+        "size": "475 MB",
+        "streamUrl": "https://stream.xcloud1.lol/be6e6120097e65b",
+        "downloadUrl": "https://xcloud1.lol/be6e6120097e65b"
       },
       {
         "sceneNumber": 3,
         "title": "Scene 3",
         "filename": "scene-3.mp4",
-        "size": "500 MB",
         "duration": "12:04",
-        "downloadUrl": "https://stream.xcloud1.lol/614b98f15b56356"
+        "size": "488 MB",
+        "streamUrl": "https://stream.xcloud1.lol/614b98f15b56356",
+        "downloadUrl": "https://xcloud1.lol/614b98f15b56356"
       },
       {
         "sceneNumber": 4,
         "title": "Scene 4",
         "filename": "scene-4.mp4",
-        "size": "500 MB",
         "duration": "19:23",
-        "downloadUrl": "https://stream.xcloud1.lol/6996746338839e4"
+        "size": "753 MB",
+        "streamUrl": "https://stream.xcloud1.lol/6996746338839e4",
+        "downloadUrl": "https://xcloud1.lol/6996746338839e4"
       },
       {
         "sceneNumber": 5,
         "title": "Scene 5",
         "filename": "scene-5.mp4",
-        "size": "500 MB",
         "duration": "27:37",
-        "downloadUrl": "https://stream.xcloud1.lol/3e1fb3645b07bad"
+        "size": "1.12 GB",
+        "streamUrl": "https://stream.xcloud1.lol/3e1fb3645b07bad",
+        "downloadUrl": "https://xcloud1.lol/3e1fb3645b07bad"
       },
       {
         "sceneNumber": 6,
         "title": "Scene 6",
         "filename": "scene-6.mp4",
-        "size": "500 MB",
         "duration": "41:39",
-        "downloadUrl": "https://stream.xcloud1.lol/1f9662de01ba092"
+        "size": "1.62 GB",
+        "streamUrl": "https://stream.xcloud1.lol/1f9662de01ba092",
+        "downloadUrl": "https://xcloud1.lol/1f9662de01ba092"
       }
     ],
     "screenshots": [
@@ -1329,8 +1389,7 @@ export const videos: Video[] = [
       "https://imgtraffic.com/1/2026/10/06/6ac4e4af298c3.jpeg",
       "https://imgtraffic.com/1/2026/10/06/6ac4e4af363a3.jpeg"
     ],
-    "releaseYear": "2026",
-    "date": "2026-10-08"
+    "releaseYear": "2026"
   },
   {
     "id": "movie-2",
@@ -1358,25 +1417,28 @@ export const videos: Video[] = [
         "sceneNumber": 1,
         "title": "Scene 1",
         "filename": "scene-1.mp4",
-        "size": "500 MB",
         "duration": "29:27",
-        "downloadUrl": "https://stream.xcloud1.lol/04745a62b1ece86"
+        "size": "1.14 GB",
+        "streamUrl": "https://stream.xcloud1.lol/04745a62b1ece86",
+        "downloadUrl": "https://xcloud1.lol/04745a62b1ece86"
       },
       {
         "sceneNumber": 2,
         "title": "Scene 2",
         "filename": "scene-2.mp4",
-        "size": "500 MB",
         "duration": "37:32",
-        "downloadUrl": "https://stream.xcloud1.lol/4a4c3a02d121a60"
+        "size": "1.45 GB",
+        "streamUrl": "https://stream.xcloud1.lol/4a4c3a02d121a60",
+        "downloadUrl": "https://xcloud1.lol/4a4c3a02d121a60"
       },
       {
         "sceneNumber": 3,
         "title": "Scene 3",
         "filename": "scene-3.mp4",
-        "size": "500 MB",
         "duration": "24:25",
-        "downloadUrl": "https://stream.xcloud1.lol/0814c8b65cdf20b"
+        "size": "906 MB",
+        "streamUrl": "https://stream.xcloud1.lol/0814c8b65cdf20b",
+        "downloadUrl": "https://xcloud1.lol/0814c8b65cdf20b"
       }
     ],
     "screenshots": [
@@ -1384,8 +1446,7 @@ export const videos: Video[] = [
       "https://imgtraffic.com/1/2026/10/06/6ac4e441608ae.jpeg",
       "https://imgtraffic.com/1/2026/10/06/6ac4e4419ab74.jpeg"
     ],
-    "releaseYear": "2026",
-    "date": "2026-10-08"
+    "releaseYear": "2026"
   },
   {
     "id": "movie-1",
@@ -1465,33 +1526,37 @@ export const videos: Video[] = [
         "sceneNumber": 1,
         "title": "Scene 1",
         "filename": "MILFY - Women And Boys 3 Scene 1 1080p.mp4",
-        "size": "1.33 GB",
         "duration": "00:35:20",
-        "downloadUrl": "https://stream.xcloud1.lol/8575f8e52e87c41"
+        "size": "1.33 GB",
+        "streamUrl": "https://stream.xcloud1.lol/8575f8e52e87c41",
+        "downloadUrl": "https://xcloud1.lol/8575f8e52e87c41"
       },
       {
         "sceneNumber": 2,
         "title": "Scene 2",
         "filename": "MILFY - Women And Boys 3 Scene 2 1080p.mp4",
-        "size": "1.28 GB",
         "duration": "00:34:26",
-        "downloadUrl": "https://stream.xcloud1.lol/0b74c63fae43944"
+        "size": "1.28 GB",
+        "streamUrl": "https://stream.xcloud1.lol/0b74c63fae43944",
+        "downloadUrl": "https://xcloud1.lol/0b74c63fae43944"
       },
       {
         "sceneNumber": 3,
         "title": "Scene 3",
         "filename": "MILFY - Women And Boys 3 Scene 3 1080p.mp4",
-        "size": "1.37 GB",
         "duration": "00:37:24",
-        "downloadUrl": "https://stream.xcloud1.lol/a3c21a5656b5bca"
+        "size": "1.37 GB",
+        "streamUrl": "https://stream.xcloud1.lol/a3c21a5656b5bca",
+        "downloadUrl": "https://xcloud1.lol/a3c21a5656b5bca"
       },
       {
         "sceneNumber": 4,
         "title": "Scene 4",
         "filename": "MILFY - Women And Boys 3 Scene 4 1080p.mp4",
-        "size": "1.3 GB",
         "duration": "00:37:06",
-        "downloadUrl": "https://stream.xcloud1.lol/6471f736bf7ee3e"
+        "size": "1.3 GB",
+        "streamUrl": "https://stream.xcloud1.lol/6471f736bf7ee3e",
+        "downloadUrl": "https://xcloud1.lol/6471f736bf7ee3e"
       }
     ],
     "screenshots": [
@@ -1500,8 +1565,7 @@ export const videos: Video[] = [
       "https://imgtraffic.com/1/2026/10/06/6ac4e4cb6ab62.jpeg",
       "https://imgtraffic.com/1/2026/10/06/6ac4e4cb77430.jpeg"
     ],
-    "releaseYear": "2026",
-    "date": "2026-10-07"
+    "releaseYear": "2026"
   }
 ];
 
