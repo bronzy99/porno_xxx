@@ -95,7 +95,9 @@ export const CATEGORIES = [
   "True X",
   "Erotica X",
   "Lesbea",
-  "The Score Group"
+  "The Score Group",
+  "Zero Tolerance",
+  "Jules Jordan Video"
 ] as const;
 
 export const NAV_CATEGORIES: string[] = [
@@ -113,7 +115,9 @@ export const NAV_CATEGORIES: string[] = [
   "True X",
   "Erotica X",
   "Lesbea",
-  "The Score Group"
+  "The Score Group",
+  "Zero Tolerance",
+  "Jules Jordan Video"
 ];
 
 export function normalizeCategory(rawCategory: string, tags: string[] = []): string {
@@ -126,6 +130,329 @@ export function normalizeCategory(rawCategory: string, tags: string[] = []): str
 export type Category = (typeof CATEGORIES)[number];
 
 export const videos: Video[] = [
+  {
+    "id": "movie-21",
+    "title": "Manuel Opens Their Asses 10 [Jules Jordan Video 2026] XXX WEB-DL 1080p",
+    "cleanTitle": "Manuel Opens Their Asses 10",
+    "thumbnail": "https://imgxclub.com/p/2026/08/25/6a8db56143ee1.jpeg",
+    "poster": "https://imgxclub.com/p/2026/08/25/6a8db56143ee1.jpeg",
+    "category": "Jules Jordan Video",
+    "studio": "Jules Jordan Video",
+    "quality": "1080p",
+    "duration": "2 hrs. 8 mins.",
+    "cast": [
+      "Jane Wilde",
+      "Kitana Montana",
+      "Lily Starfire",
+      "Scarlett Alexis",
+      "Manuel Ferrara"
+    ],
+    "genres": [
+      "Anal",
+      "Appearance",
+      "Ass to Mouth",
+      "Big Butt",
+      "Big Dicks",
+      "Big Tits",
+      "Black Women",
+      "Clothing",
+      "Ethnic",
+      "International Star Showcase",
+      "Interracial",
+      "Interracial - Black Girls",
+      "Interracial - Caucasian Men",
+      "Lingerie",
+      "Star Showcase"
+    ],
+    "tags": [
+      "Anal",
+      "Appearance",
+      "Ass to Mouth",
+      "Big Butt",
+      "Big Dicks",
+      "Big Tits",
+      "Black Women",
+      "Clothing",
+      "Ethnic",
+      "International Star Showcase",
+      "Interracial",
+      "Interracial - Black Girls",
+      "Interracial - Caucasian Men",
+      "Lingerie",
+      "Star Showcase"
+    ],
+    "synopsis": "Scarlett Alexis takes every inch of cock in her ass. Jade Wilde opens up her asshole for Manuel Ferrara. Kitana Montana is a big tit anal cum slut and ebony goddess Lily Starfire gets deep anal penetration.",
+    "splitScenes": true,
+    "scenes": [
+      {
+        "sceneNumber": 1,
+        "title": "Scene 1",
+        "filename": "scene-1.mp4",
+        "duration": "41:08",
+        "size": "1.62 GB",
+        "streamUrl": "https://stream.xcloud1.lol/0c18af4f5f64a97",
+        "downloadUrl": "https://xcloud1.lol/0c18af4f5f64a97"
+      },
+      {
+        "sceneNumber": 2,
+        "title": "Scene 2",
+        "filename": "scene-2.mp4",
+        "duration": "21:31",
+        "size": "861 MB",
+        "streamUrl": "https://stream.xcloud1.lol/bf5f4bdd879f2f9",
+        "downloadUrl": "https://xcloud1.lol/bf5f4bdd879f2f9"
+      },
+      {
+        "sceneNumber": 3,
+        "title": "Scene 3",
+        "filename": "scene-3.mp4",
+        "duration": "33:22",
+        "size": "1.33 GB",
+        "streamUrl": "https://stream.xcloud1.lol/3b70a018f655caf",
+        "downloadUrl": "https://xcloud1.lol/3b70a018f655caf"
+      },
+      {
+        "sceneNumber": 4,
+        "title": "Scene 4",
+        "filename": "scene-4.mp4",
+        "duration": "29:08",
+        "size": "1.14 GB",
+        "streamUrl": "https://stream.xcloud1.lol/8d43bd4db4e2593",
+        "downloadUrl": "https://xcloud1.lol/8d43bd4db4e2593"
+      }
+    ],
+    "screenshots": [
+      "https://imgtraffic.com/1/2026/08/25/6a8db50557837.jpeg",
+      "https://imgtraffic.com/1/2026/08/25/6a8db50565777.jpeg",
+      "https://imgtraffic.com/1/2026/08/25/6a8db5057d4c7.jpeg",
+      "https://imgtraffic.com/1/2026/08/25/6a8db5058a74d.jpeg"
+    ],
+    "releaseYear": "2026"
+  },
+  {
+    "id": "movie-20",
+    "title": "Mine Are Big And Natural [Mile High Media 2026] XXX WEB-DL 1080p",
+    "cleanTitle": "Mine Are Big And Natural",
+    "thumbnail": "https://imgxclub.com/p/2026/10/15/6ad00885b7fcb.jpeg",
+    "poster": "https://imgxclub.com/p/2026/10/15/6ad00885b7fcb.jpeg",
+    "category": "Mile High Media",
+    "studio": "Mile High Media",
+    "quality": "1080p",
+    "duration": "1 hr 36 min",
+    "cast": [
+      "Ashlyn Peaks",
+      "Crystal Chase",
+      "Oklahoma",
+      "Vanessa Leon"
+    ],
+    "tags": [],
+    "splitScenes": true,
+    "scenes": [
+      {
+        "sceneNumber": 1,
+        "title": "Scene 1",
+        "filename": "scene-1.mp4",
+        "duration": "24:01",
+        "size": "1015 MB",
+        "streamUrl": "https://stream.xcloud1.lol/f851c1e37e4df88",
+        "downloadUrl": "https://xcloud1.lol/f851c1e37e4df88"
+      },
+      {
+        "sceneNumber": 2,
+        "title": "Scene 2",
+        "filename": "scene-2.mp4",
+        "duration": "24:07",
+        "size": "1002 MB",
+        "streamUrl": "https://stream.xcloud1.lol/b1a2c15c246b747",
+        "downloadUrl": "https://xcloud1.lol/b1a2c15c246b747"
+      },
+      {
+        "sceneNumber": 3,
+        "title": "Scene 3",
+        "filename": "scene-3.mp4",
+        "duration": "27:27",
+        "size": "1.11 GB",
+        "streamUrl": "https://stream.xcloud1.lol/f9c21e749b5439c",
+        "downloadUrl": "https://xcloud1.lol/f9c21e749b5439c"
+      },
+      {
+        "sceneNumber": 4,
+        "title": "Scene 4",
+        "filename": "scene-4.mp4",
+        "duration": "21:21",
+        "size": "875 MB",
+        "streamUrl": "https://stream.xcloud1.lol/7a9eac82ab60e95",
+        "downloadUrl": "https://xcloud1.lol/7a9eac82ab60e95"
+      }
+    ],
+    "screenshots": [
+      "https://imgtraffic.com/1/2026/10/15/6ad00813ad66b.jpeg",
+      "https://imgtraffic.com/1/2026/10/15/6ad00813bb269.jpeg",
+      "https://imgtraffic.com/1/2026/10/15/6ad00813e0f2d.jpeg",
+      "https://imgtraffic.com/1/2026/10/15/6ad00813ed9f0.jpeg"
+    ],
+    "releaseYear": "2026"
+  },
+  {
+    "id": "movie-19",
+    "title": "Nymphomanic Fuck Sluts [Traudich 2026] XXX WEB-DL 1080p",
+    "cleanTitle": "Nymphomanic Fuck Sluts",
+    "thumbnail": "https://imgxclub.com/p/2026/10/15/6ad00884a58b7.jpeg",
+    "poster": "https://imgxclub.com/p/2026/10/15/6ad00884a58b7.jpeg",
+    "category": "Zero Tolerance",
+    "studio": "Traudich",
+    "quality": "1080p",
+    "duration": "1 hr 57 Min",
+    "cast": [
+      "Kitty",
+      "Laura",
+      "Lia Amalia",
+      "Maria Gail",
+      "Yoshira",
+      "Jean Pallett"
+    ],
+    "tags": [],
+    "synopsis": "If there's one thing that can never be said about the sluts in this wonderful adventure, it's that they're not enthusiastic when it comes to satisfying the hard dicks they get rewarded with. Indeed, if the thought of watching a collection of cock-hungry whores living their dreams for the camera is the kind of thing that turns you on, then rest assured that you've literally come to the right place here. No question about it, there's not a moment of hesitancy from the sluts in question as they get down on their knees and worship one thick, meaty schlong after the next for all the world to see, before opening their legs and riding those same cocks hard for all they're worth. Culminating in the kind of cum-inducing climax that'll leave you utterly dry.",
+    "splitScenes": true,
+    "scenes": [
+      {
+        "sceneNumber": 1,
+        "title": "Scene 1",
+        "filename": "scene-1.mp4",
+        "duration": "24:14",
+        "size": "929 MB",
+        "streamUrl": "https://stream.xcloud1.lol/39a6b4e389a95dd",
+        "downloadUrl": "https://xcloud1.lol/39a6b4e389a95dd"
+      },
+      {
+        "sceneNumber": 2,
+        "title": "Scene 2",
+        "filename": "scene-2.mp4",
+        "duration": "20:32",
+        "size": "814 MB",
+        "streamUrl": "https://stream.xcloud1.lol/d0045a3462b3bc6",
+        "downloadUrl": "https://xcloud1.lol/d0045a3462b3bc6"
+      },
+      {
+        "sceneNumber": 3,
+        "title": "Scene 3",
+        "filename": "scene-3.mp4",
+        "duration": "22:42",
+        "size": "897 MB",
+        "streamUrl": "https://stream.xcloud1.lol/4e0629ce4f74e88",
+        "downloadUrl": "https://xcloud1.lol/4e0629ce4f74e88"
+      },
+      {
+        "sceneNumber": 4,
+        "title": "Scene 4",
+        "filename": "scene-4.mp4",
+        "duration": "25:32",
+        "size": "1004 MB",
+        "streamUrl": "https://stream.xcloud1.lol/5ce743ab020aa5c",
+        "downloadUrl": "https://xcloud1.lol/5ce743ab020aa5c"
+      },
+      {
+        "sceneNumber": 5,
+        "title": "Scene 5",
+        "filename": "scene-5.mp4",
+        "duration": "24:39",
+        "size": "914 MB",
+        "streamUrl": "https://stream.xcloud1.lol/68ae6edec0a8e4e",
+        "downloadUrl": "https://xcloud1.lol/68ae6edec0a8e4e"
+      }
+    ],
+    "screenshots": [
+      "https://imgtraffic.com/1/2026/10/15/6ad007fb69139.jpeg",
+      "https://imgtraffic.com/1/2026/10/15/6ad007fb761b0.jpeg",
+      "https://imgtraffic.com/1/2026/10/15/6ad007fb82e92.jpeg",
+      "https://imgtraffic.com/1/2026/10/15/6ad007fba1d7e.jpeg",
+      "https://imgtraffic.com/1/2026/10/15/6ad007fbaef23.jpeg"
+    ],
+    "releaseYear": "2026"
+  },
+  {
+    "id": "movie-18",
+    "title": "Raunchy Times 2 [Zero Tolerance] (2025) HD 1080p",
+    "cleanTitle": "Raunchy Times 2",
+    "thumbnail": "https://imgxclub.com/p/2026/10/15/6ad0accad8fad.jpeg",
+    "poster": "https://imgxclub.com/p/2026/10/15/6ad0accad8fad.jpeg",
+    "category": "Zero Tolerance",
+    "studio": "Zero Tolerance",
+    "quality": "1080p",
+    "duration": "02:15:00",
+    "cast": [
+      "Jenna Starr",
+      "Kenna James",
+      "Lauren Phillips",
+      "Lily Starfire"
+    ],
+    "genres": [
+      "Anal",
+      "Big Butt",
+      "Big Tits",
+      "Blowjob",
+      "Cumshot",
+      "Creampie",
+      "Facial",
+      "Redhead"
+    ],
+    "tags": [
+      "Anal",
+      "Big Butt",
+      "Big Tits",
+      "Blowjob",
+      "Cumshot",
+      "Creampie",
+      "Facial",
+      "Redhead"
+    ],
+    "splitScenes": true,
+    "scenes": [
+      {
+        "sceneNumber": 1,
+        "title": "Scene 1",
+        "filename": "scene-1.mp4",
+        "duration": "36:18",
+        "size": "1.63 GB",
+        "streamUrl": "https://stream.xcloud1.lol/02f3129dabf65ea",
+        "downloadUrl": "https://xcloud1.lol/02f3129dabf65ea"
+      },
+      {
+        "sceneNumber": 2,
+        "title": "Scene 2",
+        "filename": "scene-2.mp4",
+        "duration": "29:27",
+        "size": "1.33 GB",
+        "streamUrl": "https://stream.xcloud1.lol/66eb3d4a2d16b4d",
+        "downloadUrl": "https://xcloud1.lol/66eb3d4a2d16b4d"
+      },
+      {
+        "sceneNumber": 3,
+        "title": "Scene 3",
+        "filename": "scene-3.mp4",
+        "duration": "30:05",
+        "size": "1.37 GB",
+        "streamUrl": "https://stream.xcloud1.lol/af55672c58b1412",
+        "downloadUrl": "https://xcloud1.lol/af55672c58b1412"
+      },
+      {
+        "sceneNumber": 4,
+        "title": "Scene 4",
+        "filename": "scene-4.mp4",
+        "duration": "31:14",
+        "size": "1.4 GB",
+        "streamUrl": "https://stream.xcloud1.lol/f3c682e86a7555d",
+        "downloadUrl": "https://xcloud1.lol/f3c682e86a7555d"
+      }
+    ],
+    "screenshots": [
+      "https://rintor.space/images/2026/10/14/Raunchy-Times-2-1.jpg",
+      "https://rintor.space/images/2026/10/14/Raunchy-Times-2-2.jpg",
+      "https://rintor.space/images/2026/10/14/Raunchy-Times-2-3.jpg",
+      "https://rintor.space/images/2026/10/14/Raunchy-Times-2-4.jpg"
+    ],
+    "releaseYear": "2026"
+  },
   {
     "id": "movie-17",
     "title": "Big Tit Bimbofication 2 [ 2026] | Watch Free Porn Video",
